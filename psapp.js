@@ -25,8 +25,8 @@ window.tailwind.config = {
                 name: 'About Me',
                 iconImg: 'image0.jpg',
                 title: 'Yusuf Rayyan Daniel',
-                desc: 'Step into a pixel-styled 3D library and discover my projects as a cat wandering its three rooms.',
-                projectInfo: 'Play as a cat in a handcrafted 3D library. Follow the glowing green gems between the three rooms and press E under any framed artwork to open the project behind it.',
+                desc: 'Spawn in my bedroom for the about-me and CV, then explore a 3D library of projects grouped by genre — all as a cat.',
+                projectInfo: 'Play as a cat. Start in my bedroom (about-me + CV), then head into the library: four genre rooms — Web & App, AI & Science, Data & Database, and Network & Infra. Follow the glowing green gems and press E under any framed artwork.',
                 techCards: [
                     { name: 'JavaScript', use: 'Movement, camera, interactions, and animation.' },
                     { name: 'WebGL', use: 'Renders the real-time 3D library in the browser.' },
@@ -236,8 +236,12 @@ window.tailwind.config = {
 
             // Render Hero Play Button if link exists
             if (app.link && app.link !== '#') {
+                const sameTab = !!app.sameTab;
+                const onClick = sameTab
+                    ? `event.preventDefault(); launchGame('${app.link}');`
+                    : '';
                 heroActionContainer.innerHTML = `
-                    <a href="${app.link}" target="${app.sameTab ? '_self' : '_blank'}" class="hero-play-button inline-flex items-center gap-3 bg-white hover:bg-gray-100 text-black font-extrabold px-7 py-3 rounded-xl shadow-xl transition-transform active:scale-95 text-xs">
+                    <a href="${app.link}" ${sameTab ? `onclick="${onClick}"` : `target="_blank"`} class="hero-play-button inline-flex items-center gap-3 bg-white hover:bg-gray-100 text-black font-extrabold px-7 py-3 rounded-xl shadow-xl transition-transform active:scale-95 text-xs">
                         <div class="w-5 h-5 rounded-full bg-psBlue flex items-center justify-center text-white text-[10px]">
                             <i class="fa-solid fa-play ml-0.5"></i>
                         </div>
@@ -272,11 +276,21 @@ window.tailwind.config = {
             const list = getActiveList();
             const app = list[activeIndex];
             if (app.link && app.link !== '#') {
-                if (app.sameTab) window.location.href = app.link;
+                if (app.sameTab) launchGame(app.link);
                 else window.open(app.link, '_blank');
             } else {
                 openSearchModal();
             }
+        }
+
+        // Smooth fade-to-black "launch" transition into the 3D game.
+        let isLaunching = false;
+        function launchGame(url) {
+            if (isLaunching) return;
+            isLaunching = true;
+            const overlay = document.getElementById('launchOverlay');
+            overlay.classList.add('is-active');
+            setTimeout(() => { window.location.href = url; }, 750);
         }
 
         // Modal Helpers

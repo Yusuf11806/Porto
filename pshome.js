@@ -17,6 +17,21 @@ document.addEventListener('keydown', event => {
     if (!hasEnteredProfile && !event.ctrlKey && !event.altKey && !event.metaKey) showProfile();
 });
 
+// Smooth fade transition when selecting the profile -> PS app dashboard.
+let isLeaving = false;
+const profileChoice = document.querySelector('.profile-choice');
+if (profileChoice) {
+    profileChoice.addEventListener('click', event => {
+        if (isLeaving) return;
+        isLeaving = true;
+        event.preventDefault();
+        const url = profileChoice.getAttribute('href');
+        profileChoice.classList.add('is-selected');
+        document.getElementById('homeTransition').classList.add('is-active');
+        setTimeout(() => { window.location.href = url; }, 620);
+    });
+}
+
 function updateClock() {
     document.getElementById('clock').textContent = new Intl.DateTimeFormat([], {
         hour: 'numeric',

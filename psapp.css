@@ -314,3 +314,73 @@ body {
             .project-tech-card p { font-size: .6rem; }
             #gameTileContainer { min-height: 6rem; padding-block: .7rem 1rem; }
         }
+
+/* ===== PS app launch transition + extra animations ===== */
+
+/* Fade-to-black overlay used when launching the 3D game */
+.launch-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: grid;
+    place-items: center;
+    gap: 1.5rem;
+    background: radial-gradient(ellipse at 50% 50%, #10131f 0%, #04060b 70%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .6s ease, visibility .6s ease;
+}
+.launch-overlay.is-active { opacity: 1; visibility: visible; pointer-events: all; }
+.launch-core {
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, .15);
+    border-top-color: #4b9cff;
+    animation: launchSpin .8s linear infinite;
+}
+.launch-text {
+    margin: 0;
+    color: rgba(255, 255, 255, .7);
+    font-size: .8rem;
+    letter-spacing: .25em;
+    font-weight: 600;
+    animation: launchPulse 1.2s ease-in-out infinite;
+}
+@keyframes launchSpin { to { transform: rotate(360deg); } }
+@keyframes launchPulse { 50% { opacity: .4; } }
+
+/* Whole dashboard gently fades + lifts in once the intro is dismissed */
+body { animation: appFadeIn .6s ease both; }
+@keyframes appFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Moving sheen across the active game tile */
+.game-tile.active-tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%);
+    background-size: 220% 100%;
+    animation: tileSheen 2.4s ease-in-out infinite;
+    pointer-events: none;
+}
+.game-tile { position: relative; }
+@keyframes tileSheen { 0% { background-position: 150% 0; } 60%,100% { background-position: -50% 0; } }
+
+/* Hero play button: subtle breathing glow to draw the eye */
+.hero-play-button { position: relative; animation: heroGlow 2.8s ease-in-out infinite; }
+@keyframes heroGlow {
+    0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,.24) !important; }
+    50% { box-shadow: 0 8px 30px rgba(75,156,255,.45) !important; }
+}
+
+/* Tab underline + tech cards already animate; add a gentle hover lift to tabs */
+.console-tabs button { transition: transform .2s ease, color .2s ease; }
+.console-tabs button:hover { transform: translateY(-1px); }
+
+@media (prefers-reduced-motion: reduce) {
+    .launch-core, .launch-text, body, .game-tile.active-tile::after, .hero-play-button { animation: none !important; }
+    .launch-overlay { transition-duration: .01ms; }
+}

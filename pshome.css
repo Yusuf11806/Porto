@@ -156,3 +156,36 @@ main { position: relative; min-height: 100vh; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* ===== Home -> app transition + selection animation ===== */
+.home-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: radial-gradient(ellipse at 50% 50%, #12111f 0%, #050510 72%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .55s ease, visibility .55s ease;
+}
+.home-transition.is-active { opacity: 1; visibility: visible; pointer-events: all; }
+
+/* When a profile is picked, it pulses + the ring glows before we fade out */
+.profile-choice.is-selected .avatar-ring {
+    animation: profilePick .6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes profilePick {
+    0% { transform: scale(1.06); }
+    40% { transform: scale(1.14); border-color: #fff; box-shadow: 0 0 46px rgba(120,183,255,.6); }
+    100% { transform: scale(1.02); box-shadow: 0 0 60px rgba(120,183,255,.35); }
+}
+.profile-choice.is-selected .select-hint { opacity: 0; transition: opacity .3s ease; }
+
+/* Gentle entrance for the whole home screen */
+body { animation: homeFadeIn .7s ease both; }
+@keyframes homeFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+    body, .profile-choice.is-selected .avatar-ring { animation: none !important; }
+    .home-transition { transition-duration: .01ms; }
+}
