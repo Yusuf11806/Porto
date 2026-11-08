@@ -25,11 +25,11 @@ window.tailwind.config = {
                 name: 'About Me',
                 iconImg: 'image0.jpg',
                 title: 'Yusuf Rayyan Daniel',
-                desc: 'Step into a pixel-styled art gallery and discover my projects through an interactive 3D world.',
-                projectInfo: 'Play as a cat in a handcrafted 3D gallery. Walk between the exhibits and open each artwork to learn about the project behind it.',
+                desc: 'Step into a pixel-styled 3D library and discover my projects as a cat wandering its three rooms.',
+                projectInfo: 'Play as a cat in a handcrafted 3D library. Follow the glowing green gems between the three rooms and press E under any framed artwork to open the project behind it.',
                 techCards: [
                     { name: 'JavaScript', use: 'Movement, camera, interactions, and animation.' },
-                    { name: 'WebGL', use: 'Renders the real-time 3D gallery in the browser.' },
+                    { name: 'WebGL', use: 'Renders the real-time 3D library in the browser.' },
                     { name: 'HTML & CSS', use: 'Builds the interface and responsive presentation.' }
                 ],
                 art: 'image0.jpg',

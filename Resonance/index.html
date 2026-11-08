@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#090b12">
-<title>Yusuf Rayyan Daniel — 3D Portfolio Gallery</title>
-<meta name="description" content="Explore Yusuf Rayyan Daniel's portfolio as a cat in a hand-built 3D pixel-art bedroom gallery. Walk up to each artwork to open the project behind it.">
-<meta property="og:title" content="Yusuf Rayyan Daniel — 3D Portfolio Gallery">
-<meta property="og:description" content="Play as a cat and explore a pixel-art bedroom where every framed artwork is one of my projects.">
+<title>Yusuf Rayyan Daniel — 3D Portfolio Library</title>
+<meta name="description" content="Explore Yusuf Rayyan Daniel's portfolio as a cat wandering a hand-built 3D pixel-art library of three rooms. Follow the glowing gems and open each framed project.">
+<meta property="og:title" content="Yusuf Rayyan Daniel — 3D Portfolio Library">
+<meta property="og:description" content="Play as a cat and explore a pixel-art library where every framed artwork is one of my projects.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23090b12'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23ffb86b'%3E%F0%9F%90%88%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=gallery-portfolio-20">
-<link rel="stylesheet" href="loading.css?v=gallery-portfolio-20">
+<link rel="stylesheet" href="style.css?v=library-21">
+<link rel="stylesheet" href="loading.css?v=library-21">
 </head>
 <body>
 <main class="experience" id="experience">
-  <div class="scene" id="scene" aria-label="Third-person 3D pixel-art portfolio gallery"><canvas id="world" tabindex="0" aria-label="3D game view. Use WASD to move, drag to look, and E to open projects."></canvas></div>
+  <div class="scene" id="scene" aria-label="Third-person 3D pixel-art portfolio library"><canvas id="world" tabindex="0" aria-label="3D game view. Use WASD to move, drag to look, and E to open projects."></canvas></div>
   <div class="grain"></div><div class="shade"></div>
-  <div class="scene-status"><span><i class="status-square"></i><b id="zoneLabel">BEDROOM GALLERY</b></span><span>COORD <b id="coord">00 : 00</b></span></div>
+  <div class="scene-status"><span><i class="status-square"></i><b id="zoneLabel">LIBRARY</b></span><span>COORD <b id="coord">00 : 00</b></span></div>
   <div class="toast" id="toast"></div><div class="center-prompt" id="interactHint" aria-live="polite"></div>
   <footer class="controls"><span><kbd>WASD</kbd> MOVE</span><span><kbd>SPACE</kbd> JUMP</span><span><kbd>E</kbd> VIEW ART</span><span><kbd>CLICK</kbd> INTERACT</span><small>DRAG TO LOOK · SCROLL TO ZOOM · ESC TO PAUSE</small></footer>
   <div class="fatal" id="fatal" hidden>The 3D scene could not start in this browser.</div>
@@ -46,12 +46,12 @@
     <div class="loader-center">
       <div class="loader-window" aria-hidden="true"><div class="loader-stars"></div><div class="loader-floor"></div><div class="loader-anomaly"></div><div class="loader-cat"><i></i><b></b><span></span></div><div class="preview-caption"><i></i> FIELD PREVIEW</div></div>
       <p class="loader-kicker" id="menuKicker">YUSUF RAYYAN DANIEL / PORTFOLIO</p>
-      <h1 id="menuTitle">A room of<br><em>my own.</em></h1>
-      <p class="loader-copy" id="menuCopy">Play as the cat and explore my bedroom gallery.</p>
+      <h1 id="menuTitle">A library of<br><em>my work.</em></h1>
+      <p class="loader-copy" id="menuCopy">Play as the cat and wander three library rooms of projects.</p>
       <div class="loader-progress" id="loaderProgress"><span></span></div>
       <div class="loader-foot" id="loaderFoot"><span id="loaderStatus">BUILDING THE PIXEL WORLD</span><span>WASD MOVE <i>·</i> E VIEW ART</span></div>
       <div class="game-menu-actions" id="gameMenuActions" hidden>
-        <button class="enter-house-button" id="enterHouse" type="button"><span>ENTER GALLERY</span><b>↗</b></button>
+        <button class="enter-house-button" id="enterHouse" type="button"><span>ENTER LIBRARY</span><b>↗</b></button>
         <button class="controls-button" id="showControls" type="button" aria-expanded="false"><span>CONTROLS</span><b>+</b></button>
         <a class="pshome-button" href="../index.html">BACK TO HOME <span>↗</span></a>
       </div>
@@ -61,5 +61,5 @@
     </div>
   </section>
 </main>
-<script src="game.js?v=gallery-portfolio-20"></script>
+<script src="game.js?v=library-21"></script>
 </body></html>
