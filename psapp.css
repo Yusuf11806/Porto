@@ -1,0 +1,316 @@
+html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+body {
+            background-color: #07090e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            user-select: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* PS5 Background Image Zoom Animation */
+        .ps-bg-art {
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-in-out;
+        }
+        .ps-bg-art.changing {
+            opacity: 0.2;
+            transform: scale(1.08);
+        }
+
+        /* Top Horizontal Icon Bar Selection Animation */
+        .game-tile {
+            transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .game-tile.active-tile {
+            transform: scale(1.22) translateY(-4px);
+            border-color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0, 112, 209, 0.5), 0 0 15px rgba(255, 255, 255, 0.8);
+            z-index: 30;
+        }
+
+        /* Sub-Label Slide Fade Animation */
+        @keyframes psFadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-ps-appear {
+            animation: psFadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Bottom Activity Cards Hover Animation */
+        .activity-card {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .activity-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .showcase-screen {
+            flex: 1 0 auto;
+            min-height: calc(100vh - 5rem);
+            min-height: calc(100svh - 5rem);
+        }
+        .page-art-background { height: 100vh; height: 100svh; }
+        .scroll-cue {
+            position: relative;
+            align-self: center;
+            margin-top: auto;
+            margin-bottom: -.8rem;
+            display: grid;
+            place-items: center;
+            width: 2.2rem;
+            height: 2.2rem;
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, .66);
+            font-size: .85rem;
+            text-decoration: none;
+            animation: scrollCueFloat 1.8s ease-in-out infinite;
+        }
+        .scroll-cue:hover { color: white; }
+        @keyframes scrollCueFloat {
+            50% { translate: 0 6px; }
+        }
+        .project-information-section {
+            min-height: 110vh;
+            display: flex;
+            align-items: center;
+            padding: clamp(3rem, 9vw, 8rem) clamp(2rem, 9vw, 9rem);
+            border-top: 1px solid rgba(255,255,255,.1);
+            background: linear-gradient(135deg, #151925 0%, #10141e 52%, #191722 100%);
+        }
+        .main-tech-section { width: min(100%, 58rem); margin-top: auto; margin-bottom: -3.25rem; }
+        .project-info-placeholder {
+            width: min(100%, 56rem);
+            margin: 0 auto;
+            padding-left: clamp(1rem, 3vw, 2rem);
+            border-left: 2px solid rgba(0, 130, 243, .75);
+        }
+        .project-info-reveal {
+            opacity: 0;
+            transform: translateY(2.5rem) scale(.985);
+            filter: blur(8px);
+            transition: opacity .8s ease, transform .9s cubic-bezier(.2,.75,.2,1), filter .8s ease;
+        }
+        .project-info-reveal.is-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        .project-info-placeholder .project-info-eyebrow {
+            margin: 0 0 .75rem;
+            color: #64b5ff;
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+        .project-info-placeholder h2 {
+            margin: 0 0 1.1rem;
+            color: white;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -.03em;
+        }
+        .project-info-placeholder p {
+            margin: 0;
+            color: rgba(255, 255, 255, .78);
+            font-size: clamp(.95rem, 1.5vw, 1.15rem);
+            line-height: 1.85;
+        }
+        .project-tech-heading {
+            margin: 0 0 .8rem;
+            color: white;
+            font-size: .8rem;
+            font-weight: 700;
+        }
+        .project-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+            gap: .85rem;
+        }
+        .project-tech-card {
+            min-height: 9rem;
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 1rem;
+            background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
+            box-shadow: 0 12px 30px rgba(0,0,0,.18);
+            animation: techCardEnter .55s cubic-bezier(.2,.75,.2,1) both;
+            animation-delay: calc(var(--card-index) * 75ms);
+            transition: transform .25s ease, border-color .25s ease, background .25s ease;
+        }
+        .project-tech-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(100,181,255,.55);
+            background: linear-gradient(145deg, rgba(0,112,209,.18), rgba(255,255,255,.05));
+        }
+        .project-tech-icon {
+            display: grid;
+            place-items: center;
+            width: 2rem;
+            height: 2rem;
+            margin-bottom: .8rem;
+            border-radius: .65rem;
+            color: #8bc9ff;
+            background: rgba(0,112,209,.2);
+        }
+        .project-tech-card h4 { margin: 0 0 .4rem; color: white; font-size: .85rem; font-weight: 700; }
+        .project-tech-card p { color: rgba(255,255,255,.62); font-size: .72rem; line-height: 1.5; }
+        @keyframes techCardEnter {
+            from { opacity: 0; transform: translateY(16px) scale(.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .project-info-copy.is-changing { animation: infoCopyEnter .55s cubic-bezier(.2,.75,.2,1) both; }
+        @keyframes infoCopyEnter { from { opacity: 0; transform: translateY(12px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { display: none; }
+
+        /* Intro screens shown before the portfolio */
+        .intro-flow {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            overflow: hidden;
+            color: #f7f7fb;
+            background:
+                radial-gradient(ellipse at 23% 5%, rgba(193, 158, 145, .38), transparent 35%),
+                radial-gradient(ellipse at 13% 75%, rgba(124, 128, 137, .22), transparent 38%),
+                radial-gradient(ellipse at 82% 42%, rgba(29, 30, 56, .62), transparent 46%),
+                linear-gradient(112deg, #28252d 0%, #11121f 46%, #070812 100%);
+            transition: opacity .65s ease, visibility .65s ease;
+        }
+        .intro-flow.is-dismissed { opacity: 0; visibility: hidden; pointer-events: none; }
+        .intro-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .intro-particle {
+            position: absolute;
+            bottom: -12px;
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            background: #f4d6a0;
+            opacity: var(--opacity);
+            filter: blur(var(--blur));
+            box-shadow: 0 0 12px rgba(255, 205, 129, .55);
+            animation: introFloat var(--duration) linear var(--delay) infinite;
+        }
+        @keyframes introFloat { to { transform: translate3d(var(--drift), -110vh, 0); } }
+        .intro-screen {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            justify-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.015);
+            transition: opacity .65s ease, transform .8s cubic-bezier(.2,.7,.2,1), visibility .65s;
+        }
+        .intro-screen.is-active { opacity: 1; visibility: visible; transform: scale(1); }
+        .intro-welcome { grid-template-rows: 1fr auto auto 1fr; align-items: center; cursor: pointer; }
+        .intro-prompt { align-self: end; margin: 0 0 2.5rem; color: rgba(255,255,255,.84); font-size: clamp(1rem,2vw,1.45rem); font-weight: 300; }
+        .intro-continue-button {
+            display: grid;
+            place-items: center;
+            width: 4.5rem;
+            height: 4.5rem;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            color: #161622;
+            background: #fff;
+            box-shadow: 0 0 35px rgba(255,255,255,.18);
+            cursor: pointer;
+            animation: introPulse 2.2s ease-in-out infinite;
+        }
+        .intro-continue-button span { font-size: .82rem; font-weight: 900; letter-spacing: .05em; }
+        .intro-continue-button:hover { transform: scale(1.08); }
+        .intro-hint { align-self: start; margin: 1.35rem 0 0; color: rgba(255,255,255,.48); font-size: .75rem; }
+        @keyframes introPulse { 50% { box-shadow: 0 0 0 13px rgba(255,255,255,0), 0 0 40px rgba(255,255,255,.24); } }
+        .intro-profile { grid-template-rows: auto 1fr auto; align-items: center; padding: clamp(1.5rem,5vw,4rem); }
+        .intro-clock { justify-self: end; color: rgba(255,255,255,.9); font-size: clamp(1rem,2vw,1.5rem); font-weight: 300; }
+        .intro-profile-content { margin-top: -2rem; text-align: center; }
+        .intro-profile-content h1 { margin: 0; font-size: clamp(2rem,4.5vw,3.4rem); font-weight: 300; letter-spacing: -.035em; }
+        .intro-profile-content > p { margin: 1rem 0 3rem; color: rgba(255,255,255,.7); font-size: clamp(1.1rem,2vw,1.55rem); font-weight: 300; }
+        .intro-user-button { display: flex; min-width: 18rem; flex-direction: column; align-items: center; border: 0; color: white; background: none; cursor: pointer; }
+        .intro-controller { margin-bottom: 1rem; font-size: .8rem; }
+        .intro-avatar-ring { display: grid; place-items: center; width: clamp(8rem,15vw,11.5rem); aspect-ratio: 1; border: 2px solid rgba(232,225,255,.58); border-radius: 50%; transition: .25s ease; }
+        .intro-user-button:hover .intro-avatar-ring, .intro-user-button:focus-visible .intro-avatar-ring { transform: scale(1.06); border-color: white; box-shadow: 0 0 30px rgba(255,255,255,.24); }
+        .intro-avatar { display: grid; place-items: center; width: 82%; height: 82%; border: 4px solid white; border-radius: 50%; background: radial-gradient(circle at 35% 25%, #91a9ba, #364251 45%, #12131c 85%); box-shadow: inset 0 0 25px rgba(0,0,0,.6); font-size: clamp(2rem,5vw,3.7rem); font-weight: 800; letter-spacing: -.08em; }
+        .intro-user-name { margin-top: 1.1rem; font-size: clamp(1.15rem,2vw,1.65rem); font-weight: 300; }
+        .intro-select-hint { margin-top: .75rem; color: rgba(255,255,255,.65); font-size: .9rem; }
+        .intro-footer { align-self: end; margin: 0; color: rgba(255,255,255,.48); font-size: .8rem; }
+        @media (max-width: 600px) {
+            .intro-profile { padding: 1.5rem; }
+            .intro-profile-content { margin-top: -1rem; }
+            .intro-profile-content > p { margin-bottom: 2rem; }
+            .intro-prompt { padding: 0 1rem; text-align: center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .intro-particle, .intro-continue-button { animation: none; }
+            .intro-flow, .intro-screen, .intro-avatar-ring { transition-duration: .01ms; }
+            html { scroll-behavior: auto; }
+            .scroll-cue { animation: none; }
+            .project-info-reveal, .project-info-copy.is-changing, .project-tech-card { transition-duration: .01ms; animation-duration: .01ms; }
+        }
+        .intro-avatar { object-fit: cover; }
+
+        /* Console inspired portfolio home */
+        .console-tabs { min-width: 14rem; gap: 2.5rem; font-size: clamp(1.05rem, 1.6vw, 1.55rem); }
+        .console-tabs button { font-weight: 400; }
+        .console-tabs button:first-child { font-weight: 700; }
+        .console-tools { gap: clamp(1rem, 2.3vw, 2.2rem); }
+        .page-art-background { height: 100svh; background: #080a0f; }
+        #psBgArt {
+            position: absolute;
+            inset: 0 0 0 auto;
+            width: min(76vw, 1120px) !important;
+            height: 100% !important;
+            object-fit: contain !important;
+            object-position: right center;
+            opacity: .72 !important;
+            filter: saturate(.82) brightness(.68);
+            transform: none !important;
+        }
+        .console-showcase {
+            min-height: calc(100svh - 6.5rem);
+            padding-top: .5rem;
+            padding-bottom: 1.1rem;
+        }
+        #gameTileContainer { min-height: 8rem; gap: .75rem; padding: 1.1rem .5rem 1.4rem; overflow: visible; }
+        .game-tile { width: clamp(4.25rem, 6vw, 5.6rem); height: clamp(4.25rem, 6vw, 5.6rem); border-radius: 1rem; }
+        .game-tile.active-tile { transform: scale(1.3) translateY(2px); box-shadow: 0 0 0 3px rgba(255,255,255,.82), 0 12px 35px rgba(0,0,0,.5); }
+        #tileLabel { padding-left: .25rem; color: rgba(255,255,255,.78); font-size: .95rem; }
+        #heroTextContainer { max-width: min(48rem, 58vw); margin-top: auto; margin-bottom: clamp(1.25rem, 3vh, 2.5rem); }
+        #heroTitle { font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1.03; }
+        #heroDesc { max-width: 35rem; font-size: clamp(.95rem, 1.35vw, 1.15rem); line-height: 1.55; }
+        .hero-play-button { min-width: 15rem; justify-content: center; border-radius: 999px !important; padding: .95rem 1.7rem !important; font-size: 1rem !important; background: rgba(35,38,44,.9) !important; color: white !important; box-shadow: 0 8px 24px rgba(0,0,0,.24) !important; }
+        .hero-play-button:hover { background: rgba(75,79,88,.94) !important; }
+        .hero-play-button > div { background: #fff !important; color: #15171b !important; }
+        .main-tech-section { width: min(100%, 46rem); margin: 0 0 0; }
+        .project-tech-heading { margin-bottom: .55rem; color: rgba(255,255,255,.83); font-size: .78rem; letter-spacing: .02em; }
+        .project-tech-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem; }
+        .project-tech-card { min-height: 6.8rem; padding: .75rem; border-radius: .8rem; background: rgba(12,15,21,.82); }
+        .project-tech-icon { width: 1.7rem; height: 1.7rem; margin-bottom: .45rem; }
+        .project-tech-card h4 { font-size: .76rem; }
+        .project-tech-card p { margin: 0; font-size: .66rem; line-height: 1.4; }
+        footer { display: none !important; }
+        @media (max-width: 700px) {
+            header { height: 4.5rem !important; padding-inline: 1.1rem !important; }
+            .console-tabs { min-width: 0; gap: 1.25rem; font-size: 1rem; }
+            .console-tools { gap: .9rem; }
+            .console-showcase { min-height: calc(100svh - 4.5rem); padding: .5rem 1.1rem 1rem !important; }
+            #psBgArt { width: 100% !important; opacity: .5 !important; object-position: 58% center; }
+            #heroTextContainer { max-width: 100%; margin-bottom: 1rem; }
+            #heroTitle { font-size: clamp(2.25rem, 12vw, 3.4rem); }
+            #heroDesc { max-width: 28rem; }
+            .main-tech-section { width: 100%; }
+            .project-tech-grid { gap: .45rem; }
+            .project-tech-card { min-height: 6rem; padding: .6rem; }
+            .project-tech-card p { font-size: .6rem; }
+            #gameTileContainer { min-height: 6rem; padding-block: .7rem 1rem; }
+        }

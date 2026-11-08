@@ -1,0 +1,114 @@
+.game-loader{position:absolute;inset:0;z-index:4;display:grid;grid-template-rows:auto 1fr;padding:clamp(20px,4vw,64px);background:radial-gradient(ellipse at 50% 42%,#252037 0%,#11131d 48%,#080a11 100%);transition:opacity .65s ease,visibility .65s ease}
+.loader-top{display:flex;align-items:center;gap:12px;color:#e7e7ed;font:700 11px var(--mono);letter-spacing:.15em}
+.loader-top small{display:block;margin-top:5px;color:#8e91a2;font:8px var(--mono);letter-spacing:.12em}
+.loader-mark{width:35px;height:35px;display:grid;place-items:center;border:1px solid #ffb86b;color:#ffb86b;font:700 19px var(--sans);transform:rotate(-7deg)}
+.loader-top>b{display:flex;align-items:center;gap:9px;margin-left:auto;color:#aeb1c1;font:8px var(--mono);letter-spacing:.14em}
+.loader-top>b i{width:6px;height:6px;border-radius:50%;background:#ffb86b;box-shadow:0 0 14px #ffb86b;animation:loaderPulse .7s infinite alternate}
+.loader-center{width:min(620px,100%);align-self:center;justify-self:center;text-align:center}
+.loader-window{position:relative;height:clamp(150px,28vh,240px);margin:0 auto 32px;overflow:hidden;border:1px solid #fff2;background:linear-gradient(#181a2a 0 58%,#665444 58% 100%);box-shadow:0 22px 80px #0008;image-rendering:pixelated}
+.loader-stars{position:absolute;inset:0 0 42%;opacity:.8;background-image:radial-gradient(circle,#a9e8dc 1px,transparent 2px),radial-gradient(circle,#f7c786 1px,transparent 2px);background-position:12px 18px,41px 56px;background-size:83px 67px,117px 93px;animation:starsDrift 8s linear infinite}
+.loader-floor{position:absolute;inset:58% 0 0;background:repeating-linear-gradient(0deg,transparent 0 24px,#ffdda733 25px 27px),repeating-linear-gradient(90deg,transparent 0 55px,#ffdda722 56px 58px),linear-gradient(135deg,#c49b69,#e6c58e 60%,#947254)}
+.loader-anomaly{position:absolute;left:70%;top:42%;width:42px;height:42px;background:#ad83ff;border:2px solid #ddcaff;box-shadow:0 0 24px #a78bfa;transform:rotate(45deg);animation:anomalyFloat 2s ease-in-out infinite alternate}
+.loader-cat{position:absolute;left:14%;bottom:22%;width:48px;height:31px;background:#dc914b;box-shadow:inset -8px -5px #b66e3a;animation:catTravel 2.1s cubic-bezier(.4,0,.6,1) infinite}
+.loader-cat:before{content:"";position:absolute;left:26px;top:-16px;width:27px;height:25px;background:#e59b4e;clip-path:polygon(0 28%,17% 28%,17% 0,40% 0,52% 27%,82% 27%,82% 0,100% 0,100% 100%,0 100%)}
+.loader-cat:after{content:"";position:absolute;left:39px;top:-6px;width:4px;height:5px;background:#24242d;box-shadow:8px 8px 0 -1px #f2d8aa}
+.loader-cat i,.loader-cat b{position:absolute;bottom:-9px;width:11px;height:12px;background:#f0d8ad;animation:catStep .24s ease-in-out infinite alternate}
+.loader-cat i{left:6px}.loader-cat b{left:34px;animation-delay:-.12s}
+.loader-cat span{position:absolute;left:-18px;top:4px;width:22px;height:6px;background:#ca7e42;transform-origin:right center;animation:tailFlick .4s ease-in-out infinite alternate}
+.loader-kicker{margin:0;color:#ffb86b;font:9px var(--mono);letter-spacing:.2em}
+.loader-center h1{margin:16px 0 10px;color:#f0eff3;font:700 clamp(39px,7vw,72px)/.94 var(--sans);letter-spacing:-.07em}
+.loader-center h1 em{color:#ffb86b;font-style:normal}
+.loader-copy{margin:0;color:#aeb1c1;font-size:13px}
+.loader-progress{width:min(320px,80%);height:3px;margin:26px auto 11px;background:#ffffff20;overflow:hidden}
+.loader-progress span{display:block;width:38%;height:100%;background:#ffb86b;box-shadow:0 0 14px #ffb86b;animation:progressSweep 1.65s cubic-bezier(.55,.05,.35,.95) forwards}
+.loader-foot{display:flex;justify-content:space-between;width:min(420px,90%);margin:auto;color:#85899a;font:8px var(--mono);letter-spacing:.1em}
+.loader-foot i{padding:0 5px;color:#ffb86b;font-style:normal}
+.experience.is-playing .game-loader{opacity:0;visibility:hidden;pointer-events:none}
+.experience.is-playing .scene-status,.experience.is-playing .gravity-hud,.experience.is-playing .bottom-hud,.experience.is-playing .controls{opacity:1;visibility:visible;transition:opacity .7s ease,visibility .7s ease}
+@keyframes loaderPulse{to{opacity:.25;transform:scale(.65)}}
+@keyframes starsDrift{to{background-position:95px 95px,-30px 10px}}
+@keyframes anomalyFloat{to{transform:translateY(-17px) rotate(135deg);filter:hue-rotate(35deg)}}
+@keyframes catTravel{0%,100%{transform:translateX(0) translateY(0)}50%{transform:translateX(42vw) translateY(-14px)}}
+@keyframes catStep{to{transform:translateY(-5px)}}
+@keyframes tailFlick{to{transform:rotate(-28deg)}}
+@keyframes progressSweep{0%{width:4%;margin-left:0}65%{width:42%;margin-left:30%}100%{width:100%;margin-left:0}}
+@media(max-width:600px){.game-loader{padding:20px}.loader-window{height:180px}.loader-foot{font-size:7px}.loader-cat{animation-duration:1.7s}}
+@media(prefers-reduced-motion:reduce){.game-loader *, .game-loader *:before,.game-loader *:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+.game-loader:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.32;background:linear-gradient(115deg,transparent 15%,#ffffff06 45%,transparent 70%),radial-gradient(ellipse at 78% 88%,#ffb86b12,transparent 42%)}
+.loader-top,.loader-center{position:relative;z-index:1}
+.game-loader.is-ready .loader-center{display:grid;grid-template-columns:minmax(320px,1fr) minmax(330px,.9fr);grid-template-rows:auto auto auto auto 1fr;align-items:center;column-gap:clamp(32px,6vw,96px);width:min(1080px,100%);text-align:left;animation:menuAppear .7s ease both}
+.game-loader.is-ready .loader-window{grid-column:1;grid-row:1/6;width:100%;height:clamp(300px,53vh,500px);margin:0;border-color:#ffffff2a;box-shadow:0 26px 110px #0009,0 0 70px #ffb86b0b}
+.game-loader.is-ready .loader-kicker{grid-column:2;grid-row:1;margin:0 0 13px}
+.game-loader.is-ready .loader-center h1{grid-column:2;grid-row:2;margin:0;font-size:clamp(44px,6vw,82px)}
+.game-loader.is-ready .loader-copy{grid-column:2;grid-row:3;margin-top:18px;max-width:360px;line-height:1.7}
+.game-loader.is-ready .loader-progress{display:none}
+.game-loader.is-ready .loader-foot{grid-column:2;grid-row:4;width:100%;margin:22px 0 16px;justify-content:flex-start}
+.game-loader.is-ready .loader-foot span:last-child{display:none}
+.game-menu-actions{grid-column:2;grid-row:5;display:flex;gap:11px;align-items:center;flex-wrap:wrap}
+.game-menu-actions[hidden],.game-controls-card[hidden]{display:none}
+.enter-house-button,.controls-button{height:50px;padding:0 18px;cursor:pointer;font:9px var(--mono);letter-spacing:.12em;transition:transform .18s,background .18s,border-color .18s,box-shadow .18s}
+.enter-house-button{min-width:220px;display:flex;align-items:center;justify-content:space-between;border:1px solid #ffb86b;background:#ffb86b;color:#15151b}
+.enter-house-button span{font-size:16px}
+.enter-house-button:hover{transform:translateY(-2px);background:#ffd49e;box-shadow:0 0 30px #ffb86b3b}
+.controls-button{border:1px solid #ffffff27;background:#ffffff08;color:#c7c8d2}
+.controls-button:hover{border-color:#ffb86b80;color:#ffcc8a}
+.game-controls-card{grid-column:2;grid-row:6;display:flex;gap:7px;flex-wrap:wrap;margin-top:17px;animation:menuAppear .25s ease both}
+.game-controls-card span{padding:7px 8px;border:1px solid #ffffff16;background:#ffffff05;color:#a7aab8;font:8px var(--mono);letter-spacing:.05em}
+.game-controls-card kbd{height:18px;min-width:19px;margin-right:4px;font-size:8px}
+.experience.is-playing .loader-top{opacity:0;transition:opacity .3s}
+@keyframes menuAppear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){.game-loader.is-ready .loader-center{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto auto auto;width:min(520px,100%);text-align:center}.game-loader.is-ready .loader-window{grid-column:1;grid-row:1;height:clamp(170px,28vh,260px);margin:0 auto 24px}.game-loader.is-ready .loader-kicker{grid-column:1;grid-row:2}.game-loader.is-ready .loader-center h1{grid-column:1;grid-row:3;font-size:clamp(42px,12vw,68px)}.game-loader.is-ready .loader-copy{grid-column:1;grid-row:4;margin:13px auto 0}.game-loader.is-ready .loader-foot{grid-column:1;grid-row:5;justify-content:center;margin:14px 0}.game-menu-actions{grid-column:1;grid-row:6;justify-content:center}.game-controls-card{grid-column:1;grid-row:7;justify-content:center}.enter-house-button{min-width:190px}}
+.preview-caption{position:absolute;z-index:2;left:0;right:0;top:0;display:flex;align-items:center;gap:8px;padding:11px 13px;background:linear-gradient(#080a11d9,transparent);color:#e8e5e4;font:8px var(--mono);letter-spacing:.12em}
+.preview-caption i,.menu-dossier>div i{width:6px;height:6px;border-radius:50%;background:#ffb86b;box-shadow:0 0 12px #ffb86b}
+.preview-caption span{margin-left:auto;color:#b6ad9f}
+.game-loader.is-ready .loader-window{overflow:hidden}
+.game-loader.is-ready .loader-window:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#080a116e,transparent 55%),linear-gradient(0deg,#080a1166,transparent 40%);border:1px solid #ffffff0d}
+.game-loader.is-ready .preview-caption{top:auto;bottom:0;background:linear-gradient(transparent,#080a11e8);padding:15px}
+.game-menu-actions{display:grid;grid-template-columns:1fr;gap:8px;width:min(360px,100%);align-content:start}
+.enter-house-button,.controls-button{width:100%;min-width:0;display:flex;align-items:center;justify-content:flex-start;gap:13px;text-align:left}
+.enter-house-button span,.controls-button span{flex:1}
+.enter-house-button b,.controls-button b{font-size:15px;font-weight:400}
+.controls-button{height:44px;background:#ffffff07;border-color:#ffffff1b}
+.controls-button i,.enter-house-button i{width:16px;text-align:center}
+.return-button{text-decoration:none}
+.menu-dossier{grid-column:2;grid-row:7;width:min(360px,100%);margin-top:17px;padding:15px 16px;border:1px solid #ffffff17;background:linear-gradient(120deg,#ffffff09,#ffffff03);animation:menuAppear .35s ease both}
+.menu-dossier>span{color:#ffcb86;font:8px var(--mono);letter-spacing:.14em}
+.menu-dossier>b{display:block;margin-top:8px;color:#f0eff3;font:600 15px var(--sans);letter-spacing:.04em}
+.menu-dossier>p{margin:7px 0 12px;color:#a9acbb;font-size:10px;line-height:1.65}
+.menu-dossier>div{display:flex;align-items:center;gap:7px;color:#a9acbb;font:7px var(--mono);letter-spacing:.07em}
+.menu-dossier strong{margin-left:auto;color:#e5d8c5;font-weight:400}
+.enter-house-button:focus-visible,.controls-button:focus-visible{outline:2px solid #ffe0b5;outline-offset:3px}
+@media(max-width:760px){.game-menu-actions{grid-column:1;grid-row:6;width:min(360px,100%);margin:auto}.game-controls-card{grid-column:1;grid-row:7}.menu-dossier{grid-column:1;grid-row:8;margin:10px auto 0;text-align:left}.game-loader.is-ready .loader-center{grid-template-rows:auto auto auto auto auto auto auto auto;gap:0}.game-loader.is-ready .loader-window{margin-bottom:18px}.game-loader.is-ready .loader-copy{font-size:12px}}
+.game-loader.is-ready .loader-top>b,.game-loader.is-ready .loader-foot,.menu-dossier{display:none!important}
+.game-loader.is-ready .loader-center{grid-template-rows:auto auto auto auto auto;row-gap:0}
+.game-loader.is-ready .loader-window{grid-row:1/6}
+.game-loader.is-ready .loader-kicker{grid-row:1}
+.game-loader.is-ready .loader-center h1{grid-row:2;font-size:clamp(54px,7.4vw,92px);letter-spacing:-.085em}
+.game-loader.is-ready .loader-copy{grid-row:3;margin-top:12px;font-size:13px}
+.game-menu-actions{grid-row:4;display:flex;align-items:center;gap:14px;width:100%;margin-top:25px}
+.enter-house-button{width:auto;min-width:220px;height:52px;padding:0 17px;background:#ffbd73;border-color:#ffbd73;font-size:9px}
+.controls-button{width:auto;height:auto;padding:8px 0;border:0;background:transparent;color:#979bab;font:8px var(--mono);letter-spacing:.12em}
+.controls-button:hover{background:transparent;border-color:transparent;color:#ffd49e}
+.controls-button b{margin-left:3px;color:#ffbd73}
+.game-controls-card{grid-column:2;grid-row:5;width:min(430px,100%);margin-top:7px;padding-top:10px;border-top:1px solid #ffffff12}
+.game-controls-card span{padding:5px 0;border:0;background:transparent;font-size:7px}
+.preview-caption{font-size:7px;color:#d2c3b0}
+@media(max-width:760px){.game-loader.is-ready .loader-center{grid-template-rows:auto auto auto auto auto auto;row-gap:0}.game-loader.is-ready .loader-window{grid-row:1;margin-bottom:17px}.game-loader.is-ready .loader-kicker{grid-row:2}.game-loader.is-ready .loader-center h1{grid-row:3;font-size:clamp(47px,13vw,69px)}.game-loader.is-ready .loader-copy{grid-row:4}.game-menu-actions{grid-row:5;justify-content:center;margin-top:18px}.game-controls-card{grid-column:1;grid-row:6;width:min(400px,100%);margin:10px auto 0}.enter-house-button{min-width:205px}.controls-button{min-width:80px}}
+.loader-window{background:linear-gradient(#d6cec3 0 57%,#8c7861 57% 60%,#c7b18d 60% 100%)}
+.loader-stars{inset:0 0 42%;opacity:.78;background:repeating-linear-gradient(90deg,transparent 0 14%,#b9aa9718 14.2% 14.5%,transparent 14.7% 28%),linear-gradient(#e5ded3,#d6cec3);animation:none}
+.loader-anomaly{left:70%;top:17%;width:60px;height:74px;background:linear-gradient(135deg,#325563 0 45%,#e4ad70 46% 55%,#75528b 56%);border:7px solid #a88d6b;box-shadow:0 0 0 2px #e4d8c5,0 9px 22px #51403255;transform:rotate(-2deg);animation:galleryFrameFloat 3s ease-in-out infinite alternate}
+@keyframes galleryFrameFloat{to{transform:translateY(-6px) rotate(1deg)}}
+
+/* Menu return transition and PS Home action */
+.game-loader { transform: scale(1); filter: blur(0); transition: opacity .58s cubic-bezier(.2,.75,.2,1), visibility .58s, transform .62s cubic-bezier(.2,.75,.2,1), filter .58s ease; }
+.experience.is-playing .game-loader { transform: scale(1.035); filter: blur(7px); }
+.game-menu-actions { flex-wrap: wrap; }
+.pshome-button { display: inline-flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; color: #b8c9df; border: 1px solid #ffffff24; font: 8px var(--mono); letter-spacing: .1em; transition: color .2s, border-color .2s, background .2s, transform .2s; }
+.pshome-button span { color: #78b7ff; }
+.pshome-button:hover { color: white; border-color: #2d8cff; background: #2d8cff1c; transform: translateY(-2px); }
+.escape-card { transform: translateY(16px) scale(.985); opacity: 0; transition: transform .28s cubic-bezier(.2,.75,.2,1), opacity .24s ease; }
+.escape-menu.open .escape-card { transform: translateY(0) scale(1); opacity: 1; }
+.escape-actions button:last-child { border-color: #2d8cff55; }
+@media(max-width:760px) { .game-menu-actions { justify-content: center; } .pshome-button { min-height: 38px; } }
+
+.game-loader { grid-template-rows: 1fr; }
