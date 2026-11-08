@@ -82,9 +82,10 @@
   // ---------------------------------------------------------------------------
   const furnitureBlocks = [
     // ---- BEDROOM (z 2..18) ----
-    { x: 9.5, z: 13, hx: 3.0, hz: 3.4, top: 1.0, kind: 'bed' },
+    { x: 9.0, z: 13, hx: 2.9, hz: 3.4, top: 1.0, kind: 'bed' },
     { x: -10.3, z: 6, hx: 1.6, hz: 1.4, top: 5.0, kind: 'wardrobe' },
     { x: -9.8, z: 14.5, hx: 2.0, hz: .8, top: 1.7, kind: 'deskBed' },
+    { x: -9.8, z: 13.1, hx: .55, hz: .55, top: 1.0, kind: 'deskChairBlock' },
     { x: 0, z: 4.6, hx: 1.2, hz: .9, top: 1.0, kind: 'chest' },
     { x: 4.2, z: 6, hx: .9, hz: .9, top: 1.1, kind: 'armchair' },
     // ---- LIBRARY wall bookcases (in the bays between paintings) ----
@@ -94,10 +95,12 @@
     { x: -11.7, z: 29.3, hx: .55, hz: .7, top: 6.1, kind: 'bookcase' }, { x: 11.7, z: 29.3, hx: .55, hz: .7, top: 6.1, kind: 'bookcase' },
     { x: 11.7, z: 45, hx: .55, hz: 2.4, top: 6.1, kind: 'bookcase' }, { x: -11.7, z: 45.5, hx: .55, hz: .9, top: 6.1, kind: 'bookcase' },
     { x: -11.7, z: 55, hx: .55, hz: 3.6, top: 6.1, kind: 'bookcase' }, { x: 11.7, z: 55, hx: .55, hz: 3.6, top: 6.1, kind: 'bookcase' },
-    // ---- LIBRARY central furniture (aisle |x|<2.5 stays clear) ----
-    { x: 0, z: 23, hx: 1.8, hz: 1.0, top: 1.0, kind: 'table' }, { x: -2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair' }, { x: 2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair' },
-    { x: -3.4, z: 44, hx: .9, hz: 3.6, top: 5.6, kind: 'island' }, { x: 3.4, z: 44, hx: .9, hz: 3.6, top: 5.6, kind: 'island' },
-    { x: 0, z: 54, hx: 1.8, hz: 1.0, top: 1.05, kind: 'table' }, { x: 0, z: 51.8, hx: .45, hz: .45, top: 1.1, kind: 'chair' },
+    // ---- LIBRARY central furniture (low pieces only; NO free-standing bookcases
+    //      in the middle of a room — all books live on the walls). Aisle |x|<2.5 clear. ----
+    { x: 0, z: 23, hx: 1.8, hz: 1.0, top: 1.0, kind: 'table' }, { x: -2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 1 }, { x: 2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: -1 },
+    // Data room: a central study table with two facing chairs (no mid-room shelves).
+    { x: 0, z: 44, hx: 1.9, hz: 1.1, top: 1.0, kind: 'table' }, { x: -3.0, z: 44, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 1 }, { x: 3.0, z: 44, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: -1 },
+    { x: 0, z: 54, hx: 1.8, hz: 1.0, top: 1.05, kind: 'table' }, { x: 0, z: 51.8, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 2 },
     { x: 6.5, z: 57, hx: .6, hz: .6, top: 1.4, kind: 'globe' }
   ];
 
@@ -122,7 +125,7 @@
 
   // yaw 0 => camera behind the cat (at -z) looking +z; face PI => cat head points +z.
   const player = { x: 0, y: 0, z: 8, vx: 0, vy: 0, vz: 0, face: Math.PI, attackUntil: 0, attackHitAt: 0, attackPending: false };
-  const cameraRig = { x: 0, y: 0, z: 0, tx: 0, ty: 0, tz: 0, yaw: 0, pitch: 4.1, distance: 7.2, sensitivity: 1, dragging: false, lastX: 0, lastY: 0, ready: false };
+  const cameraRig = { x: 0, y: 0, z: 0, tx: 0, ty: 0, tz: 0, yaw: 0, pitch: 3.0, distance: 6.0, shoulder: 1.25, sensitivity: 1, dragging: false, lastX: 0, lastY: 0, ready: false };
 
   // ---------------------------------------------------------------------------
   // GEOMETRY HELPERS
@@ -196,17 +199,36 @@
     box(x, h - .12, z, depth * 1.08, .28, length * 1.04, trim);
   }
   function readingTable(x, z, w, d) { box(x, .9, z, w, .16, d, 0x7a5338); box(x, 1.0, z, w * .92, .05, d * .92, 0x4a6a60); for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * (w / 2 - .25), .45, z + sz * (d / 2 - .25), .2, .9, .2, 0x5c3f2b); box(x, 1.2, z, .3, .4, .3, 0x3a3f4a); box(x, 1.55, z, .5, .3, .5, 0xffd58b); }
-  function chair(x, z) { box(x, .32, z, .78, .12, .78, 0x7a5338); box(x, .74, z - .33, .78, .74, .14, 0x6a4a32); for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * .3, .16, z + sz * .3, .1, .34, .1, 0x5c3f2b); }
+  // face: 1 => faces +x, -1 => faces -x, 2 => faces +z, -2 => faces -z (default).
+  // The backrest sits BEHIND the seat (opposite the facing direction).
+  function chair(x, z, face = -2) {
+    box(x, .32, z, .78, .12, .78, 0x7a5338); // seat
+    let bx = x, bz = z, sx = .78, sz = .14;
+    if (face === 1) { bx = x - .33; sx = .14; sz = .78; }        // faces +x => back on -x
+    else if (face === -1) { bx = x + .33; sx = .14; sz = .78; }   // faces -x => back on +x
+    else if (face === 2) { bz = z - .33; }                        // faces +z => back on -z
+    else { bz = z + .33; }                                        // faces -z => back on +z
+    box(bx, .74, bz, sx, .74, sz, 0x6a4a32); // backrest
+    for (const ox of [-1, 1]) for (const oz of [-1, 1]) box(x + ox * .3, .16, z + oz * .3, .1, .34, .1, 0x5c3f2b);
+  }
+  // A simple swivel desk chair (five-star base) that faces +z by default.
+  function deskChair(x, z) { box(x, .5, z, .9, .14, .9, 0x2f3340); box(x, .95, z + .4, .86, .9, .14, 0x363b49); box(x, .22, z, .12, .5, .12, 0x1f232c); box(x, .08, z, 1.0, .1, 1.0, 0x1f232c); }
   function globe(x, z) { box(x, .7, z, .18, 1.4, .18, 0x6a4a32); box(x, 1.5, z, .7, .7, .7, 0x4e7fa6); box(x, 1.5, z, .74, .12, .74, 0xd7b06a); }
   function potPlant(x, z) { box(x, .3, z, .55, .6, .55, 0xb5763f); box(x, .9, z, .35, .7, .35, 0x3f6e46); box(x, 1.35, z, .7, .6, .7, 0x4f8a57); box(x, 1.7, z, .45, .5, .45, 0x63a567); }
   function floorLamp(x, z) { box(x, .1, z, .5, .2, .5, 0x3a3f4a); box(x, 1.4, z, .1, 2.6, .1, 0x5c5248); box(x, 2.75, z, .7, .5, .7, 0xffe0a0); }
 
   // Bedroom furniture pieces.
+  // Bed with the HEADBOARD + pillows against the right wall (+x), footboard toward -x,
+  // so it reads as a bed pushed against the wall rather than floating.
   function bed(x, z) {
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * 2.5, .25, z + sz * 2.9, .4, .5, .4, 0x6a4a32);
-    box(x, .55, z, 5.4, .5, 6.2, 0x7a5338); box(x, .95, z, 5.1, .4, 5.9, 0xe8d8bf); box(x, 1.2, z - .5, 4.9, .25, 4.2, 0x6ea0c4);
-    box(x - 1.1, 1.3, z - 2.4, 1.9, .3, 1.1, 0xf7e7d0); box(x + 1.1, 1.3, z - 2.4, 1.9, .3, 1.1, 0xf7e7d0);
-    box(x, 2.0, z + 3.1, 5.4, 2.4, .25, 0x6a4a32); for (let bx = -2; bx <= 2; bx += .8) box(x + bx, 2.0, z + 2.95, .14, 2.0, .14, 0xc4935e);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * 2.5, .25, z + sz * 2.9, .4, .5, .4, 0x6a4a32); // legs
+    box(x, .55, z, 5.4, .5, 6.2, 0x7a5338);          // frame
+    box(x, .95, z, 5.1, .4, 5.9, 0xe8d8bf);          // mattress
+    box(x + .9, 1.2, z, 3.0, .25, 5.6, 0x6ea0c4);    // folded blanket toward the foot (-x)
+    // two pillows along the headboard end (+x)
+    for (const pz of [-1.4, 1.4]) box(x + 1.9, 1.25, z + pz, 1.0, .3, 1.9, 0xf7e7d0);
+    // headboard panel standing on the +x (wall) side
+    box(x + 2.5, 2.0, z, .22, 2.4, 5.4, 0x6a4a32); for (let bz = -2; bz <= 2; bz += .8) box(x + 2.38, 2.0, z + bz, .14, 2.0, .14, 0xc4935e);
   }
   function wardrobe(x, z) { box(x, 2.5, z, 3.2, 5.0, 2.6, 0x8b674f); box(x + 1.55, 2.5, z, .1, 4.7, 2.3, 0xb68b66); for (const sz of [-1, 1]) box(x + 1.6, 2.5, z + sz * .55, .06, 4.2, .08, 0x57483c); for (const sz of [-1, 1]) box(x + 1.64, 2.5, z + sz * .55, .12, .3, .08, 0xe5c893); }
   function deskWithPC(x, z) {
@@ -220,37 +242,42 @@
   // ---------------------------------------------------------------------------
   function drawWorld(t) {
     const midZ = (W.minZ + W.maxZ) / 2, lenZ = W.maxZ - W.minZ, lenX = W.maxX - W.minX;
-    // Floors: warm wood for bedroom, cooler library floor further in.
-    box(0, -.3, 10, lenX + 1, .6, 17, 0x9a6b44);                 // bedroom floor
-    box(0, -.3, 39.5, lenX + 1, .6, 43.5, 0x8a6b4a);            // library floor
-    box(0, W.ceilY, midZ, lenX + 1, .5, lenZ + 1, 0x2f2a28);     // ceiling
-    box(W.minX, W.ceilY / 2, midZ, WALL_T, W.ceilY, lenZ + 1, 0x6f5742);
-    box(W.maxX, W.ceilY / 2, midZ, WALL_T, W.ceilY, lenZ + 1, 0x6f5742);
-    box(0, W.ceilY / 2, W.minZ, lenX + 1, W.ceilY, WALL_T, 0x6f5742);   // back wall of bedroom
-    box(0, W.ceilY / 2, W.maxZ, lenX + 1, W.ceilY, WALL_T, 0x6f5742);   // far library wall
+    // ---- Cohesive palette: warm cream plaster walls, honey floor, soft teal ceiling ----
+    const bedroomFloor = 0xb08a5c, libraryFloor = 0xa07e52, ceil = 0x3a4752;
+    const wallBedroom = 0xcdb79a, wallLibrary = 0xc3b59a, trim = 0xe8cfa3;
+    // Floors.
+    box(0, -.3, 10, lenX + 1, .6, 17, bedroomFloor);
+    box(0, -.3, 39.5, lenX + 1, .6, 43.5, libraryFloor);
+    box(0, W.ceilY, midZ, lenX + 1, .5, lenZ + 1, ceil);
+    // Outer walls — bedroom portion a touch warmer than the library portion.
+    for (const x of [W.minX, W.maxX]) { box(x, W.ceilY / 2, 10, WALL_T, W.ceilY, 17, wallBedroom); box(x, W.ceilY / 2, 39.5, WALL_T, W.ceilY, 43.5, wallLibrary); }
+    box(0, W.ceilY / 2, W.minZ, lenX + 1, W.ceilY, WALL_T, wallBedroom);
+    box(0, W.ceilY / 2, W.maxZ, lenX + 1, W.ceilY, WALL_T, wallLibrary);
     // Plank lines + rugs.
-    for (let z = W.minZ + 2; z < W.maxZ; z += 2.4) box(0, -.001, z, lenX, .012, .04, 0x6f5236);
-    box(0, .02, 10, 9.4, .03, 8.0, 0x7d4b45);                   // bedroom rug
-    for (const z of [23, 44, 54]) box(0, .02, z, 8.0, .03, 7.2, 0x6e5240);  // library rugs
-    // Baseboards.
-    for (const x of [W.minX + .32, W.maxX - .32]) { box(x, .4, midZ, .12, .8, lenZ, 0xbf9566); box(x, 6.6, midZ, .1, .16, lenZ, 0xbf9566); }
+    for (let z = W.minZ + 2; z < W.maxZ; z += 2.4) box(0, -.001, z, lenX, .012, .04, 0x8a6a44);
+    box(0, .02, 10, 9.4, .03, 8.0, 0x9c5c57);                   // bedroom rug (warm terracotta)
+    const rugColors = { 23: 0x3f6f8f, 44: 0x3f7f63, 54: 0x7a6aa0 }; // tinted per genre area
+    for (const z of [23, 44, 54]) box(0, .02, z, 8.0, .03, 7.2, rugColors[z]);
+    // Baseboards + picture rail.
+    for (const x of [W.minX + .32, W.maxX - .32]) { box(x, .4, midZ, .12, .8, lenZ, trim); box(x, 6.6, midZ, .1, .16, lenZ, trim); }
 
     // Internal walls (bedroom door + 3 library dividers), each with a doorway + archway trim.
     for (const dz of INTERNAL_WALLS) {
+      const wc = dz <= 18 ? wallBedroom : wallLibrary;
       const lCx = (W.minX + (-DOOR_HALF)) / 2, lW = (-DOOR_HALF) - W.minX;
       const rCx = (DOOR_HALF + W.maxX) / 2, rW = W.maxX - DOOR_HALF;
-      box(lCx, W.ceilY / 2, dz, lW, W.ceilY, WALL_T, 0x6f5742);
-      box(rCx, W.ceilY / 2, dz, rW, W.ceilY, WALL_T, 0x6f5742);
-      box(0, W.ceilY - 1.1, dz, DOOR_HALF * 2 + .4, 2.2, WALL_T, 0x6f5742);
-      for (const sx of [-1, 1]) box(sx * DOOR_HALF, 2.9, dz, .22, 5.8, WALL_T + .1, 0xbf9566);
-      box(0, 5.9, dz, DOOR_HALF * 2 + .4, .3, WALL_T + .1, 0xbf9566);
+      box(lCx, W.ceilY / 2, dz, lW, W.ceilY, WALL_T, wc);
+      box(rCx, W.ceilY / 2, dz, rW, W.ceilY, WALL_T, wc);
+      box(0, W.ceilY - 1.1, dz, DOOR_HALF * 2 + .4, 2.2, WALL_T, wc);
+      for (const sx of [-1, 1]) box(sx * DOOR_HALF, 2.9, dz, .22, 5.8, WALL_T + .1, trim);
+      box(0, 5.9, dz, DOOR_HALF * 2 + .4, .3, WALL_T + .1, trim);
     }
 
     // Ceiling lamps down the aisle.
     for (let z = 6; z <= 58; z += 8) { box(0, W.ceilY - .3, z, .25, .5, .25, 0x8a7a63); box(0, W.ceilY - .7, z, .7, .18, .7, 0xffe3a8); box(0, W.ceilY - .82, z, .42, .1, .42, 0xfff3cf); }
 
     // ---------------- BEDROOM contents ----------------
-    bed(9.5, 13); wardrobe(-10.3, 6); deskWithPC(-9.8, 14.5);
+    bed(9.0, 13); wardrobe(-10.3, 6); deskWithPC(-9.8, 14.5); deskChair(-9.8, 13.1);
     // chest of drawers (interactable "chest") + armchair + plant + lamp
     box(0, .5, 4.6, 2.4, 1.0, 1.8, 0x8e684d); box(0, 1.05, 4.6, 2.5, .12, 1.9, 0xb88d66); for (const yy of [.4, .75]) box(0, yy, 3.75, 2.1, .06, .06, 0x5a4232);
     box(4.2, .35, 6, 1.7, .5, 1.6, 0x9b5f58); box(4.2, 1.0, 6.7, 1.7, 1.1, .3, 0xb87970); for (const sx of [-1, 1]) box(4.2 + sx * .85, .65, 6, .22, .7, 1.4, 0x8a5750);
@@ -269,16 +296,15 @@
     furnitureBlocks.forEach(o => {
       switch (o.kind) {
         case 'bookcase': bookcase(o.x, o.z, o.hz * 2, o.hx * 2, caseColors[ci++ % caseColors.length]); break;
-        case 'island': bookcase(o.x, o.z, o.hz * 2, o.hx * 2, 0x87583e); break;
         case 'table': readingTable(o.x, o.z, o.hx * 2, o.hz * 2); break;
-        case 'chair': chair(o.x, o.z); break;
+        case 'chair': chair(o.x, o.z, o.face); break;
         case 'globe': globe(o.x, o.z); break;
       }
     });
-    // Rolling-ladder accent in the data room.
-    box(-9.6, 3, 41, .14, 6, .14, 0x5c3f2b); box(-9.6, 3, 47, .14, 6, .14, 0x5c3f2b); for (let y = 1; y < 6; y += 1) box(-9.6, y, 44, .14, .1, 6, 0x6a4a32);
-    // A couple of library plants for life.
-    potPlant(-10.6, 20.5); potPlant(10.6, 51.5);
+    // Rolling ladder leaning against the left-wall stacks in the data room (flush to wall).
+    box(-11.0, 3, 48.5, .14, 6, .14, 0x5c3f2b); box(-11.35, 3, 48.5, .14, 6, .14, 0x5c3f2b); for (let y = 1; y < 6; y += 1) box(-11.18, y, 48.5, .14, .1, .9, 0x6a4a32);
+    // A few library plants for life (against walls, out of the aisle).
+    potPlant(-10.9, 20.5); potPlant(10.9, 51.5); potPlant(10.9, 33);
 
     // ---------------- GENRE SIGNS ----------------
     // A coloured banner hanging over the doorway into each genre room.
@@ -335,8 +361,10 @@
     if (dx && dz) { dx *= .707; dz *= .707; }
     const hasInput = dx !== 0 || dz !== 0;
     const forward = -dz; // W => +1 (deeper into the world, away from camera)
-    const moveX = dx * Math.cos(cameraRig.yaw) + forward * Math.sin(cameraRig.yaw);
-    const moveZ = forward * Math.cos(cameraRig.yaw) - dx * Math.sin(cameraRig.yaw);
+    // Camera-relative movement. Forward dir = (sin,cos); screen-right dir = (-cos,sin).
+    // So D (dx=+1) strafes to the player's screen-right, A (dx=-1) to screen-left.
+    const moveX = forward * Math.sin(cameraRig.yaw) - dx * Math.cos(cameraRig.yaw);
+    const moveZ = forward * Math.cos(cameraRig.yaw) + dx * Math.sin(cameraRig.yaw);
     const sprint = keys.Shift ? 1.6 : 1, speed = 7.2 * sprint, blend = 1 - Math.exp(-16 * dt);
 
     if (hasInput) { player.vx += (moveX * speed - player.vx) * blend; player.vz += (moveZ * speed - player.vz) * blend; }
@@ -359,10 +387,13 @@
     const turn = Math.atan2(Math.sin(wanted - player.face), Math.cos(wanted - player.face));
     player.face += turn * (1 - Math.exp(-(movingNow ? 10 : 7) * dt));
 
-    const eye = [player.x - Math.sin(cameraRig.yaw) * cameraRig.distance, player.y + cameraRig.pitch, player.z - Math.cos(cameraRig.yaw) * cameraRig.distance];
-    const target = [player.x + Math.sin(cameraRig.yaw) * 1.6, player.y + 1.15, player.z + Math.cos(cameraRig.yaw) * 2.5];
+    // Over-the-shoulder rig: camera right vector = (-cos, sin); offset eye + aim sideways.
+    const rightX = -Math.cos(cameraRig.yaw), rightZ = Math.sin(cameraRig.yaw);
+    const shoulder = cameraRig.shoulder; // sideways offset (world units)
+    const eye = [player.x - Math.sin(cameraRig.yaw) * cameraRig.distance + rightX * shoulder, player.y + cameraRig.pitch, player.z - Math.cos(cameraRig.yaw) * cameraRig.distance + rightZ * shoulder];
+    const target = [player.x + Math.sin(cameraRig.yaw) * 1.6 + rightX * shoulder, player.y + 1.35, player.z + Math.cos(cameraRig.yaw) * 2.5 + rightZ * shoulder];
     cameraRig.x += (eye[0] - cameraRig.x) * smooth; cameraRig.y += (eye[1] - cameraRig.y) * smooth; cameraRig.z += (eye[2] - cameraRig.z) * smooth;
-    cameraRig.x = clamp(cameraRig.x, W.minX + .35, W.maxX - .35); cameraRig.y = clamp(cameraRig.y, .65, W.ceilY - .4); cameraRig.z = clamp(cameraRig.z, W.minZ + .35, W.maxZ - .35);
+    cameraRig.x = clamp(cameraRig.x, W.minX + .35, W.maxX - .35); cameraRig.y = clamp(cameraRig.y, .55, W.ceilY - .3); cameraRig.z = clamp(cameraRig.z, W.minZ + .35, W.maxZ - .35);
     const aim = 1 - Math.exp(-8 * dt);
     cameraRig.tx += (target[0] - cameraRig.tx) * aim; cameraRig.ty += (target[1] - cameraRig.ty) * aim; cameraRig.tz += (target[2] - cameraRig.tz) * aim;
     gl.uniformMatrix4fv(viewLoc, false, lookAt([cameraRig.x, cameraRig.y, cameraRig.z], [cameraRig.tx, cameraRig.ty, cameraRig.tz]));
@@ -438,11 +469,12 @@
   // ---------------------------------------------------------------------------
   function setPauseMenu(open) { paused = open; const menu = document.getElementById('escapeMenu'); menu.classList.toggle('open', open); menu.setAttribute('aria-hidden', String(!open)); if (open) { player.vx = 0; player.vy = 0; player.vz = 0; cameraRig.dragging = false; } }
   document.getElementById('resumeGame').addEventListener('click', () => setPauseMenu(false));
-  function exitToGameMenu() { closeModal(); setPauseMenu(false); started = false; player.x = 0; player.y = 0; player.z = 8; player.vx = 0; player.vy = 0; player.vz = 0; player.face = Math.PI; player.attackPending = false; cameraRig.yaw = 0; cameraRig.pitch = 4.1; cameraRig.ready = false; collected.clear(); document.getElementById('experience').classList.remove('is-playing'); document.getElementById('gameControlsCard').hidden = true; document.getElementById('showControls').setAttribute('aria-expanded', 'false'); document.getElementById('showControls').querySelector('b').textContent = '+'; }
+  function exitToGameMenu() { closeModal(); setPauseMenu(false); started = false; player.x = 0; player.y = 0; player.z = 8; player.vx = 0; player.vy = 0; player.vz = 0; player.face = Math.PI; player.attackPending = false; cameraRig.yaw = 0; cameraRig.pitch = 3.0; cameraRig.distance = 6.0; cameraRig.ready = false; collected.clear(); document.getElementById('experience').classList.remove('is-playing'); document.getElementById('gameControlsCard').hidden = true; document.getElementById('showControls').setAttribute('aria-expanded', 'false'); document.getElementById('showControls').querySelector('b').textContent = '+'; }
   document.getElementById('exitToGameMenu').addEventListener('click', exitToGameMenu);
   document.getElementById('openGameSettings').addEventListener('click', event => { const panel = document.getElementById('gameSettings'), isOpen = panel.hidden; panel.hidden = !isOpen; event.currentTarget.setAttribute('aria-expanded', String(isOpen)); });
   document.getElementById('lookSensitivity').addEventListener('input', event => { cameraRig.sensitivity = Number(event.target.value); document.getElementById('sensitivityValue').textContent = `${cameraRig.sensitivity.toFixed(1)}x`; });
   document.getElementById('cameraDistance').addEventListener('input', event => { cameraRig.distance = Number(event.target.value); document.getElementById('distanceValue').textContent = cameraRig.distance.toFixed(1); });
+  { const sh = document.getElementById('shoulderOffset'); if (sh) sh.addEventListener('input', event => { cameraRig.shoulder = Number(event.target.value); document.getElementById('shoulderValue').textContent = cameraRig.shoulder.toFixed(2); }); }
 
   function attackSignal() { if (!started || modalOpen) return; const now = performance.now(); player.attackUntil = now + 560; player.attackHitAt = now + 120; player.attackPending = true; }
 
@@ -468,7 +500,7 @@
   // INPUT
   // ---------------------------------------------------------------------------
   canvas.addEventListener('pointerdown', e => { if (!started || e.pointerType !== 'mouse' || e.button !== 0) return; cameraRig.dragging = true; cameraRig.lastX = e.clientX; cameraRig.lastY = e.clientY; cameraRig.downX = e.clientX; cameraRig.downY = e.clientY; canvas.setPointerCapture(e.pointerId); });
-  canvas.addEventListener('pointermove', e => { if (!cameraRig.dragging) return; const dx = e.clientX - cameraRig.lastX, dy = e.clientY - cameraRig.lastY; cameraRig.lastX = e.clientX; cameraRig.lastY = e.clientY; cameraRig.yaw -= dx * .006 * cameraRig.sensitivity; cameraRig.pitch = clamp(cameraRig.pitch + dy * .025 * cameraRig.sensitivity, 2.2, 8.2); });
+  canvas.addEventListener('pointermove', e => { if (!cameraRig.dragging) return; const dx = e.clientX - cameraRig.lastX, dy = e.clientY - cameraRig.lastY; cameraRig.lastX = e.clientX; cameraRig.lastY = e.clientY; cameraRig.yaw -= dx * .007 * cameraRig.sensitivity; cameraRig.pitch = clamp(cameraRig.pitch + dy * .03 * cameraRig.sensitivity, 1.0, 9.0); });
   const stopOrbit = e => { if (!cameraRig.dragging) return; const click = Math.hypot(e.clientX - cameraRig.downX, e.clientY - cameraRig.downY) < 5; cameraRig.dragging = false; if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId); if (e.type === 'pointerup' && click) attackSignal(); };
   canvas.addEventListener('contextmenu', e => e.preventDefault());
   canvas.addEventListener('pointerup', stopOrbit); canvas.addEventListener('pointercancel', stopOrbit);
@@ -503,7 +535,7 @@
       update(dt, t); makeScene(t);
       const data = new Float32Array(held);
       gl.bindBuffer(gl.ARRAY_BUFFER, buffer); gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW);
-      gl.clearColor(.1, .09, .12, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.clearColor(.12, .11, .13, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, data.length / 6);
     } catch (error) { renderStopped = true; showRenderError(error); console.error('World render stopped:', error); }
   }
