@@ -282,13 +282,16 @@
     if (maxWidth) { const need = text.length * (glyphW + gap) * cell - gap * cell; if (need > maxWidth) cell *= maxWidth / need; }
     const stride = (glyphW + gap) * cell;
     const totalW = text.length * stride - gap * cell;
-    let x0 = cx - totalW / 2;
+    // The sign is read from the -z side (player walks toward +z). Looking down +z, the
+    // world +x axis runs to the viewer's LEFT, so lay characters out along -x and flip
+    // each glyph's columns — otherwise the text reads mirrored.
+    let x0 = cx + totalW / 2;
     for (let i = 0; i < text.length; i++) {
       const g = FONT[text[i]] || FONT[' '];
       for (let r = 0; r < 5; r++) for (let c = 0; c < 3; c++) {
-        if (g[r][c] === '1') { const px = x0 + c * cell + cell / 2, py = topY - r * cell - cell / 2; box(px, py, zFace, cell * .92, cell * .92, .08, color); }
+        if (g[r][c] === '1') { const px = x0 - c * cell - cell / 2, py = topY - r * cell - cell / 2; box(px, py, zFace, cell * .92, cell * .92, .08, color); }
       }
-      x0 += stride;
+      x0 -= stride;
     }
   }
 
