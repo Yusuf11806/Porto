@@ -1,76 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090b12">
-<title>Yusuf's 3D Project Gallery</title>
-<link rel="stylesheet" href="style.css?v=gallery-bedroom-garden-19">
-<link rel="stylesheet" href="loading.css?v=github-menu-16">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080914">
+    <title>Yusuf Rayyan Daniel — Portfolio</title>
+    <meta name="description" content="The interactive PlayStation-style portfolio of Yusuf Rayyan Daniel, Computer Science student at BINUS University. Press start to explore a 3D pixel-art gallery of my projects.">
+    <meta property="og:title" content="Yusuf Rayyan Daniel — Portfolio">
+    <meta property="og:description" content="An interactive PlayStation-style portfolio. Press start and explore my projects as a cat in a 3D pixel-art gallery.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23080914'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23f4d6a0'%3E%F0%9F%90%88%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="pshome.css?v=home-2">
 </head>
 <body>
-<main class="experience" id="experience">
-  <div class="scene" id="scene" aria-label="Third-person 3D pixel-art project gallery"><canvas id="world" tabindex="0" aria-label="3D game view. Use WASD to move, mouse to look, and Space to jump."></canvas></div>
-  <div class="grain"></div><div class="shade"></div>
-  <div class="scene-status"><span><i class="status-square"></i><b id="zoneLabel">BEDROOM / PERSONAL SPACE</b></span><span>COORD <b id="coord">00 : 00</b></span></div>
-  <div class="toast" id="toast"></div><div class="center-prompt" id="interactHint" aria-live="polite"></div>
-  <div class="gravity-hud"><small>GRAVITY VECTOR</small><strong id="vector">↓</strong><b id="gravityText">FLOOR</b><span>SPACE TO SHIFT</span></div>
-  <footer class="controls"><span><kbd>WASD</kbd> MOVE</span><span><kbd>SPACE</kbd> JUMP</span><span><kbd>E</kbd> VIEW ART</span><span><kbd>CLICK</kbd> ATTACK / LOOK</span><small>DRAG TO LOOK · SCROLL TO ZOOM</small></footer>
-  <div class="fatal" id="fatal" hidden>The 3D scene could not start in this browser.</div>
-  <div class="modal" id="modal" aria-hidden="true"><article class="modal-card"><button class="close" id="closeModal" aria-label="Close">×</button><p class="eyebrow" id="modalEyebrow">ARTWORK / 01</p><h2 id="modalTitle">Project title</h2><section class="project-gallery" id="projectGallery" aria-label="Project screenshots" hidden><button class="gallery-arrow" id="galleryPrevious" type="button" aria-label="Previous image">‹</button><img id="galleryImage" src="" alt=""><div class="photo-empty" id="friendPhotoEmpty" hidden>PHOTO ARCHIVE<br><small>Add your photos with friends to this folder to display them here.</small></div><button class="gallery-arrow" id="galleryNext" type="button" aria-label="Next image">›</button><span class="gallery-count" id="galleryCount"></span></section><p class="modal-copy" id="modalCopy"></p><div class="modal-tags" id="modalTags"></div><a class="modal-link" id="modalLink" href="#" target="_blank" rel="noreferrer">OPEN PROJECT <span>↗</span></a><div class="profile-links" id="modalExtraLinks" hidden><a id="modalLinkedIn" href="#" target="_blank" rel="noreferrer">LINKEDIN ↗</a><a id="modalGithub" href="#" target="_blank" rel="noreferrer">GITHUB ↗</a><span>CV LINK TO BE ADDED</span></div><p class="modal-foot">PRESS ESC TO RETURN TO THE GALLERY</p></article></div>
-  <section class="escape-menu" id="escapeMenu" aria-hidden="true" aria-labelledby="escapeTitle">
-    <div class="escape-card">
-      <p class="escape-kicker">YUSUF RAYYAN DANIEL / GALLERY</p>
-      <h2 id="escapeTitle">Paused</h2>
-      <div class="escape-actions">
-        <button id="resumeGame" type="button">Resume</button>
-        <button id="openGameSettings" type="button" aria-expanded="false">Settings</button>
-        <button id="exitToGameMenu" type="button">Exit to Menu</button>
-      </div>
-      <div class="escape-settings" id="gameSettings" hidden>
-        <h3>Game settings</h3>
-        <label for="lookSensitivity">Look sensitivity <output id="sensitivityValue">1.0×</output></label>
-        <input id="lookSensitivity" type="range" min="0.7" max="1.6" step="0.1" value="1">
-        <label for="cameraDistance">Camera distance <output id="distanceValue">8.0</output></label>
-        <input id="cameraDistance" type="range" min="5" max="13" step="0.2" value="8">
-      </div>
-      <p class="escape-hint">Press ESC to resume</p>
-    </div>
-  </section>
-  <div class="touch-controls"><button data-action="left">←</button><button data-action="forward">↑</button><button data-action="back">↓</button><button data-action="right">→</button><button data-action="jump">JUMP</button><button data-action="use">E</button><button data-action="attack">✦</button></div>
-  <section class="game-loader" id="gameLoader" aria-label="Resonance game menu">
-    <div class="loader-center">
-      <div class="loader-window" aria-hidden="true"><div class="loader-stars"></div><div class="loader-floor"></div><div class="loader-anomaly"></div><div class="loader-cat"><i></i><b></b><span></span></div><div class="preview-caption"><i></i> FIELD PREVIEW</div></div>
-      <p class="loader-kicker" id="menuKicker">YUSUF RAYYAN DANIEL / PERSONAL WORLD</p>
-      <h1 id="menuTitle">A room of<br><em>my own.</em></h1>
-      <p class="loader-copy" id="menuCopy">Explore my bedroom and personal space.</p>
-      <div class="loader-progress" id="loaderProgress"><span></span></div>
-      <div class="loader-foot" id="loaderFoot"><span id="loaderStatus">BUILDING THE PIXEL WORLD</span><span>WASD MOVE <i>·</i> SPACE JUMP</span></div>
-      <div class="game-menu-actions" id="gameMenuActions" hidden>
-        <button class="enter-house-button" id="enterHouse" type="button"><span>ENTER BEDROOM</span><b>↗</b></button>
-        <button class="controls-button" id="showControls" type="button" aria-expanded="false"><span>CONTROLS</span><b>+</b></button>
-    <a class="pshome-button" href="../psapp.html">EXIT TO PS APP <span>↗</span></a>
-      </div>
-      <div class="game-controls-card" id="gameControlsCard" hidden>
-        <span><kbd>WASD</kbd> MOVE</span><span><kbd>SPACE</kbd> JUMP</span><span><kbd>E</kbd> VIEW ART</span><span><kbd>CLICK</kbd> ATTACK / LOOK</span>
-      </div>
-    </div>
-  </section>
-</main>
-<script src="game.js?v=bedroom-minimal-02"></script>
-</body></html>
+    <div class="ambient" aria-hidden="true"></div>
+    <div id="particles" class="particles" aria-hidden="true"></div>
 
+    <main>
+        <section id="welcomeScreen" class="screen welcome-screen is-active" aria-label="Welcome">
+            <p class="welcome-prompt">Press the PS button on your controller.</p>
+            <button id="psButton" class="ps-button" type="button" aria-label="Continue to profile">
+                <span class="ps-mark" aria-hidden="true">PS</span>
+            </button>
+            <span class="screen-hint">Click anywhere or press any key</span>
+        </section>
 
+        <section id="profileScreen" class="screen profile-screen" aria-label="Choose a profile" aria-hidden="true">
+            <time id="clock" class="clock"></time>
+            <div class="profile-content">
+                <h1>Welcome Back</h1>
+                <p class="profile-question">Who's using this controller?</p>
+                <div class="profile-options">
+                    <a class="profile-choice" href="psapp.html?from=home" aria-label="Open Yusuf Rayyan Daniel's portfolio">
+                        <span class="controller-number">1 <span aria-hidden="true">🎮</span></span>
+                        <span class="avatar-ring">
+                            <img class="avatar" src="image0.jpg" alt="Yusuf Rayyan Daniel">
+                        </span>
+                        <span class="profile-name">Yusuf Rayyan Daniel</span>
+                        <span class="select-hint">Select to continue <span aria-hidden="true">↗</span></span>
+                    </a>
+                </div>
+            </div>
+            <p class="profile-footer">Choose your profile to continue</p>
+        </section>
+    </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <script src="pshome.js?v=home-2"></script>
+</body>
+</html>

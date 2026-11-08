@@ -35,88 +35,54 @@ window.tailwind.config = {
                 art: 'image0.jpg',
                 link: 'Resonance/index.html',
                 sameTab: true,
-                actionLabel: 'Play Game',
+                actionLabel: 'Play the Game',
                 cards: []
-            },
+            }
+        ];
+
+        // Media / highlights dataset — real projects, shown on the "Media" tab.
+        const ACTIVITY_APPS = [
             {
-                id: 'resonance',
-                name: 'Resonance Archive',
-                icon: '<i class="fa-solid fa-cube text-2xl text-amber-300"></i>',
-                isStore: true,
-                title: 'Resonance — Yusuf’s Portfolio',
-                desc: 'Explore a pixelated 3D house, meet the cat, and find projects hidden among gravity shifting anomalies.',
-                projectInfo: 'Resonance is an interactive portfolio built as a small, self-contained WebGL game. Walk through the connected house, explore project anomalies, and use gravity shifts near walls to discover the archive.',
+                id: 'ecommerce',
+                name: 'E-Commerce Analytics Pipeline',
+                iconImg: 'pipeline.png',
+                title: 'E-Commerce Sales & Profit Analytics',
+                desc: 'A data engineering pipeline built with Pentaho for cleaning and Power BI for visualization, on a Kaggle e-commerce dataset.',
                 techCards: [
-                    { name: 'JavaScript', use: 'Handles movement, gravity, project interactions, and animation.' },
-                    { name: 'WebGL', use: 'Draws the low-resolution 3D house and its pixel-styled objects.' },
-                    { name: 'Game design', use: 'Combines exploration, a companion cat, and portfolio discovery.' }
+                    { name: 'Pentaho', use: 'Cleaned and transformed the raw sales data.' },
+                    { name: 'Power BI', use: 'Built the sales and profit dashboards.' },
+                    { name: 'Data engineering', use: 'Designed the end-to-end pipeline.' }
                 ],
-                art: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"%3E%3Cdefs%3E%3ClinearGradient id="g" x2="1" y2="1"%3E%3Cstop stop-color="%23090b12"/%3E%3Cstop offset="1" stop-color="%233c2c24"/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill="url(%23g)" d="M0 0h1600v900H0z"/%3E%3Cpath fill="%23c9955d" d="M0 650 800 390l800 260v250H0z"/%3E%3Cpath fill="%23766b5e" d="M180 190h1240v470H180z"/%3E%3Cpath fill="%23ffb86b" d="M740 370h120v120H740z"/%3E%3C/svg%3E',
-                link: 'Resonance/index.html'
-            },
-            {
-                id: 'shipdeckk',
-                name: 'ShipDecKK Maritime',
-                iconImg: 'https://images.pexels.com/photos/35310682/pexels-photo-35310682.jpeg?auto=compress&cs=tinysrgb&w=300',
-                title: 'ShipDecKK Maritime Solutions',
-                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                projectInfo: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Replace this placeholder with a detailed explanation of the project, its purpose, the features you built, and the results.',
-                techCards: [
-                    { name: 'HTML & CSS', use: 'Responsive structure and visual styling.' },
-                    { name: 'JavaScript', use: 'Interactive interface and project flow.' },
-                    { name: 'Web design', use: 'Visual identity and page composition.' }
-                ],
-                art: 'https://images.pexels.com/photos/35310682/pexels-photo-35310682.jpeg?auto=compress&cs=tinysrgb&w=1920',
-                link: 'https://shipdeckk.vercel.app/',
+                art: 'pipeline.png',
+                link: 'https://github.com/Yusuf11806/E-Commerce-Sales-and-Profit-Analytics-Using-Data-Engineering-Pipeline'
             },
             {
                 id: 'hr_analytics',
-                name: 'HR Data Analytics',
-                iconImg: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=300&q=80',
-                title: 'Data Analytics in HR Database',
-                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                projectInfo: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Replace this placeholder with a detailed explanation of the project, its purpose, the features you built, and the results.',
+                name: 'HR Database Analysis',
+                iconImg: 'image0.jpg',
+                title: 'Data Analytics on an HR Database',
+                desc: 'Analyzing employee retention with Python, pandas, Matplotlib, Seaborn, and statistical tests like Pearson correlation and chi-squared.',
                 techCards: [
-                    { name: 'Language / tool name', use: 'Add how you used it in this project.' },
-                    { name: 'Language / tool name', use: 'Add how you used it in this project.' },
-                    { name: 'Language / tool name', use: 'Add how you used it in this project.' }
+                    { name: 'Python & pandas', use: 'Cleaned and analyzed the HR dataset.' },
+                    { name: 'Matplotlib / Seaborn', use: 'Visualized retention patterns.' },
+                    { name: 'SciPy', use: 'Correlation and chi-squared testing.' }
                 ],
-                art: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1920&q=80',
-                link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database',
-            },
-        ];
-
-        // Keep the PS app home as the landing screen; launch Resonance from its profile card.
-        PROJECTS_APPS.length = 1;
-
-        // Activity Dataset
-        const ACTIVITY_APPS = [
-            {
-                id: 'commit_1',
-                name: 'GitHub Commit Push',
-                iconImg: 'https://images.unsplash.com/photo-1618401471353-b98aedd04e11?auto=format&fit=crop&w=300&q=80',
-                title: 'Pushed 12 commits to main branch',
-                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                art: 'https://images.unsplash.com/photo-1618401471353-b98aedd04e11?auto=format&fit=crop&w=1920&q=80',
-                link: 'https://github.com/Yusuf11806'
-            },
-            {
-                id: 'binus_exam',
-                name: 'BINUS Course Project',
-                iconImg: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=300&q=80',
-                title: 'Advanced Computer Science Milestone',
-                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                art: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1920&q=80',
-                link: 'https://github.com/Yusuf11806'
-            },
-            {
-                id: 'data_run',
-                name: 'Jupyter Notebook Execution',
-                iconImg: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=300&q=80',
-                title: 'HR Database Statistical Modeling',
-                desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                art: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&q=80',
+                art: 'image0.jpg',
                 link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database'
+            },
+            {
+                id: 'videogame',
+                name: 'Video Game Sales Analytics',
+                iconImg: 'DataVis.png',
+                title: 'Video Game Sales Analytics',
+                desc: 'A Power BI analysis of video game sales across genres, release periods, and regions, with comparisons of global performance.',
+                techCards: [
+                    { name: 'Power BI', use: 'Built the interactive sales dashboard.' },
+                    { name: 'Data visualization', use: 'Compared sales by genre and region.' },
+                    { name: 'Analysis', use: 'Surfaced regional and global trends.' }
+                ],
+                art: 'DataVis.png',
+                link: 'https://github.com/Yusuf11806/Video-Game-Sales'
             }
         ];
 
@@ -266,7 +232,7 @@ window.tailwind.config = {
             heroTitle.innerText = app.title;
             heroDesc.innerText = app.desc;
             renderProjectTechCards(app);
-            document.getElementById('projectTechSection').classList.toggle('hidden', currentCategory !== 'projects');
+            document.getElementById('projectTechSection').classList.toggle('hidden', !(app.techCards && app.techCards.length));
 
             // Render Hero Play Button if link exists
             if (app.link && app.link !== '#') {
@@ -329,18 +295,35 @@ window.tailwind.config = {
         }
 
         function openSearchModal() {
-            const allApps = [...PROJECTS_APPS, ...ACTIVITY_APPS];
-            showModal('Search Projects & Activity', `
-                <input type="text" placeholder="Lorem ipsum dolor sit amet..." class="w-full bg-black/40 border border-white/20 rounded-xl px-4 py-3 text-xs text-white outline-none focus:border-psBlue">
-                <div class="space-y-2 pt-2 max-h-60 overflow-y-auto">
-                    ${allApps.map(a => `
-                        <div onclick="window.open('${a.link}', '_blank')" class="p-3 bg-white/5 rounded-xl flex items-center justify-between cursor-pointer hover:bg-white/10">
-                            <span class="font-bold text-white">${a.title}</span>
-                            <i class="fa-solid fa-chevron-right text-gray-400"></i>
-                        </div>
-                    `).join('')}
-                </div>
+            showModal('Search projects', `
+                <input id="searchInput" type="text" placeholder="Search by name or technology..." class="w-full bg-black/40 border border-white/20 rounded-xl px-4 py-3 text-xs text-white outline-none focus:border-psBlue" autocomplete="off">
+                <div id="searchResults" class="space-y-2 pt-2 max-h-60 overflow-y-auto"></div>
             `);
+            const input = document.getElementById('searchInput');
+            input.addEventListener('input', () => renderSearchResults(input.value));
+            renderSearchResults('');
+            setTimeout(() => input.focus(), 50);
+        }
+
+        function renderSearchResults(query) {
+            const q = query.trim().toLowerCase();
+            const all = [...PROJECTS_APPS, ...ACTIVITY_APPS];
+            const matches = all.filter(a => {
+                if (!q) return true;
+                const haystack = [a.title, a.name, a.desc, ...(a.techCards || []).map(c => c.name)].join(' ').toLowerCase();
+                return haystack.includes(q);
+            });
+            const container = document.getElementById('searchResults');
+            if (!container) return;
+            container.innerHTML = matches.length ? matches.map(a => `
+                <a href="${a.link}" target="${a.sameTab ? '_self' : '_blank'}" class="p-3 bg-white/5 rounded-xl flex items-center justify-between cursor-pointer hover:bg-white/10 no-underline">
+                    <span>
+                        <span class="block font-bold text-white">${a.title}</span>
+                        <span class="block text-[10px] text-gray-400 mt-0.5">${a.name}</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                </a>
+            `).join('') : `<p class="text-center text-gray-500 py-6 text-xs">No projects match "${query}".</p>`;
         }
 
         function openProfileModal() {
@@ -397,7 +380,16 @@ window.tailwind.config = {
         });
 
         window.onload = function() {
-            setupIntroFlow();
+            // Skip the duplicate welcome/profile intro when arriving from the home boot screen.
+            const cameFromHome = new URLSearchParams(window.location.search).get('from') === 'home';
+            if (cameFromHome) {
+                introStage = 'portfolio';
+                const introFlow = document.getElementById('introFlow');
+                introFlow.classList.add('is-dismissed');
+                introFlow.setAttribute('aria-hidden', 'true');
+            } else {
+                setupIntroFlow();
+            }
             setupScrollReveal();
             renderTiles();
             selectApp(0);
