@@ -24,75 +24,92 @@
   gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL); gl.disable(gl.CULL_FACE);
 
   // ---------------------------------------------------------------------------
-  // PORTFOLIO DATA — every project is a reachable exhibit, grouped into 3 library rooms.
+  // PORTFOLIO DATA — 9 projects, each grouped into a genre room of the library.
   // ---------------------------------------------------------------------------
   const allProjects = [
-    { name: 'WeGoGym', tag: 'PROJECT / 001', year: '2024', description: 'In 2024, my colleagues and I were assigned to create a simple app prototype in Figma. Nicho and I designed WeGoGym, an app where users could log meals, plan gym routines, and watch workout videos from instructors. It was our first app, and although the design had plenty of room to improve, it was an important first step for us. A big thank you to Bernhard, Geronimo, Oliver, and Nicholas Carlen for helping bring the project to life.', tags: ['Figma', 'UI/UX prototype', 'Fitness app', 'Team project'], images: Array.from({ length: 10 }, (_, i) => `../${i + 1}.png`), link: '#', showLink: false },
-    { name: 'ShippDecKk', tag: 'PROJECT / 002', year: '2024', description: 'In 2024, I created ShippDecKk as a solo website project where visitors can browse ships at a range of prices, from affordable options to more premium vessels. I built the site myself using basic HTML, CSS, and JavaScript.', tags: ['HTML', 'CSS', 'JavaScript', 'Solo project'], images: ['../shipdeckk.png'], link: 'https://shipdeckk.vercel.app/' },
-    { name: 'SmartBaby', tag: 'PROJECT / 003', year: '2024', description: 'In 2024, my colleagues and I created SmartBaby, a prototype app for parents. Families could contact doctors who specialize in baby care, shop for baby products, and have their orders delivered to their homes. This project was my first introduction to business concepts in computer science. Thank you, Bryan, Silva, Patrick, and Ayundini, for helping make it happen. You are amazing.', tags: ['App prototype', 'Baby care', 'E-commerce', 'Team project'], images: Array.from({ length: 5 }, (_, i) => `../${i + 20}.png`), link: '#', showLink: false },
-    { name: 'Face Mask Detector', tag: 'PROJECT / 004', year: '2025', description: 'In 2025, I took my first artificial intelligence course, where I learned foundational concepts such as intelligent agents. For the course project, I built a face mask detector that identifies whether a person is wearing a mask. I prepared a dataset and trained a YOLOv8 model with PyTorch; the trained weights are saved as best.pt.', tags: ['Artificial intelligence', 'Computer vision', 'YOLOv8', 'PyTorch'], images: ['../67.png'], link: 'https://facemask-keav-j342p68sv-yusuf-rayyan-daniel-portofolio.vercel.app/' },
-    { name: 'Database HR Analysis', tag: 'PROJECT / 005', year: '2025', description: 'My colleagues and I analyzed an HR database to understand which employees stayed and which left. We cleaned the original dataset and saved a clean version, then analyzed it with Python, pandas, NumPy, Matplotlib, and Seaborn. We also used statistical and machine-learning methods, including Pearson correlation (pearsonr) and chi-squared contingency analysis. Thank you to Richard, Felix, and Filbert for their teamwork and help completing this project.', tags: ['Python', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy', 'Machine learning'], link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database/blob/main/Code%20-%20Data%20Analytics.ipynb' },
-    { name: 'matK Gene Alignment', tag: 'PROJECT / 006', year: '2025', description: 'My colleagues and I compared matK gene DNA sequences from the Venus flytrap and sundew using global and local sequence alignment. We implemented the analysis with Biopython, including the Needleman-Wunsch method for global alignment. Thank you to Filbert, Felix, and Atiqah for their collaboration and help with this project.', tags: ['Bioinformatics', 'Biopython', 'DNA sequence analysis', 'Needleman-Wunsch'], images: ['../69.png'], link: 'https://github.com/Yusuf11806/Global-Alignment-Study' },
-    { name: 'BINUS Network (Floors 4-6)', tag: 'PROJECT / 007', year: '2025', description: 'My team and I designed a network system for floors 4 through 6 at BINUS. Using Cisco Packet Tracer, we planned the IP addresses, subnet masks, default gateways, Wi-Fi network, and cable types for the floor network.', tags: ['Cisco Packet Tracer', 'Network design', 'IP addressing', 'Team project'], images: ['../11.jpg', '../12.jpg', '../13.jpg'], link: 'https://github.com/Yusuf11806/binus-network-4-6-floor' },
-    { name: 'E-Commerce Analytics Pipeline', tag: 'PROJECT / 008', year: '2025', description: 'In 2025, my colleagues and I built a data engineering pipeline for an e-commerce sales and profit analytics project. We used a Kaggle dataset, cleaned and prepared the data with Pentaho, then created visualizations in Power BI. Thank you to Christian, Filbert, Jovita, Felix, and Richard for your teamwork.', tags: ['Pentaho', 'Power BI', 'Data engineering', 'Data cleaning', 'Team project'], images: ['../pipeline.png'], link: 'https://github.com/Yusuf11806/E-Commerce-Sales-and-Profit-Analytics-Using-Data-Engineering-Pipeline' },
-    { name: 'Video Game Sales Analytics', tag: 'PROJECT / 009', year: '2025', description: 'I used Power BI to analyze video game sales across genres, release date categories, and regions, as well as global sales. The visualizations make it easier to compare how sales vary across these categories.', tags: ['Power BI', 'Data visualization', 'Video game sales', 'Regional analysis'], images: ['../DataVis.png'], link: 'https://github.com/Yusuf11806/Video-Game-Sales' }
+    { name: 'WeGoGym', tag: 'PROJECT / 001', year: '2024', genre: 'Web & App', description: 'In 2024, my colleagues and I were assigned to create a simple app prototype in Figma. Nicho and I designed WeGoGym, an app where users could log meals, plan gym routines, and watch workout videos from instructors. It was our first app, and although the design had plenty of room to improve, it was an important first step for us. A big thank you to Bernhard, Geronimo, Oliver, and Nicholas Carlen for helping bring the project to life.', tags: ['Figma', 'UI/UX prototype', 'Fitness app', 'Team project'], images: Array.from({ length: 10 }, (_, i) => `../${i + 1}.png`), link: '#', showLink: false },
+    { name: 'ShippDecKk', tag: 'PROJECT / 002', year: '2024', genre: 'Web & App', description: 'In 2024, I created ShippDecKk as a solo website project where visitors can browse ships at a range of prices, from affordable options to more premium vessels. I built the site myself using basic HTML, CSS, and JavaScript.', tags: ['HTML', 'CSS', 'JavaScript', 'Solo project'], images: ['../shipdeckk.png'], link: 'https://shipdeckk.vercel.app/' },
+    { name: 'SmartBaby', tag: 'PROJECT / 003', year: '2024', genre: 'Web & App', description: 'In 2024, my colleagues and I created SmartBaby, a prototype app for parents. Families could contact doctors who specialize in baby care, shop for baby products, and have their orders delivered to their homes. This project was my first introduction to business concepts in computer science. Thank you, Bryan, Silva, Patrick, and Ayundini, for helping make it happen. You are amazing.', tags: ['App prototype', 'Baby care', 'E-commerce', 'Team project'], images: Array.from({ length: 5 }, (_, i) => `../${i + 20}.png`), link: '#', showLink: false },
+    { name: 'Face Mask Detector', tag: 'PROJECT / 004', year: '2025', genre: 'AI & Science', description: 'In 2025, I took my first artificial intelligence course, where I learned foundational concepts such as intelligent agents. For the course project, I built a face mask detector that identifies whether a person is wearing a mask. I prepared a dataset and trained a YOLOv8 model with PyTorch; the trained weights are saved as best.pt.', tags: ['Artificial intelligence', 'Computer vision', 'YOLOv8', 'PyTorch'], images: ['../67.png'], link: 'https://facemask-keav-j342p68sv-yusuf-rayyan-daniel-portofolio.vercel.app/' },
+    { name: 'matK Gene Alignment', tag: 'PROJECT / 006', year: '2025', genre: 'AI & Science', description: 'My colleagues and I compared matK gene DNA sequences from the Venus flytrap and sundew using global and local sequence alignment. We implemented the analysis with Biopython, including the Needleman-Wunsch method for global alignment. Thank you to Filbert, Felix, and Atiqah for their collaboration and help with this project.', tags: ['Bioinformatics', 'Biopython', 'DNA sequence analysis', 'Needleman-Wunsch'], images: ['../69.png'], link: 'https://github.com/Yusuf11806/Global-Alignment-Study' },
+    { name: 'Database HR Analysis', tag: 'PROJECT / 005', year: '2025', genre: 'Data & Database', description: 'My colleagues and I analyzed an HR database to understand which employees stayed and which left. We cleaned the original dataset and saved a clean version, then analyzed it with Python, pandas, NumPy, Matplotlib, and Seaborn. We also used statistical and machine-learning methods, including Pearson correlation (pearsonr) and chi-squared contingency analysis. Thank you to Richard, Felix, and Filbert for their teamwork and help completing this project.', tags: ['Python', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy', 'Machine learning'], link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database/blob/main/Code%20-%20Data%20Analytics.ipynb' },
+    { name: 'E-Commerce Analytics Pipeline', tag: 'PROJECT / 008', year: '2025', genre: 'Data & Database', description: 'In 2025, my colleagues and I built a data engineering pipeline for an e-commerce sales and profit analytics project. We used a Kaggle dataset, cleaned and prepared the data with Pentaho, then created visualizations in Power BI. Thank you to Christian, Filbert, Jovita, Felix, and Richard for your teamwork.', tags: ['Pentaho', 'Power BI', 'Data engineering', 'Data cleaning', 'Team project'], images: ['../pipeline.png'], link: 'https://github.com/Yusuf11806/E-Commerce-Sales-and-Profit-Analytics-Using-Data-Engineering-Pipeline' },
+    { name: 'Video Game Sales Analytics', tag: 'PROJECT / 009', year: '2025', genre: 'Data & Database', description: 'I used Power BI to analyze video game sales across genres, release date categories, and regions, as well as global sales. The visualizations make it easier to compare how sales vary across these categories.', tags: ['Power BI', 'Data visualization', 'Video game sales', 'Regional analysis'], images: ['../DataVis.png'], link: 'https://github.com/Yusuf11806/Video-Game-Sales' },
+    { name: 'BINUS Network (Floors 4-6)', tag: 'PROJECT / 007', year: '2025', genre: 'Network & Infra', description: 'My team and I designed a network system for floors 4 through 6 at BINUS. Using Cisco Packet Tracer, we planned the IP addresses, subnet masks, default gateways, Wi-Fi network, and cable types for the floor network.', tags: ['Cisco Packet Tracer', 'Network design', 'IP addressing', 'Team project'], images: ['../11.jpg', '../12.jpg', '../13.jpg'], link: 'https://github.com/Yusuf11806/binus-network-4-6-floor' }
   ];
 
-  // The library hall runs along +z and is split into three rooms by divider walls.
-  const HALL = { minX: -12, maxX: 12, minZ: 2, maxZ: 58, ceilY: 9 };
-  const DIVIDERS = [20, 40];       // z of the two internal divider walls
-  const DOOR_HALF = 2.2;           // half-width of the walk-through doorway in each divider
-  const EXHIBIT_Y = 4.0;
+  // World runs along +z: a BEDROOM (z 2..18) then a LIBRARY split into 4 genre rooms.
+  const W = { minX: -12, maxX: 12, minZ: 2, maxZ: 60, ceilY: 9 };
+  const WALL_T = .6, DOOR_HALF = 2.2, EXHIBIT_Y = 4.0;
+  // Internal walls (each with a doorway gap at x in [-DOOR_HALF, DOOR_HALF]):
+  //   z=18 bedroom<->library, then library dividers at 28, 38, 50.
+  const INTERNAL_WALLS = [18, 28, 38, 50];
 
-  // wall: 'left' (x=-11.8, faces +x, angle +PI/2) | 'right' (x=11.8, faces -x, angle -PI/2) | 'end' (z=57.6, faces -z, angle PI)
+  // Genre rooms along the library: [name, zStart, zEnd, accent colour].
+  const GENRE_ROOMS = [
+    { name: 'WEB & APP', z0: 18, z1: 28, accent: 0x4b9cff },
+    { name: 'AI & SCIENCE', z0: 28, z1: 38, accent: 0x8f6bff },
+    { name: 'DATA & DATABASE', z0: 38, z1: 50, accent: 0x36c98d },
+    { name: 'NETWORK & INFRA', z0: 50, z1: 60, accent: 0xffab52 }
+  ];
+
+  // Painting placements (validated reachable). wall: left(+x), right(-x), end(-z).
   const exhibitSpots = [
-    { wall: 'left',  x: -11.8, z: 7  }, { wall: 'right', x: 11.8, z: 7  }, { wall: 'right', x: 11.8, z: 15 },
-    { wall: 'left',  x: -11.8, z: 27 }, { wall: 'right', x: 11.8, z: 27 }, { wall: 'left',  x: -11.8, z: 35 },
-    { wall: 'left',  x: -11.8, z: 47 }, { wall: 'right', x: 11.8, z: 47 }, { wall: 'end',   x: 0,     z: 57.6 }
+    { wall: 'left', x: -11.8, z: 22 }, { wall: 'right', x: 11.8, z: 22 }, { wall: 'right', x: 11.8, z: 25.5 }, // Web & App
+    { wall: 'left', x: -11.8, z: 32 }, { wall: 'right', x: 11.8, z: 32 },                                      // AI & Science
+    { wall: 'left', x: -11.8, z: 42 }, { wall: 'right', x: 11.8, z: 42 }, { wall: 'left', x: -11.8, z: 47 },   // Data & Database
+    { wall: 'end', x: 0, z: 59.6 }                                                                             // Network & Infra
   ];
   allProjects.forEach((p, i) => { const s = exhibitSpots[i]; p.wall = s.wall; p.x = s.x; p.y = EXHIBIT_Y; p.z = s.z; p.angle = s.wall === 'left' ? Math.PI / 2 : s.wall === 'right' ? -Math.PI / 2 : Math.PI; });
   const projects = allProjects;
 
-  const ROOM_NAMES = ['READING HALL', 'ARCHIVE WING', 'STUDY & STACKS'];
-  function roomOf(z) { return z < DIVIDERS[0] ? 0 : z < DIVIDERS[1] ? 1 : 2; }
+  // Bedroom "about me" interactables.
+  const PROFILE_POS = { x: -11.5, y: 4.4, z: 11 };   // pixel portrait on the bedroom left wall
+  const CV_POS = { x: -11.5, y: 4.4, z: 15 };        // CV board (coming soon) beside it
+
+  function zoneLabel(z) {
+    if (z < 18) return 'BEDROOM / ABOUT ME';
+    for (const r of GENRE_ROOMS) if (z >= r.z0 && z < r.z1) return `LIBRARY / ${r.name}`;
+    return 'LIBRARY';
+  }
 
   const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
   const keys = {}, collected = new Set();
   let nearby = -1, nearbySpecial = '', last = 0, toastTimer, modalOpen = false, started = false, paused = false, galleryIndex = 0;
 
   // ---------------------------------------------------------------------------
-  // FURNITURE / BOOKSHELF COLLISION BLOCKS
-  // top = height a player standing on it would rest at (for jump-on support).
+  // COLLISION BLOCKS (bedroom + library). kind drives how each is drawn.
   // ---------------------------------------------------------------------------
-  // Shallow wall bookcases placed ONLY in the bays between paintings (so every painting
-  // has clear floor in front of it), plus central furniture that leaves the aisle clear
-  // through both doorways. This whole layout is flood-fill validated for reachability.
-  const WALL_CASES = [
-    // left wall (x=-11.7)
-    { x: -11.7, z: 13.9, hx: .55, hz: 4.1 }, { x: -11.7, z: 23.2, hx: .55, hz: 1.1 }, { x: -11.7, z: 31.0, hx: .55, hz: 1.3 }, { x: -11.7, z: 43.2, hx: .55, hz: 1.1 }, { x: -11.7, z: 53.3, hx: .55, hz: 3.6 },
-    // right wall (x=11.7)
-    { x: 11.7, z: 11.1, hx: .55, hz: 1.3 }, { x: 11.7, z: 23.2, hx: .55, hz: 1.1 }, { x: 11.7, z: 33.8, hx: .55, hz: 4.1 }, { x: 11.7, z: 43.2, hx: .55, hz: 1.1 }, { x: 11.7, z: 53.3, hx: .55, hz: 3.6 }
-  ];
   const furnitureBlocks = [
-    ...WALL_CASES.map(c => ({ ...c, top: 6.2, kind: 'bookcase' })),
-    // Room 1 — reading table + chairs (center, away from the doorway).
-    { x: 0, z: 10, hx: 2.0, hz: 1.1, top: 1.0, kind: 'table' }, { x: -4.0, z: 10, hx: .45, hz: .45, top: 1.1, kind: 'chair' }, { x: 4.0, z: 10, hx: .45, hz: .45, top: 1.1, kind: 'chair' },
-    // Room 2 — two island stacks either side of the central aisle.
-    { x: -3.2, z: 30, hx: .9, hz: 5.5, top: 5.6, kind: 'island' }, { x: 3.2, z: 30, hx: .9, hz: 5.5, top: 5.6, kind: 'island' },
-    // Room 3 — study desk, reading chair, and a globe.
-    { x: 0, z: 52, hx: 2.0, hz: 1.0, top: 1.05, kind: 'table' }, { x: 0, z: 49.6, hx: .45, hz: .45, top: 1.1, kind: 'chair' }, { x: 6.5, z: 55.5, hx: .6, hz: .6, top: 1.4, kind: 'globe' }
+    // ---- BEDROOM (z 2..18) ----
+    { x: 9.5, z: 13, hx: 3.0, hz: 3.4, top: 1.0, kind: 'bed' },
+    { x: -10.3, z: 6, hx: 1.6, hz: 1.4, top: 5.0, kind: 'wardrobe' },
+    { x: -9.8, z: 14.5, hx: 2.0, hz: .8, top: 1.7, kind: 'deskBed' },
+    { x: 0, z: 4.6, hx: 1.2, hz: .9, top: 1.0, kind: 'chest' },
+    { x: 4.2, z: 6, hx: .9, hz: .9, top: 1.1, kind: 'armchair' },
+    // ---- LIBRARY wall bookcases (in the bays between paintings) ----
+    { x: -11.7, z: 25.5, hx: .55, hz: 1.6, top: 6.1, kind: 'bookcase' },
+    { x: 11.7, z: 19.3, hx: .55, hz: .9, top: 6.1, kind: 'bookcase' },
+    { x: -11.7, z: 35, hx: .55, hz: 1.6, top: 6.1, kind: 'bookcase' }, { x: 11.7, z: 35, hx: .55, hz: 1.6, top: 6.1, kind: 'bookcase' },
+    { x: -11.7, z: 29.3, hx: .55, hz: .7, top: 6.1, kind: 'bookcase' }, { x: 11.7, z: 29.3, hx: .55, hz: .7, top: 6.1, kind: 'bookcase' },
+    { x: 11.7, z: 45, hx: .55, hz: 2.4, top: 6.1, kind: 'bookcase' }, { x: -11.7, z: 45.5, hx: .55, hz: .9, top: 6.1, kind: 'bookcase' },
+    { x: -11.7, z: 55, hx: .55, hz: 3.6, top: 6.1, kind: 'bookcase' }, { x: 11.7, z: 55, hx: .55, hz: 3.6, top: 6.1, kind: 'bookcase' },
+    // ---- LIBRARY central furniture (aisle |x|<2.5 stays clear) ----
+    { x: 0, z: 23, hx: 1.8, hz: 1.0, top: 1.0, kind: 'table' }, { x: -2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair' }, { x: 2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair' },
+    { x: -3.4, z: 44, hx: .9, hz: 3.6, top: 5.6, kind: 'island' }, { x: 3.4, z: 44, hx: .9, hz: 3.6, top: 5.6, kind: 'island' },
+    { x: 0, z: 54, hx: 1.8, hz: 1.0, top: 1.05, kind: 'table' }, { x: 0, z: 51.8, hx: .45, hz: .45, top: 1.1, kind: 'chair' },
+    { x: 6.5, z: 57, hx: .6, hz: .6, top: 1.4, kind: 'globe' }
   ];
 
-  const PLAYER_R = .42, WALL_T = .6;
-  // Solid-wall test: outer rectangle + two divider walls (each with a doorway gap at x in [-DOOR_HALF, DOOR_HALF]).
-  function insideHall(x, z) {
-    if (x < HALL.minX + WALL_T / 2 || x > HALL.maxX - WALL_T / 2 || z < HALL.minZ + WALL_T / 2 || z > HALL.maxZ - WALL_T / 2) return false;
-    for (const dz of DIVIDERS) { if (Math.abs(z - dz) < WALL_T / 2 + PLAYER_R && Math.abs(x) > DOOR_HALF - PLAYER_R) return false; }
+  const PLAYER_R = .42;
+  function insideWorld(x, z) {
+    if (x < W.minX + WALL_T / 2 || x > W.maxX - WALL_T / 2 || z < W.minZ + WALL_T / 2 || z > W.maxZ - WALL_T / 2) return false;
+    for (const dz of INTERNAL_WALLS) { if (Math.abs(z - dz) < WALL_T / 2 + PLAYER_R && Math.abs(x) > DOOR_HALF - PLAYER_R) return false; }
     return true;
   }
   function hitsFurniture(x, z, y) { for (const o of furnitureBlocks) { if (y < o.top - .08 && Math.abs(x - o.x) < o.hx + PLAYER_R && Math.abs(z - o.z) < o.hz + PLAYER_R) return true; } return false; }
   function canMoveTo(fromX, fromZ, toX, toZ, y) {
-    if (!insideHall(toX, toZ)) return false;
+    if (!insideWorld(toX, toZ)) return false;
     for (const o of furnitureBlocks) {
       if (y >= o.top - .08) continue;
       const overlap = (x, z) => Math.max(0, o.hx + PLAYER_R - Math.abs(x - o.x)) * Math.max(0, o.hz + PLAYER_R - Math.abs(z - o.z));
@@ -100,12 +117,11 @@
     }
     return true;
   }
-  function recoverPlayer() { if (insideHall(player.x, player.z) && !hitsFurniture(player.x, player.z, player.y)) return; for (let r = .2; r <= 10; r += .2) { for (let n = 0; n < 24; n++) { const a = n * Math.PI / 12, x = player.x + Math.cos(a) * r, z = player.z + Math.sin(a) * r; if (insideHall(x, z) && !hitsFurniture(x, z, player.y)) { player.x = x; player.z = z; player.vx = 0; player.vz = 0; return; } } } }
+  function recoverPlayer() { if (insideWorld(player.x, player.z) && !hitsFurniture(player.x, player.z, player.y)) return; for (let r = .2; r <= 12; r += .2) { for (let n = 0; n < 24; n++) { const a = n * Math.PI / 12, x = player.x + Math.cos(a) * r, z = player.z + Math.sin(a) * r; if (insideWorld(x, z) && !hitsFurniture(x, z, player.y)) { player.x = x; player.z = z; player.vx = 0; player.vz = 0; return; } } } }
   function furnitureLanding(x, z, fromY, toY) { if (player.vy >= 0) return 0; let top = 0; for (const o of furnitureBlocks) { if (o.top > top && fromY >= o.top && toY <= o.top && Math.abs(x - o.x) < o.hx && Math.abs(z - o.z) < o.hz) top = o.top; } return top; }
 
-  // yaw 0 => camera sits behind the cat (at -z) looking toward +z, deeper into the library.
-  // face PI => the cat's head points +z (into the library) so we see its back on spawn.
-  const player = { x: 0, y: 0, z: 6, vx: 0, vy: 0, vz: 0, face: Math.PI, attackUntil: 0, attackHitAt: 0, attackPending: false };
+  // yaw 0 => camera behind the cat (at -z) looking +z; face PI => cat head points +z.
+  const player = { x: 0, y: 0, z: 8, vx: 0, vy: 0, vz: 0, face: Math.PI, attackUntil: 0, attackHitAt: 0, attackPending: false };
   const cameraRig = { x: 0, y: 0, z: 0, tx: 0, ty: 0, tz: 0, yaw: 0, pitch: 4.1, distance: 7.2, sensitivity: 1, dragging: false, lastX: 0, lastY: 0, ready: false };
 
   // ---------------------------------------------------------------------------
@@ -120,36 +136,29 @@
   function tri(a, b, c, color, shade = 1) { const k = rgb(color, shade); for (const raw of [a, b, c]) { let p = raw; if (activeFrame) { const dx = raw[0] - activeFrame.ox, dy = raw[1] - activeFrame.oy, dz = raw[2] - activeFrame.oz; const m = activeFrame.matrix; p = [activeFrame.x + m[0] * dx + m[1] * dy + m[2] * dz, activeFrame.y + m[3] * dx + m[4] * dy + m[5] * dz, activeFrame.z + m[6] * dx + m[7] * dy + m[8] * dz]; } add(p[0], p[1], p[2], ...k); } }
   function quad(a, b, c, d, color, shade = 1) { tri(a, b, c, color, shade); tri(a, c, d, color, shade * .94); }
   function box(x, y, z, sx, sy, sz, color, angle = 0) { const turn = v => { const dx = v[0] - x, dz = v[2] - z, c = Math.cos(angle), s = Math.sin(angle); return [x + dx * c + dz * s, v[1], z - dx * s + dz * c]; }, a = turn([x - sx / 2, y - sy / 2, z - sz / 2]), b = turn([x + sx / 2, y - sy / 2, z - sz / 2]), c = turn([x + sx / 2, y + sy / 2, z - sz / 2]), d = turn([x - sx / 2, y + sy / 2, z - sz / 2]), e = turn([x - sx / 2, y - sy / 2, z + sz / 2]), f = turn([x + sx / 2, y - sy / 2, z + sz / 2]), g = turn([x + sx / 2, y + sy / 2, z + sz / 2]), h = turn([x - sx / 2, y + sy / 2, z + sz / 2]); quad(a, b, c, d, color, .75); quad(e, h, g, f, color, 1); quad(a, e, f, b, color, .85); quad(d, c, g, h, color, 1.12); quad(a, d, h, e, color, .92); quad(b, f, g, c, color, .8); }
-  function prism(points, zFront, zBack, color) { for (let i = 0; i < points.length; i++) { const p = points[i], q = points[(i + 1) % points.length]; quad([p[0], p[1], zFront], [q[0], q[1], zFront], [q[0], q[1], zBack], [p[0], p[1], zBack], color, .75); } const front = points[0]; for (let i = 1; i < points.length - 1; i++) tri([front[0], front[1], zFront], [points[i][0], points[i][1], zFront], [points[i + 1][0], points[i + 1][1], zFront], color, 1.15); }
 
   // A framed painting. angle: PI/2 faces +x, -PI/2 faces -x, PI faces -z.
-  function galleryArt(x, y, z, w, h, angle, index, interactive = false) {
+  function galleryArt(x, y, z, w, h, angle, index, accent) {
     const palette = [[0x405b69, 0xe7aa65, 0xe9d7b7], [0x604c7c, 0x9de5dc, 0xe8b77d], [0x344e4b, 0xef9b79, 0xf4dca9], [0x4d536d, 0xd3a2e8, 0xf4c871], [0x6d493f, 0x9ed8d0, 0xf4e3c4], [0x343f5d, 0xffb86b, 0x9de5dc], [0x62534a, 0xec8d9d, 0xe5cb91], [0x3e594e, 0xd8b4f4, 0xffd27d], [0x554665, 0xf4a76c, 0xb6e7db]][index % 9];
-    const frame = interactive ? 0xc59b64 : 0x85775f, normal = .19, c = Math.cos(angle), s = Math.sin(angle);
+    const normal = .19, c = Math.cos(angle), s = Math.sin(angle);
     const part = (u, v, d, sx, sy, sz, color) => box(x + u * c + d * s, y + v, z - u * s + d * c, sx, sy, sz, color, angle);
-    part(0, 0, 0, w, h, .3, frame); part(0, 0, normal, w - .22, h - .22, .08, 0xe8dfce); part(0, 0, normal + .055, w - .48, h - .48, .04, palette[0]);
+    part(0, 0, 0, w, h, .3, 0xc59b64); part(0, 0, normal, w - .22, h - .22, .08, 0xe8dfce); part(0, 0, normal + .055, w - .48, h - .48, .04, palette[0]);
     const face = (u, v, sx, sy, color) => part(u, v, normal + .09, sx, sy, .035, color);
     face(-w * .19, -h * .22, w * .52, .11, palette[1]); face(w * .19, h * .08, w * .25, .2, palette[2]); face(-w * .08, h * .24, w * .12, .12, palette[2]); face(w * .29, -h * .25, w * .09, .09, palette[1]);
     if (index % 3 === 0) face(-w * .24, h * .06, .1, h * .5, palette[2]);
+    // a thin accent strip under the frame to colour-code the genre
+    part(0, -h * .5 - .12, .02, w * .9, .09, .06, accent);
   }
   // A seven-segment year plaque under each painting.
   function yearPlaque(x, y, z, year, angle = 0) { const c = Math.cos(angle), s = Math.sin(angle), stamp = (dx, dy, dz, sx, sy, sz, color) => box(x + dx * c + dz * s, y + dy, z - dx * s + dz * c, sx, sy, sz, color, angle); stamp(0, 0, 0, 1.42, .52, .12, 0x353641); const segments = { 0: 'abcdef', 1: 'bc', 2: 'abged', 3: 'abgcd', 4: 'fgbc', 5: 'afgcd', 6: 'afgecd', 7: 'abc', 8: 'abcdefg', 9: 'abfgcd' }, digitW = .24, start = -.48; for (let i = 0; i < 4; i++) { const cx = start + i * digitW, pattern = segments[Number(year[i])] || segments[0], horizontal = (name, dx, dy) => { if (pattern.includes(name)) stamp(cx + dx, dy, .09, .13, .035, .035, 0xffd895); }, vertical = (name, dx, dy) => { if (pattern.includes(name)) stamp(cx + dx, dy, .09, .035, .12, .035, 0xffd895); }; horizontal('a', 0, .17); horizontal('g', 0, 0); horizontal('d', 0, -.17); vertical('f', -.075, .085); vertical('b', .075, .085); vertical('e', -.075, -.085); vertical('c', .075, -.085); } }
 
   // A Sims-style plumbob: a rotating green octahedron floating above an openable item.
-  // `active` (currently targeted) makes it brighter and spin faster.
   function plumbob(x, y, z, t, active) {
     const spin = t * (active ? .004 : .0018), bobY = y + Math.sin(t * .003 + x) * .12;
-    const r = active ? .34 : .26, hTop = active ? .5 : .4, hBot = active ? .42 : .34;
-    const bright = active ? 1.18 : 1.0;
-    const top = [x, bobY + hTop, z], bot = [x, bobY - hBot, z];
-    const pts = [];
+    const r = active ? .34 : .26, hTop = active ? .5 : .4, hBot = active ? .42 : .34, bright = active ? 1.18 : 1.0;
+    const top = [x, bobY + hTop, z], bot = [x, bobY - hBot, z], pts = [];
     for (let i = 0; i < 4; i++) { const a = spin + i * Math.PI / 2; pts.push([x + Math.cos(a) * r, bobY, z + Math.sin(a) * r]); }
-    for (let i = 0; i < 4; i++) {
-      const p = pts[i], q = pts[(i + 1) % 4];
-      // facet shading alternates for a gem-like read
-      tri(top, p, q, 0x46e07a, (i % 2 ? 1.25 : .95) * bright);
-      tri(bot, q, p, 0x2fae55, (i % 2 ? .8 : 1.1) * bright);
-    }
+    for (let i = 0; i < 4; i++) { const p = pts[i], q = pts[(i + 1) % 4]; tri(top, p, q, 0x46e07a, (i % 2 ? 1.25 : .95) * bright); tri(bot, q, p, 0x2fae55, (i % 2 ? .8 : 1.1) * bright); }
   }
 
   // ---------------------------------------------------------------------------
@@ -174,116 +183,127 @@
   }
 
   // ---------------------------------------------------------------------------
-  // LIBRARY ARCHITECTURE + FURNITURE
+  // FURNITURE PIECES
   // ---------------------------------------------------------------------------
-  // A tall warm-wood bookcase filled with coloured spines. side: wall it backs onto.
-  function bookcase(x, z, length, depth, along, color) {
-    // `along` = 'z' (runs along z axis) or 'x' (runs along x axis)
-    const h = 6.2, trim = 0xb77c4f;
-    const sx = along === 'z' ? depth : length, sz = along === 'z' ? length : depth;
-    box(x, h / 2, z, sx, h, sz, color);
+  function bookcase(x, z, length, depth, color) {
+    const h = 6.0, trim = 0xb77c4f;
+    box(x, h / 2, z, depth, h, length, color);
     for (let s = 0; s < 5; s++) {
-      const shelfY = .55 + s * 1.25;
-      box(x, shelfY, z, sx * .92, .14, sz * .92, 0xd0a06b);
-      // books along the shelf
-      const n = Math.floor((along === 'z' ? length : length) / .36);
-      for (let b = 0; b < n; b++) {
-        const t2 = (b * 7 + s * 3) % 5, bh = .62 + t2 * .1, bw = .24 + ((b + s) % 3) * .035;
-        const off = -((along === 'z' ? length : length) / 2) + .22 + b * .36;
-        const bx = along === 'z' ? x : x + off, bz = along === 'z' ? z + off : z;
-        box(bx, shelfY + .14 + bh / 2, bz, along === 'z' ? depth * .5 : bw, bh, along === 'z' ? bw : depth * .5, [0x52776c, 0x55728b, 0xa14f43, 0xd39a55, 0x63527e, 0x42635c, 0x9a6849][(b + s * 2) % 7]);
-      }
+      const shelfY = .55 + s * 1.2; box(x, shelfY, z, depth * .9, .14, length * .92, 0xd0a06b);
+      const n = Math.max(1, Math.floor(length / .36));
+      for (let b = 0; b < n; b++) { const bh = .58 + ((b * 7 + s * 3) % 5) * .1, bw = .22 + ((b + s) % 3) * .035, off = -length / 2 + .22 + b * .36; box(x, shelfY + .14 + bh / 2, z + off, depth * .5, bh, bw, [0x52776c, 0x55728b, 0xa14f43, 0xd39a55, 0x63527e, 0x42635c, 0x9a6849][(b + s * 2) % 7]); }
     }
-    box(x, h - .15, z, sx * 1.04, .3, sz * 1.04, trim); // cornice
+    box(x, h - .12, z, depth * 1.08, .28, length * 1.04, trim);
   }
-  // A reading/study table with a warm lamp.
-  function readingTable(x, z, w, d) {
-    box(x, .9, z, w, .16, d, 0x7a5338); box(x, 1.0, z, w * .92, .05, d * .92, 0x4a6a60); // felt top
-    for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * (w / 2 - .25), .45, z + sz * (d / 2 - .25), .2, .9, .2, 0x5c3f2b);
-    box(x, 1.2, z, .3, .4, .3, 0x3a3f4a); box(x, 1.55, z, .5, .3, .5, 0xffd58b); // lamp
-  }
+  function readingTable(x, z, w, d) { box(x, .9, z, w, .16, d, 0x7a5338); box(x, 1.0, z, w * .92, .05, d * .92, 0x4a6a60); for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * (w / 2 - .25), .45, z + sz * (d / 2 - .25), .2, .9, .2, 0x5c3f2b); box(x, 1.2, z, .3, .4, .3, 0x3a3f4a); box(x, 1.55, z, .5, .3, .5, 0xffd58b); }
   function chair(x, z) { box(x, .32, z, .78, .12, .78, 0x7a5338); box(x, .74, z - .33, .78, .74, .14, 0x6a4a32); for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * .3, .16, z + sz * .3, .1, .34, .1, 0x5c3f2b); }
   function globe(x, z) { box(x, .7, z, .18, 1.4, .18, 0x6a4a32); box(x, 1.5, z, .7, .7, .7, 0x4e7fa6); box(x, 1.5, z, .74, .12, .74, 0xd7b06a); }
+  function potPlant(x, z) { box(x, .3, z, .55, .6, .55, 0xb5763f); box(x, .9, z, .35, .7, .35, 0x3f6e46); box(x, 1.35, z, .7, .6, .7, 0x4f8a57); box(x, 1.7, z, .45, .5, .45, 0x63a567); }
+  function floorLamp(x, z) { box(x, .1, z, .5, .2, .5, 0x3a3f4a); box(x, 1.4, z, .1, 2.6, .1, 0x5c5248); box(x, 2.75, z, .7, .5, .7, 0xffe0a0); }
 
-  function drawLibrary(t) {
-    const floorC = 0x8a6b4a, ceilC = 0x2f2a28, wallC = 0x6f5742, trimC = 0xbf9566;
-    // Floor, ceiling, outer walls spanning the whole hall.
-    const midZ = (HALL.minZ + HALL.maxZ) / 2, lenZ = HALL.maxZ - HALL.minZ, lenX = HALL.maxX - HALL.minX;
-    box(0, -.3, midZ, lenX + 1, .6, lenZ + 1, floorC);
-    box(0, HALL.ceilY, midZ, lenX + 1, .5, lenZ + 1, ceilC);
-    box(HALL.minX, HALL.ceilY / 2, midZ, WALL_T, HALL.ceilY, lenZ + 1, wallC);
-    box(HALL.maxX, HALL.ceilY / 2, midZ, WALL_T, HALL.ceilY, lenZ + 1, wallC);
-    box(0, HALL.ceilY / 2, HALL.minZ, lenX + 1, HALL.ceilY, WALL_T, wallC);   // entry wall
-    box(0, HALL.ceilY / 2, HALL.maxZ, lenX + 1, HALL.ceilY, WALL_T, wallC);   // far end wall
-    // Plank floor lines + warm rugs per room.
-    for (let z = HALL.minZ + 2; z < HALL.maxZ; z += 2.4) box(0, -.001, z, lenX, .012, .04, 0x6f5236);
-    for (const z of [10, 30, 50]) box(0, .02, z, 8.4, .03, 7.6, 0x7d4b45);
-    // Baseboard trim + a picture rail around the outer walls.
-    for (const x of [HALL.minX + .32, HALL.maxX - .32]) { box(x, .4, midZ, .12, .8, lenZ, trimC); box(x, 6.6, midZ, .1, .16, lenZ, trimC); }
+  // Bedroom furniture pieces.
+  function bed(x, z) {
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * 2.5, .25, z + sz * 2.9, .4, .5, .4, 0x6a4a32);
+    box(x, .55, z, 5.4, .5, 6.2, 0x7a5338); box(x, .95, z, 5.1, .4, 5.9, 0xe8d8bf); box(x, 1.2, z - .5, 4.9, .25, 4.2, 0x6ea0c4);
+    box(x - 1.1, 1.3, z - 2.4, 1.9, .3, 1.1, 0xf7e7d0); box(x + 1.1, 1.3, z - 2.4, 1.9, .3, 1.1, 0xf7e7d0);
+    box(x, 2.0, z + 3.1, 5.4, 2.4, .25, 0x6a4a32); for (let bx = -2; bx <= 2; bx += .8) box(x + bx, 2.0, z + 2.95, .14, 2.0, .14, 0xc4935e);
+  }
+  function wardrobe(x, z) { box(x, 2.5, z, 3.2, 5.0, 2.6, 0x8b674f); box(x + 1.55, 2.5, z, .1, 4.7, 2.3, 0xb68b66); for (const sz of [-1, 1]) box(x + 1.6, 2.5, z + sz * .55, .06, 4.2, .08, 0x57483c); for (const sz of [-1, 1]) box(x + 1.64, 2.5, z + sz * .55, .12, .3, .08, 0xe5c893); }
+  function deskWithPC(x, z) {
+    box(x, .95, z, 4.0, .22, 1.5, 0x76533f); for (const sx of [-1, 1]) box(x + sx * 1.7, .45, z, .2, 1.0, 1.2, 0x5c3f2b);
+    box(x, 1.75, z - .4, 2.0, 1.2, .12, 0x24252b); box(x, 1.75, z - .33, 1.8, .98, .05, 0x79aeb4); box(x, 1.3, z - .1, .16, .5, .16, 0x333741); box(x, 1.08, z - .1, 1.3, .08, .6, 0x333741);
+    box(x + 1.3, 1.2, z, .9, .25, .4, 0x2a2d36); // keyboard-ish stack
+  }
 
-    // Divider walls (each with a doorway gap) + warm archways.
-    for (const dz of DIVIDERS) {
-      // left segment spans from minX to -DOOR_HALF; right segment from +DOOR_HALF to maxX.
-      const lCx = (HALL.minX + (-DOOR_HALF)) / 2, lW = (-DOOR_HALF) - HALL.minX;
-      const rCx = ((DOOR_HALF) + HALL.maxX) / 2, rW = HALL.maxX - (DOOR_HALF);
-      box(lCx, HALL.ceilY / 2, dz, lW, HALL.ceilY, WALL_T, wallC);
-      box(rCx, HALL.ceilY / 2, dz, rW, HALL.ceilY, WALL_T, wallC);
-      box(0, HALL.ceilY - 1.1, dz, DOOR_HALF * 2 + .4, 2.2, WALL_T, wallC); // lintel over doorway
-      // doorway frame trim
-      for (const sx of [-1, 1]) box(sx * DOOR_HALF, 2.9, dz, .22, 5.8, WALL_T + .1, trimC);
-      box(0, 5.9, dz, DOOR_HALF * 2 + .4, .3, WALL_T + .1, trimC);
+  // ---------------------------------------------------------------------------
+  // THE WORLD
+  // ---------------------------------------------------------------------------
+  function drawWorld(t) {
+    const midZ = (W.minZ + W.maxZ) / 2, lenZ = W.maxZ - W.minZ, lenX = W.maxX - W.minX;
+    // Floors: warm wood for bedroom, cooler library floor further in.
+    box(0, -.3, 10, lenX + 1, .6, 17, 0x9a6b44);                 // bedroom floor
+    box(0, -.3, 39.5, lenX + 1, .6, 43.5, 0x8a6b4a);            // library floor
+    box(0, W.ceilY, midZ, lenX + 1, .5, lenZ + 1, 0x2f2a28);     // ceiling
+    box(W.minX, W.ceilY / 2, midZ, WALL_T, W.ceilY, lenZ + 1, 0x6f5742);
+    box(W.maxX, W.ceilY / 2, midZ, WALL_T, W.ceilY, lenZ + 1, 0x6f5742);
+    box(0, W.ceilY / 2, W.minZ, lenX + 1, W.ceilY, WALL_T, 0x6f5742);   // back wall of bedroom
+    box(0, W.ceilY / 2, W.maxZ, lenX + 1, W.ceilY, WALL_T, 0x6f5742);   // far library wall
+    // Plank lines + rugs.
+    for (let z = W.minZ + 2; z < W.maxZ; z += 2.4) box(0, -.001, z, lenX, .012, .04, 0x6f5236);
+    box(0, .02, 10, 9.4, .03, 8.0, 0x7d4b45);                   // bedroom rug
+    for (const z of [23, 44, 54]) box(0, .02, z, 8.0, .03, 7.2, 0x6e5240);  // library rugs
+    // Baseboards.
+    for (const x of [W.minX + .32, W.maxX - .32]) { box(x, .4, midZ, .12, .8, lenZ, 0xbf9566); box(x, 6.6, midZ, .1, .16, lenZ, 0xbf9566); }
+
+    // Internal walls (bedroom door + 3 library dividers), each with a doorway + archway trim.
+    for (const dz of INTERNAL_WALLS) {
+      const lCx = (W.minX + (-DOOR_HALF)) / 2, lW = (-DOOR_HALF) - W.minX;
+      const rCx = (DOOR_HALF + W.maxX) / 2, rW = W.maxX - DOOR_HALF;
+      box(lCx, W.ceilY / 2, dz, lW, W.ceilY, WALL_T, 0x6f5742);
+      box(rCx, W.ceilY / 2, dz, rW, W.ceilY, WALL_T, 0x6f5742);
+      box(0, W.ceilY - 1.1, dz, DOOR_HALF * 2 + .4, 2.2, WALL_T, 0x6f5742);
+      for (const sx of [-1, 1]) box(sx * DOOR_HALF, 2.9, dz, .22, 5.8, WALL_T + .1, 0xbf9566);
+      box(0, 5.9, dz, DOOR_HALF * 2 + .4, .3, WALL_T + .1, 0xbf9566);
     }
 
-    // Ceiling lamps down the central aisle.
-    for (let z = 6; z <= 54; z += 8) { box(0, HALL.ceilY - .3, z, .25, .5, .25, 0x8a7a63); box(0, HALL.ceilY - .7, z, .7, .18, .7, 0xffe3a8); box(0, HALL.ceilY - .82, z, .42, .1, .42, 0xfff3cf); }
+    // Ceiling lamps down the aisle.
+    for (let z = 6; z <= 58; z += 8) { box(0, W.ceilY - .3, z, .25, .5, .25, 0x8a7a63); box(0, W.ceilY - .7, z, .7, .18, .7, 0xffe3a8); box(0, W.ceilY - .82, z, .42, .1, .42, 0xfff3cf); }
 
-    // Draw every collision block as its real piece of library furniture.
+    // ---------------- BEDROOM contents ----------------
+    bed(9.5, 13); wardrobe(-10.3, 6); deskWithPC(-9.8, 14.5);
+    // chest of drawers (interactable "chest") + armchair + plant + lamp
+    box(0, .5, 4.6, 2.4, 1.0, 1.8, 0x8e684d); box(0, 1.05, 4.6, 2.5, .12, 1.9, 0xb88d66); for (const yy of [.4, .75]) box(0, yy, 3.75, 2.1, .06, .06, 0x5a4232);
+    box(4.2, .35, 6, 1.7, .5, 1.6, 0x9b5f58); box(4.2, 1.0, 6.7, 1.7, 1.1, .3, 0xb87970); for (const sx of [-1, 1]) box(4.2 + sx * .85, .65, 6, .22, .7, 1.4, 0x8a5750);
+    potPlant(10.5, 5.5); floorLamp(-11.0, 11.5);
+    // Window with warm light on the bedroom right wall.
+    box(11.72, 5.0, 9, .12, 3.2, 5.0, 0x9bd8e7); box(11.55, 5.0, 6.4, .2, 3.6, .2, 0xc89c69); box(11.55, 5.0, 11.6, .2, 3.6, .2, 0xc89c69); box(11.55, 6.85, 9, .2, .2, 5.2, 0xc89c69); box(11.55, 3.15, 9, .2, .2, 5.2, 0xc89c69);
+    // Pixel self-portrait (ABOUT ME) on the bedroom LEFT wall at z=11.
+    box(-11.72, PROFILE_POS.y, 11, .18, 3.0, 2.4, 0x735841); box(-11.6, PROFILE_POS.y, 11, .12, 2.76, 2.16, 0xe4d2ad);
+    if (profilePixels) { const cell = .07; for (let py = 0; py < 32; py++) for (let px = 0; px < 24; px++) { const o = (py * 24 + px) * 4, a = profilePixels[o + 3] / 255; if (a < .1) continue; const color = (profilePixels[o] << 16) | (profilePixels[o + 1] << 8) | profilePixels[o + 2]; const bz = 11 - 11.5 * cell + px * cell, by = PROFILE_POS.y + 1.1 - py * cell; quad([-11.48, by, bz], [-11.48, by, bz + cell], [-11.48, by - cell, bz + cell], [-11.48, by - cell, bz], color); } }
+    // CV board (coming soon) beside the portrait at z=15.
+    box(-11.72, CV_POS.y, 15, .16, 2.8, 2.2, 0x45506a); box(-11.6, CV_POS.y + .9, 15, .1, .5, 1.7, 0xdce6f5); box(-11.6, CV_POS.y + .2, 15, .1, .3, 1.5, 0xaebbd2); box(-11.6, CV_POS.y - .35, 15, .1, .3, 1.5, 0xaebbd2); box(-11.6, CV_POS.y - .9, 15, .1, .3, 1.0, 0xaebbd2);
+
+    // ---------------- LIBRARY contents (data-driven from collision blocks) ----------------
     const caseColors = [0x80523a, 0x7a4e37, 0x7d4e36, 0x87583e, 0x82543c];
-    furnitureBlocks.forEach((o, i) => {
-      if (o.kind === 'bookcase') bookcase(o.x, o.z, o.hz * 2, o.hx * 2, 'z', caseColors[i % caseColors.length]);
-      else if (o.kind === 'island') bookcase(o.x, o.z, o.hz * 2, o.hx * 2, 'z', 0x87583e);
-      else if (o.kind === 'table') readingTable(o.x, o.z, o.hx * 2, o.hz * 2);
-      else if (o.kind === 'chair') chair(o.x, o.z);
-      else if (o.kind === 'globe') globe(o.x, o.z);
+    let ci = 0;
+    furnitureBlocks.forEach(o => {
+      switch (o.kind) {
+        case 'bookcase': bookcase(o.x, o.z, o.hz * 2, o.hx * 2, caseColors[ci++ % caseColors.length]); break;
+        case 'island': bookcase(o.x, o.z, o.hz * 2, o.hx * 2, 0x87583e); break;
+        case 'table': readingTable(o.x, o.z, o.hx * 2, o.hz * 2); break;
+        case 'chair': chair(o.x, o.z); break;
+        case 'globe': globe(o.x, o.z); break;
+      }
     });
-    // Rolling-ladder accent against the left archive stack.
-    box(-9.6, 3, 27, .14, 6, .14, 0x5c3f2b); box(-9.6, 3, 33, .14, 6, .14, 0x5c3f2b); for (let y = 1; y < 6; y += 1) box(-9.6, y, 30, .14, .1, 6, 0x6a4a32);
+    // Rolling-ladder accent in the data room.
+    box(-9.6, 3, 41, .14, 6, .14, 0x5c3f2b); box(-9.6, 3, 47, .14, 6, .14, 0x5c3f2b); for (let y = 1; y < 6; y += 1) box(-9.6, y, 44, .14, .1, 6, 0x6a4a32);
+    // A couple of library plants for life.
+    potPlant(-10.6, 20.5); potPlant(10.6, 51.5);
 
-    // Pixel self-portrait on the far end wall, beside the last painting's year area.
-    box(-6.5, 5.0, 57.6, 2.4, 3.1, .18, 0x735841); box(-6.5, 5.0, 57.45, 2.2, 2.9, .12, 0xe4d2ad);
-    if (profilePixels) { const cell = .075; for (let py = 0; py < 32; py++) for (let px = 0; px < 24; px++) { const o = (py * 24 + px) * 4, a = profilePixels[o + 3] / 255; if (a < .1) continue; const color = (profilePixels[o] << 16) | (profilePixels[o + 1] << 8) | profilePixels[o + 2]; const bx = -6.5 - 11.5 * cell + px * cell; const by = 6.2 - py * cell; quad([bx, by, 57.35], [bx + cell, by, 57.35], [bx + cell, by - cell, 57.35], [bx, by - cell, 57.35], color); } }
+    // ---------------- GENRE SIGNS ----------------
+    // A coloured banner hanging over the doorway into each genre room.
+    GENRE_ROOMS.forEach(r => { const dz = r.z0; box(0, 7.0, dz + .2, 4.6, .9, .12, r.accent); box(0, 7.0, dz + .14, 4.9, 1.05, .06, 0x1c1e26); box(0, 7.0, dz + .22, 4.4, .72, .12, r.accent); });
 
-    // -------------------------------------------------------------------------
-    // PROJECT EXHIBITS — paintings on the walls of each room + year plaques.
-    // -------------------------------------------------------------------------
+    // ---------------- PROJECT EXHIBITS ----------------
     projects.forEach((p, i) => {
       const a = p.angle, w = 2.6, h = 2.0;
-      // nudge the painting just off the wall surface
-      const offX = p.wall === 'left' ? .35 : p.wall === 'right' ? -.35 : 0;
-      const offZ = p.wall === 'end' ? -.35 : 0;
-      galleryArt(p.x + offX, EXHIBIT_Y, p.z + offZ, w, h, a, i, true);
-      // plaque sits below the painting, flat on the same wall
+      const accent = (GENRE_ROOMS.find(r => r.name === p.genre.toUpperCase()) || GENRE_ROOMS[0]).accent;
+      const offX = p.wall === 'left' ? .35 : p.wall === 'right' ? -.35 : 0, offZ = p.wall === 'end' ? -.35 : 0;
+      galleryArt(p.x + offX, EXHIBIT_Y, p.z + offZ, w, h, a, i, accent);
       const pOffX = p.wall === 'left' ? .3 : p.wall === 'right' ? -.3 : 0, pOffZ = p.wall === 'end' ? -.3 : 0;
       yearPlaque(p.x + pOffX, EXHIBIT_Y - 1.45, p.z + pOffZ, p.year, a);
     });
   }
 
-  // ---------------------------------------------------------------------------
-  // SCENE: draw everything, including the Sims plumbob over every openable item.
-  // ---------------------------------------------------------------------------
-  const PROFILE_POS = { x: -6.5, y: 5.0, z: 57.0 };
   function makeScene(t) {
     held.length = 0;
-    drawLibrary(t);
+    drawWorld(t);
     drawCat(t);
-    // Plumbob guide above each openable painting...
-    projects.forEach((p, i) => {
-      const gx = p.x + (p.wall === 'left' ? 1.0 : p.wall === 'right' ? -1.0 : 0);
-      const gz = p.z + (p.wall === 'end' ? -1.0 : 0);
-      plumbob(gx, EXHIBIT_Y + 1.7, gz, t, started && nearby === i);
-    });
-    // ...and above the profile portrait.
-    plumbob(PROFILE_POS.x, PROFILE_POS.y + 2.1, PROFILE_POS.z - 1.0, t, started && nearbySpecial === 'profile');
+    // Plumbob over each openable painting...
+    projects.forEach((p, i) => { const gx = p.x + (p.wall === 'left' ? 1.0 : p.wall === 'right' ? -1.0 : 0), gz = p.z + (p.wall === 'end' ? -1.0 : 0); plumbob(gx, EXHIBIT_Y + 1.7, gz, t, started && nearby === i); });
+    // ...and over the ABOUT ME portrait + CV board.
+    plumbob(PROFILE_POS.x + 1.0, PROFILE_POS.y + 2.0, PROFILE_POS.z, t, started && nearbySpecial === 'profile');
+    plumbob(CV_POS.x + 1.0, CV_POS.y + 1.9, CV_POS.z, t, started && nearbySpecial === 'cv');
   }
 
   // ---------------------------------------------------------------------------
@@ -291,11 +311,10 @@
   // ---------------------------------------------------------------------------
   function perspective(fov, aspect, near, far) { const f = 1 / Math.tan(fov / 2), nf = 1 / (near - far); return new Float32Array([f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, (far + near) * nf, -1, 0, 0, 2 * far * near * nf, 0]); }
   function lookAt(eye, center) { let zx = eye[0] - center[0], zy = eye[1] - center[1], zz = eye[2] - center[2], l = Math.hypot(zx, zy, zz) || 1; zx /= l; zy /= l; zz /= l; let xx = zz, xy = 0, xz = -zx; l = Math.hypot(xx, xz) || 1; xx /= l; xz /= l; const yx = zy * xz - zz * xy, yy = zz * xx - zx * xz, yz = zx * xy - zy * xx; return new Float32Array([xx, yx, zx, 0, xy, yy, zy, 0, xz, yz, zz, 0, -(xx * eye[0] + xy * eye[1] + xz * eye[2]), -(yx * eye[0] + yy * eye[1] + yz * eye[2]), -(zx * eye[0] + zy * eye[1] + zz * eye[2]), 1]); }
-  function resize() { const d = 3, w = Math.max(320, Math.floor(innerWidth / d)), h = Math.max(180, Math.floor(innerHeight / d)); canvas.width = w; canvas.height = h; canvas.style.width = '100%'; canvas.style.height = '100%'; gl.viewport(0, 0, w, h); gl.uniformMatrix4fv(projLoc, false, perspective(58 * Math.PI / 180, w / h, .1, 160)); }
+  function resize() { const d = 3, w = Math.max(320, Math.floor(innerWidth / d)), h = Math.max(180, Math.floor(innerHeight / d)); canvas.width = w; canvas.height = h; canvas.style.width = '100%'; canvas.style.height = '100%'; gl.viewport(0, 0, w, h); gl.uniformMatrix4fv(projLoc, false, perspective(58 * Math.PI / 180, w / h, .1, 170)); }
   addEventListener('resize', resize); resize();
 
-  function showToast(s) { const e = document.getElementById('toast'); e.textContent = s; e.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => e.classList.remove('show'), 1450); }
-
+  function showToast(s) { const e = document.getElementById('toast'); e.textContent = s; e.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => e.classList.remove('show'), 1600); }
   function jump() { const onFloor = player.y <= .08, onFurniture = furnitureBlocks.some(o => Math.abs(player.y - o.top) < .08 && Math.abs(player.x - o.x) < o.hx && Math.abs(player.z - o.z) < o.hz); if (!onFloor && !onFurniture) return; player.vy = 15.5; }
 
   // ---------------------------------------------------------------------------
@@ -315,31 +334,20 @@
     let dz = Number(Boolean(keys.s || keys.S || keys.ArrowDown)) - Number(Boolean(keys.w || keys.W || keys.ArrowUp));
     if (dx && dz) { dx *= .707; dz *= .707; }
     const hasInput = dx !== 0 || dz !== 0;
-    // Camera sits behind the cat (at -z for yaw 0) and looks toward +z. W must push the cat
-    // forward, away from the camera (+z at yaw 0). forward=+1 for W.
-    const forward = -dz; // dz = S - W, so -dz = +1 for W, -1 for S
+    const forward = -dz; // W => +1 (deeper into the world, away from camera)
     const moveX = dx * Math.cos(cameraRig.yaw) + forward * Math.sin(cameraRig.yaw);
     const moveZ = forward * Math.cos(cameraRig.yaw) - dx * Math.sin(cameraRig.yaw);
     const sprint = keys.Shift ? 1.6 : 1, speed = 7.2 * sprint, blend = 1 - Math.exp(-16 * dt);
 
-    if (hasInput) {
-      player.vx += (moveX * speed - player.vx) * blend;
-      player.vz += (moveZ * speed - player.vz) * blend;
-    } else {
-      // No input: decay fast and SNAP to a full stop so the cat never drifts.
-      const stopBlend = 1 - Math.exp(-22 * dt);
-      player.vx -= player.vx * stopBlend;
-      player.vz -= player.vz * stopBlend;
-      if (Math.abs(player.vx) < .05) player.vx = 0;
-      if (Math.abs(player.vz) < .05) player.vz = 0;
-    }
-    player.vy -= 32 * dt; // gravity
+    if (hasInput) { player.vx += (moveX * speed - player.vx) * blend; player.vz += (moveZ * speed - player.vz) * blend; }
+    else { const sb = 1 - Math.exp(-22 * dt); player.vx -= player.vx * sb; player.vz -= player.vz * sb; if (Math.abs(player.vx) < .05) player.vx = 0; if (Math.abs(player.vz) < .05) player.vz = 0; }
+    player.vy -= 32 * dt;
     player.vx = clamp(player.vx, -24, 24); player.vy = clamp(player.vy, -30, 30); player.vz = clamp(player.vz, -24, 24);
 
-    const previousX = player.x, previousY = player.y, previousZ = player.z;
-    const nextX = clamp(player.x + player.vx * dt, HALL.minX, HALL.maxX);
-    const nextZ = clamp(player.z + player.vz * dt, HALL.minZ, HALL.maxZ);
-    let nextY = clamp(player.y + player.vy * dt, 0, HALL.ceilY), landing = furnitureLanding(nextX, nextZ, previousY, nextY);
+    const previousY = player.y, previousZ = player.z;
+    const nextX = clamp(player.x + player.vx * dt, W.minX, W.maxX);
+    const nextZ = clamp(player.z + player.vz * dt, W.minZ, W.maxZ);
+    let nextY = clamp(player.y + player.vy * dt, 0, W.ceilY), landing = furnitureLanding(nextX, nextZ, previousY, nextY);
     if (landing) { nextY = landing; player.vy = 0; }
     player.y = nextY;
     if (player.y <= 0) { player.y = 0; if (player.vy < 0) player.vy = 0; }
@@ -351,27 +359,28 @@
     const turn = Math.atan2(Math.sin(wanted - player.face), Math.cos(wanted - player.face));
     player.face += turn * (1 - Math.exp(-(movingNow ? 10 : 7) * dt));
 
-    const cameraHeight = cameraRig.pitch;
-    const eye = [player.x - Math.sin(cameraRig.yaw) * cameraRig.distance, player.y + cameraHeight, player.z - Math.cos(cameraRig.yaw) * cameraRig.distance];
+    const eye = [player.x - Math.sin(cameraRig.yaw) * cameraRig.distance, player.y + cameraRig.pitch, player.z - Math.cos(cameraRig.yaw) * cameraRig.distance];
     const target = [player.x + Math.sin(cameraRig.yaw) * 1.6, player.y + 1.15, player.z + Math.cos(cameraRig.yaw) * 2.5];
     cameraRig.x += (eye[0] - cameraRig.x) * smooth; cameraRig.y += (eye[1] - cameraRig.y) * smooth; cameraRig.z += (eye[2] - cameraRig.z) * smooth;
-    cameraRig.x = clamp(cameraRig.x, HALL.minX + .35, HALL.maxX - .35); cameraRig.y = clamp(cameraRig.y, .65, HALL.ceilY - .4); cameraRig.z = clamp(cameraRig.z, HALL.minZ + .35, HALL.maxZ - .35);
+    cameraRig.x = clamp(cameraRig.x, W.minX + .35, W.maxX - .35); cameraRig.y = clamp(cameraRig.y, .65, W.ceilY - .4); cameraRig.z = clamp(cameraRig.z, W.minZ + .35, W.maxZ - .35);
     const aim = 1 - Math.exp(-8 * dt);
     cameraRig.tx += (target[0] - cameraRig.tx) * aim; cameraRig.ty += (target[1] - cameraRig.ty) * aim; cameraRig.tz += (target[2] - cameraRig.tz) * aim;
     gl.uniformMatrix4fv(viewLoc, false, lookAt([cameraRig.x, cameraRig.y, cameraRig.z], [cameraRig.tx, cameraRig.ty, cameraRig.tz]));
 
-    // Proximity detection — nearest openable painting or the profile portrait.
+    // Proximity: nearest painting, or the profile/CV in the bedroom.
     nearby = -1; nearbySpecial = '';
     let closest = 4.6;
-    projects.forEach((p, i) => { const d = Math.hypot(player.x - p.x, player.y + 1.1 - p.y, player.z - p.z); if (d < closest) { closest = d; nearby = i; } });
-    const profileDist = Math.hypot(player.x - PROFILE_POS.x, player.y + 1 - PROFILE_POS.y, player.z - PROFILE_POS.z);
-    if (profileDist < closest) { closest = profileDist; nearby = -1; nearbySpecial = 'profile'; }
+    projects.forEach((p, i) => { const d = Math.hypot(player.x - p.x, player.y + 1.1 - p.y, player.z - p.z); if (d < closest) { closest = d; nearby = i; nearbySpecial = ''; } });
+    const dProfile = Math.hypot(player.x - PROFILE_POS.x, player.y + 1 - PROFILE_POS.y, player.z - PROFILE_POS.z);
+    if (dProfile < closest) { closest = dProfile; nearby = -1; nearbySpecial = 'profile'; }
+    const dCv = Math.hypot(player.x - CV_POS.x, player.y + 1 - CV_POS.y, player.z - CV_POS.z);
+    if (dCv < closest) { closest = dCv; nearby = -1; nearbySpecial = 'cv'; }
 
     const hint = document.getElementById('interactHint');
-    if (hint) { const prompt = nearbySpecial === 'profile' ? 'CLICK OR PRESS E  /  ABOUT ME' : nearby >= 0 ? 'CLICK OR PRESS E  /  VIEW PROJECT' : ''; hint.textContent = prompt; hint.classList.toggle('visible', Boolean(prompt)); }
+    if (hint) { const prompt = nearbySpecial === 'profile' ? 'CLICK OR PRESS E  /  ABOUT ME' : nearbySpecial === 'cv' ? 'CLICK OR PRESS E  /  CV' : nearby >= 0 ? 'CLICK OR PRESS E  /  VIEW PROJECT' : ''; hint.textContent = prompt; hint.classList.toggle('visible', Boolean(prompt)); }
     if (player.attackPending && t >= player.attackHitAt) { player.attackPending = false; if (nearby >= 0 || nearbySpecial) openSignal(); }
 
-    document.getElementById('zoneLabel').textContent = nearby >= 0 ? `EXHIBIT / ${projects[nearby].tag}` : nearbySpecial === 'profile' ? 'ABOUT / YUSUF RAYYAN DANIEL' : `LIBRARY / ${ROOM_NAMES[roomOf(player.z)]}`;
+    document.getElementById('zoneLabel').textContent = nearby >= 0 ? `${projects[nearby].genre.toUpperCase()} / ${projects[nearby].tag}` : nearbySpecial === 'profile' ? 'ABOUT / YUSUF RAYYAN DANIEL' : nearbySpecial === 'cv' ? 'ABOUT / CURRICULUM VITAE' : zoneLabel(player.z);
     document.getElementById('coord').textContent = `${String(Math.round(player.x + 12)).padStart(2, '0')} : ${String(Math.round(player.z)).padStart(2, '0')}`;
   }
 
@@ -385,16 +394,14 @@
   function openSignal() {
     const gallery = document.getElementById('projectGallery'), projectLink = document.getElementById('modalLink'), extra = document.getElementById('modalExtraLinks');
     gallery.classList.remove('pixel-profile', 'single-image');
-    document.getElementById('galleryImage').hidden = false;
-    document.getElementById('friendPhotoEmpty').hidden = true;
-    document.getElementById('galleryPrevious').hidden = false;
-    document.getElementById('galleryNext').hidden = false;
+    document.getElementById('galleryImage').hidden = false; document.getElementById('friendPhotoEmpty').hidden = true;
+    document.getElementById('galleryPrevious').hidden = false; document.getElementById('galleryNext').hidden = false;
     projectLink.hidden = true; extra.hidden = true;
 
     if (nearbySpecial === 'profile') {
       document.getElementById('modalEyebrow').textContent = 'ABOUT / YUSUF RAYYAN DANIEL';
       document.getElementById('modalTitle').textContent = 'Yusuf Rayyan Daniel';
-      document.getElementById('modalCopy').textContent = 'Computer Science student at BINUS University @ Alam Sutera (born 11 August 2006). This library is my portfolio — walk the cat through the three rooms and press E under any framed artwork to open the project behind it.';
+      document.getElementById('modalCopy').textContent = 'Computer Science student at BINUS University @ Alam Sutera (born 11 August 2006). This is my bedroom — my personal space. Head through the doorway into the library to explore my projects, grouped by genre.';
       document.getElementById('modalTags').innerHTML = ['BINUS UNIVERSITY', 'COMPUTER SCIENCE', 'BORN 11 AUGUST 2006'].map(x => `<span>${x}</span>`).join('');
       gallery.hidden = !profilePixelUrl; gallery.classList.add('pixel-profile', 'single-image');
       document.getElementById('galleryPrevious').hidden = true; document.getElementById('galleryNext').hidden = true;
@@ -402,20 +409,24 @@
       extra.hidden = false;
       document.getElementById('modalLinkedIn').href = 'https://www.linkedin.com/in/yusuf-rayyan-daniel-936a35318';
       document.getElementById('modalGithub').href = 'https://github.com/Yusuf11806';
-      openModal();
-      return;
+      openModal(); return;
     }
-
+    if (nearbySpecial === 'cv') {
+      document.getElementById('modalEyebrow').textContent = 'ABOUT / CURRICULUM VITAE';
+      document.getElementById('modalTitle').textContent = 'My CV';
+      document.getElementById('modalCopy').textContent = 'My curriculum vitae will be available here soon. Check back shortly — the download link is being prepared.';
+      document.getElementById('modalTags').innerHTML = ['<span>COMING SOON</span>'];
+      gallery.hidden = true; openModal(); return;
+    }
     if (nearby < 0) { showToast('MOVE CLOSER TO AN ARTWORK'); return; }
     const p = projects[nearby];
-    document.getElementById('modalEyebrow').textContent = `${p.year} / ${p.tag}`;
+    document.getElementById('modalEyebrow').textContent = `${p.genre.toUpperCase()} · ${p.year} / ${p.tag}`;
     document.getElementById('modalTitle').textContent = p.name;
     document.getElementById('modalCopy').textContent = p.description;
     document.getElementById('modalTags').innerHTML = p.tags.map(x => `<span>${x}</span>`).join('');
     gallery.hidden = !p.images?.length;
     if (p.images?.length) { galleryIndex = 0; const single = p.images.length === 1; gallery.classList.toggle('single-image', single); document.getElementById('galleryPrevious').hidden = single; document.getElementById('galleryNext').hidden = single; showGalleryImage(p.images); }
-    projectLink.href = p.link || '#';
-    projectLink.hidden = p.showLink === false || !p.link || p.link === '#';
+    projectLink.href = p.link || '#'; projectLink.hidden = p.showLink === false || !p.link || p.link === '#';
     openModal();
     if (!collected.has(nearby)) { collected.add(nearby); showToast(`PROJECT ${collected.size} / ${projects.length} DISCOVERED`); }
   }
@@ -427,7 +438,7 @@
   // ---------------------------------------------------------------------------
   function setPauseMenu(open) { paused = open; const menu = document.getElementById('escapeMenu'); menu.classList.toggle('open', open); menu.setAttribute('aria-hidden', String(!open)); if (open) { player.vx = 0; player.vy = 0; player.vz = 0; cameraRig.dragging = false; } }
   document.getElementById('resumeGame').addEventListener('click', () => setPauseMenu(false));
-  function exitToGameMenu() { closeModal(); setPauseMenu(false); started = false; player.x = 0; player.y = 0; player.z = 6; player.vx = 0; player.vy = 0; player.vz = 0; player.face = Math.PI; player.attackPending = false; cameraRig.yaw = 0; cameraRig.pitch = 4.1; cameraRig.ready = false; collected.clear(); document.getElementById('experience').classList.remove('is-playing'); document.getElementById('gameControlsCard').hidden = true; document.getElementById('showControls').setAttribute('aria-expanded', 'false'); document.getElementById('showControls').querySelector('b').textContent = '+'; }
+  function exitToGameMenu() { closeModal(); setPauseMenu(false); started = false; player.x = 0; player.y = 0; player.z = 8; player.vx = 0; player.vy = 0; player.vz = 0; player.face = Math.PI; player.attackPending = false; cameraRig.yaw = 0; cameraRig.pitch = 4.1; cameraRig.ready = false; collected.clear(); document.getElementById('experience').classList.remove('is-playing'); document.getElementById('gameControlsCard').hidden = true; document.getElementById('showControls').setAttribute('aria-expanded', 'false'); document.getElementById('showControls').querySelector('b').textContent = '+'; }
   document.getElementById('exitToGameMenu').addEventListener('click', exitToGameMenu);
   document.getElementById('openGameSettings').addEventListener('click', event => { const panel = document.getElementById('gameSettings'), isOpen = panel.hidden; panel.hidden = !isOpen; event.currentTarget.setAttribute('aria-expanded', String(isOpen)); });
   document.getElementById('lookSensitivity').addEventListener('input', event => { cameraRig.sensitivity = Number(event.target.value); document.getElementById('sensitivityValue').textContent = `${cameraRig.sensitivity.toFixed(1)}x`; });
@@ -439,14 +450,14 @@
   // LOADER / MENU
   // ---------------------------------------------------------------------------
   function startGame() { if (started) return; started = true; document.getElementById('experience').classList.add('is-playing'); }
-  setTimeout(() => { const status = document.getElementById('loaderStatus'); if (status) status.textContent = 'SHELVING THE BOOKS'; }, 650);
+  setTimeout(() => { const status = document.getElementById('loaderStatus'); if (status) status.textContent = 'ARRANGING THE ROOMS'; }, 650);
   setTimeout(() => {
     const loader = document.getElementById('gameLoader'), status = document.getElementById('loaderStatus');
-    if (status) status.textContent = 'LIBRARY READY';
+    if (status) status.textContent = 'WORLD READY';
     loader.classList.add('is-ready');
     document.getElementById('menuKicker').textContent = 'YUSUF RAYYAN DANIEL / PORTFOLIO';
-    document.getElementById('menuTitle').innerHTML = 'A library of<br><em>my work.</em>';
-    document.getElementById('menuCopy').textContent = 'Play as the cat and wander three library rooms. Follow the glowing green gems to nine framed projects — press E under any to open it.';
+    document.getElementById('menuTitle').innerHTML = 'My room,<br><em>my library.</em>';
+    document.getElementById('menuCopy').textContent = 'Spawn in my bedroom for the about-me and CV, then walk the cat into the library — four genre rooms of projects. Follow the glowing gems and press E.';
     document.getElementById('loaderProgress').hidden = true;
     document.getElementById('gameMenuActions').hidden = false;
   }, 1850);
@@ -494,7 +505,7 @@
       gl.bindBuffer(gl.ARRAY_BUFFER, buffer); gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW);
       gl.clearColor(.1, .09, .12, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, data.length / 6);
-    } catch (error) { renderStopped = true; showRenderError(error); console.error('Library render stopped:', error); }
+    } catch (error) { renderStopped = true; showRenderError(error); console.error('World render stopped:', error); }
   }
   requestAnimationFrame(frame);
 })();

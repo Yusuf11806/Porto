@@ -112,3 +112,35 @@
 @media(max-width:760px) { .game-menu-actions { justify-content: center; } .pshome-button { min-height: 38px; } }
 
 .game-loader { grid-template-rows: 1fr; }
+
+
+/* ===== Extra menu polish & entrance animations (world update) ===== */
+.game-loader.is-ready .loader-kicker { animation: menuItemIn .5s ease .05s both; }
+.game-loader.is-ready .loader-center h1 { animation: menuItemIn .5s ease .12s both; }
+.game-loader.is-ready .loader-copy { animation: menuItemIn .5s ease .2s both; }
+.game-loader.is-ready .game-menu-actions { animation: menuItemIn .5s ease .3s both; }
+@keyframes menuItemIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Enter button gets a soft breathing glow so it reads as the primary action */
+.enter-house-button { animation: enterGlow 2.6s ease-in-out infinite; }
+@keyframes enterGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(255,189,115,0); }
+  50% { box-shadow: 0 0 26px rgba(255,189,115,.45); }
+}
+.enter-house-button:hover { animation: none; }
+
+/* Pause/escape menu buttons: quick staggered reveal when the menu opens */
+.escape-menu.open .escape-actions button { animation: escBtnIn .32s ease both; }
+.escape-menu.open .escape-actions button:nth-child(1) { animation-delay: .04s; }
+.escape-menu.open .escape-actions button:nth-child(2) { animation-delay: .1s; }
+.escape-menu.open .escape-actions button:nth-child(3) { animation-delay: .16s; }
+@keyframes escBtnIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .game-loader.is-ready .loader-kicker,
+  .game-loader.is-ready .loader-center h1,
+  .game-loader.is-ready .loader-copy,
+  .game-loader.is-ready .game-menu-actions,
+  .enter-house-button,
+  .escape-menu.open .escape-actions button { animation: none !important; }
+}
