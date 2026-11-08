@@ -10,8 +10,8 @@
 <meta property="og:description" content="Play as a cat and explore a pixel-art bedroom and genre library where every framed artwork is one of my projects.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23090b12'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23ffb86b'%3E%F0%9F%90%88%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=world-22">
-<link rel="stylesheet" href="loading.css?v=world-22">
+<link rel="stylesheet" href="style.css?v=world-23">
+<link rel="stylesheet" href="loading.css?v=world-23">
 </head>
 <body>
 <main class="experience" id="experience">
@@ -34,9 +34,11 @@
       <div class="escape-settings" id="gameSettings" hidden>
         <h3>Game settings</h3>
         <label for="lookSensitivity">Look sensitivity <output id="sensitivityValue">1.0x</output></label>
-        <input id="lookSensitivity" type="range" min="0.7" max="1.6" step="0.1" value="1">
-        <label for="cameraDistance">Camera distance <output id="distanceValue">7.2</output></label>
-        <input id="cameraDistance" type="range" min="5" max="13" step="0.2" value="7.2">
+        <input id="lookSensitivity" type="range" min="0.7" max="1.8" step="0.1" value="1">
+        <label for="cameraDistance">Camera distance <output id="distanceValue">6.0</output></label>
+        <input id="cameraDistance" type="range" min="3.5" max="12" step="0.2" value="6">
+        <label for="shoulderOffset">Shoulder offset <output id="shoulderValue">1.25</output></label>
+        <input id="shoulderOffset" type="range" min="0" max="2.5" step="0.05" value="1.25">
       </div>
       <p class="escape-hint">Press ESC to resume</p>
     </div>
@@ -61,5 +63,5 @@
     </div>
   </section>
 </main>
-<script src="game.js?v=world-22"></script>
+<script src="game.js?v=world-23"></script>
 </body></html>
