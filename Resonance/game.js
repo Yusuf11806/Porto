@@ -64,8 +64,8 @@
   const projects = allProjects;
 
   // Bedroom "about me" interactables.
-  const PROFILE_POS = { x: -11.5, y: 4.4, z: 11 };   // pixel portrait on the bedroom left wall
-  const CV_POS = { x: -11.5, y: 4.4, z: 15 };        // CV board (coming soon) beside it
+  const PROFILE_POS = { x: -11.5, y: 3.5, z: 11 };   // pixel portrait on the bedroom left wall (lowered)
+  const CV_POS = { x: -11.5, y: 3.5, z: 15 };        // CV board (coming soon) beside it (lowered)
 
   function zoneLabel(z) {
     if (z < 18) return 'BEDROOM / ABOUT ME';
@@ -85,9 +85,16 @@
     { x: 9.0, z: 13, hx: 2.9, hz: 3.4, top: 1.0, kind: 'bed' },
     { x: -10.3, z: 6, hx: 1.6, hz: 1.4, top: 5.0, kind: 'wardrobe' },
     { x: -9.8, z: 14.5, hx: 2.0, hz: .8, top: 1.7, kind: 'deskBed' },
-    { x: -9.8, z: 13.1, hx: .55, hz: .55, top: 1.0, kind: 'deskChairBlock' },
-    { x: 0, z: 4.6, hx: 1.2, hz: .9, top: 1.0, kind: 'chest' },
-    { x: 4.2, z: 6, hx: .9, hz: .9, top: 1.1, kind: 'armchair' },
+    { x: -9.8, z: 13.2, hx: .5, hz: .5, top: 1.0, kind: 'deskChairBlock' },
+    // TV lounge: media console on the entry wall, sofa facing it, coffee table between.
+    { x: 5.5, z: 2.9, hx: 2.6, hz: .7, top: 1.4, kind: 'tvConsole' },
+    { x: 5.5, z: 8.2, hx: 2.5, hz: 1.0, top: 1.0, kind: 'sofa' },
+    { x: 5.5, z: 5.6, hx: 1.2, hz: .7, top: .7, kind: 'coffee' },
+    { x: 4.9, z: 13, hx: .7, hz: .7, top: 1.1, kind: 'nightstand' },
+    { x: -4.5, z: 3.0, hx: .8, hz: .8, top: 1.2, kind: 'bookStack' },
+    // library decorative pedestals (collision so the cat can't stand inside them)
+    { x: 10.9, z: 49, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
+    { x: -10.8, z: 20, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
     // ---- LIBRARY wall bookcases (in the bays between paintings) ----
     { x: -11.7, z: 25.5, hx: .55, hz: 1.6, top: 6.1, kind: 'bookcase' },
     { x: 11.7, z: 19.3, hx: .55, hz: .9, top: 6.1, kind: 'bookcase' },
@@ -211,11 +218,79 @@
     box(bx, .74, bz, sx, .74, sz, 0x6a4a32); // backrest
     for (const ox of [-1, 1]) for (const oz of [-1, 1]) box(x + ox * .3, .16, z + oz * .3, .1, .34, .1, 0x5c3f2b);
   }
-  // A simple swivel desk chair (five-star base) that faces +z by default.
-  function deskChair(x, z) { box(x, .5, z, .9, .14, .9, 0x2f3340); box(x, .95, z + .4, .86, .9, .14, 0x363b49); box(x, .22, z, .12, .5, .12, 0x1f232c); box(x, .08, z, 1.0, .1, 1.0, 0x1f232c); }
+  // A swivel desk chair. faceZ=+1 => seat faces +z (backrest on the -z side).
+  function deskChair(x, z, faceZ = 1) { box(x, .5, z, .9, .14, .9, 0x2f3340); box(x, .95, z - faceZ * .4, .86, .9, .14, 0x363b49); box(x, .22, z, .12, .5, .12, 0x1f232c); box(x, .08, z, 1.0, .1, 1.0, 0x1f232c); box(x, 1.15, z - faceZ * .38, .5, .22, .1, 0x363b49); }
   function globe(x, z) { box(x, .7, z, .18, 1.4, .18, 0x6a4a32); box(x, 1.5, z, .7, .7, .7, 0x4e7fa6); box(x, 1.5, z, .74, .12, .74, 0xd7b06a); }
-  function potPlant(x, z) { box(x, .3, z, .55, .6, .55, 0xb5763f); box(x, .9, z, .35, .7, .35, 0x3f6e46); box(x, 1.35, z, .7, .6, .7, 0x4f8a57); box(x, 1.7, z, .45, .5, .45, 0x63a567); }
+  // A small display pedestal topped with a stylised bust (decor, no plants).
+  function pedestal(x, z) { box(x, .7, z, .7, 1.4, .7, 0xd8cdb6); box(x, 1.45, z, .9, .18, .9, 0xe8dfca); box(x, 1.85, z, .5, .6, .4, 0xb9c2cc); box(x, 2.25, z, .38, .38, .34, 0xc9d0d8); }
   function floorLamp(x, z) { box(x, .1, z, .5, .2, .5, 0x3a3f4a); box(x, 1.4, z, .1, 2.6, .1, 0x5c5248); box(x, 2.75, z, .7, .5, .7, 0xffe0a0); }
+
+  // Big flat-screen TV on a low media console (mounted + standing). Screen faces +z.
+  function tvWall(x, z, t) {
+    // media console
+    box(x, .5, z, 5.0, 1.0, 1.3, 0x6b4a34); box(x, 1.02, z, 5.1, .12, 1.4, 0x8a6244);
+    for (const dx of [-1.6, 0, 1.6]) { box(x + dx, .5, z + .35, 1.2, .5, .06, 0x3a2a1e); } // cabinet doors
+    for (const dx of [-1.6, 0, 1.6]) box(x + dx, .5, z + .42, .18, .12, .04, 0xd7b06a);     // handles
+    // soundbar
+    box(x, 1.18, z, 3.6, .18, .32, 0x1c1e24);
+    // big screen on a stand
+    box(x, 3.2, z - .2, .5, 2.2, .35, 0x24252b);          // mount/stand
+    box(x, 4.2, z - .35, 6.6, 3.7, .28, 0x15161c);         // bezel
+    box(x, 4.2, z - .5, 6.2, 3.35, .06, 0x2b3550);         // screen base
+    // subtle animated "picture": shifting colour bands
+    const bands = [0x3f6f9f, 0x54618f, 0x8a5f7e, 0x4f8a6b];
+    for (let i = 0; i < 4; i++) { const w = 6.0, bw = w / 4, bx = x - w / 2 + bw * (i + .5); const shade = .8 + .35 * Math.sin(t * .002 + i); box(bx, 4.2, z - .54, bw * .92, 3.1, .03, bands[i], shade); }
+    box(x, 4.2, z - .56, 1.3, .9, .02, 0xcfe0f0, 1.1 + .2 * Math.sin(t * .004)); // highlight glint
+  }
+  // A cosy 3-seater sofa. Seat faces -z (toward the TV); backrest on the +z side.
+  function sofa(x, z) {
+    box(x, .35, z, 5.0, .5, 1.9, 0x8a5750);               // base
+    box(x, .78, z - .1, 4.7, .35, 1.5, 0xb87a72);         // seat cushions
+    for (const cx of [-1.55, 0, 1.55]) box(x + cx, .95, z - .1, 1.45, .25, 1.4, 0xc98c82); // seat seams
+    box(x, 1.25, z + .8, 5.0, 1.3, .5, 0x8a5750);         // backrest
+    for (const cx of [-1.55, 0, 1.55]) box(x + cx, 1.25, z + .62, 1.45, 1.0, .25, 0xc98c82); // back cushions
+    for (const sx of [-1, 1]) box(x + sx * 2.5, 1.0, z, .5, 1.1, 1.9, 0x7a4a44); // armrests
+    for (const sx of [-1, 1]) box(x + sx * .9, 1.35, z - .1, .7, .4, 1.0, 0xcf9a90); // throw pillows
+  }
+  function coffeeTable(x, z) { box(x, .45, z, 2.4, .18, 1.4, 0x6b4a34); box(x, .55, z, 2.0, .05, 1.1, 0x4a3426); for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * 1.0, .22, z + sz * .55, .16, .45, .16, 0x5c3f2b); box(x - .5, .62, z, .7, .1, .5, 0xcf9a90); }
+  function nightstand(x, z) { box(x, .5, z, 1.3, 1.0, 1.3, 0x8e684d); box(x, 1.02, z, 1.4, .1, 1.4, 0xb88d66); box(x, .55, z + .35, 1.0, .5, .05, 0x6b4a34); box(x, 1.25, z, .3, .4, .3, 0x3a3f4a); box(x, 1.5, z, .5, .3, .5, 0xffd58b); }
+  function bookStack(x, z) { const cols = [0x9a6849, 0x55728b, 0xa14f43, 0x63527e]; for (let i = 0; i < 4; i++) box(x, .25 + i * .22, z, 1.1 - i * .08, .2, .8, cols[i]); box(x + .2, 1.2, z, .7, .08, .7, 0xd0a06b); }
+
+  // ---------------------------------------------------------------------------
+  // PIXEL TEXT (tiny 3x5 block font) — used for genre room name signs.
+  // Each glyph is 5 rows x 3 cols, top row first. '1' = filled cell.
+  // ---------------------------------------------------------------------------
+  const FONT = {
+    'A': ['010', '101', '111', '101', '101'], 'B': ['110', '101', '110', '101', '110'],
+    'C': ['011', '100', '100', '100', '011'], 'D': ['110', '101', '101', '101', '110'],
+    'E': ['111', '100', '110', '100', '111'], 'F': ['111', '100', '110', '100', '100'],
+    'G': ['011', '100', '101', '101', '011'], 'H': ['101', '101', '111', '101', '101'],
+    'I': ['111', '010', '010', '010', '111'], 'K': ['101', '110', '100', '110', '101'],
+    'L': ['100', '100', '100', '100', '111'], 'M': ['101', '111', '111', '101', '101'],
+    'N': ['101', '111', '111', '111', '101'], 'O': ['010', '101', '101', '101', '010'],
+    'P': ['110', '101', '110', '100', '100'], 'R': ['110', '101', '110', '101', '101'],
+    'S': ['011', '100', '010', '001', '110'], 'T': ['111', '010', '010', '010', '010'],
+    'U': ['101', '101', '101', '101', '111'], 'V': ['101', '101', '101', '101', '010'],
+    'W': ['101', '101', '111', '111', '101'], 'Y': ['101', '101', '010', '010', '010'],
+    '&': ['010', '101', '010', '101', '011'], ' ': ['000', '000', '000', '000', '000']
+  };
+  // Draw text on a wall perpendicular to z (letters run along x), facing +z (toward the room).
+  // cx = centre x, topY = top of the text, zFace = z position of the wall face, cell = glyph cell size.
+  function pixelTextOnZWall(text, cx, topY, zFace, cell, color, maxWidth) {
+    const glyphW = 3, gap = 1;
+    // Auto-shrink the cell so the whole word fits within maxWidth (if given).
+    if (maxWidth) { const need = text.length * (glyphW + gap) * cell - gap * cell; if (need > maxWidth) cell *= maxWidth / need; }
+    const stride = (glyphW + gap) * cell;
+    const totalW = text.length * stride - gap * cell;
+    let x0 = cx - totalW / 2;
+    for (let i = 0; i < text.length; i++) {
+      const g = FONT[text[i]] || FONT[' '];
+      for (let r = 0; r < 5; r++) for (let c = 0; c < 3; c++) {
+        if (g[r][c] === '1') { const px = x0 + c * cell + cell / 2, py = topY - r * cell - cell / 2; box(px, py, zFace, cell * .92, cell * .92, .08, color); }
+      }
+      x0 += stride;
+    }
+  }
 
   // Bedroom furniture pieces.
   // Bed with the HEADBOARD + pillows against the right wall (+x), footboard toward -x,
@@ -277,11 +352,10 @@
     for (let z = 6; z <= 58; z += 8) { box(0, W.ceilY - .3, z, .25, .5, .25, 0x8a7a63); box(0, W.ceilY - .7, z, .7, .18, .7, 0xffe3a8); box(0, W.ceilY - .82, z, .42, .1, .42, 0xfff3cf); }
 
     // ---------------- BEDROOM contents ----------------
-    bed(9.0, 13); wardrobe(-10.3, 6); deskWithPC(-9.8, 14.5); deskChair(-9.8, 13.1);
-    // chest of drawers (interactable "chest") + armchair + plant + lamp
-    box(0, .5, 4.6, 2.4, 1.0, 1.8, 0x8e684d); box(0, 1.05, 4.6, 2.5, .12, 1.9, 0xb88d66); for (const yy of [.4, .75]) box(0, yy, 3.75, 2.1, .06, .06, 0x5a4232);
-    box(4.2, .35, 6, 1.7, .5, 1.6, 0x9b5f58); box(4.2, 1.0, 6.7, 1.7, 1.1, .3, 0xb87970); for (const sx of [-1, 1]) box(4.2 + sx * .85, .65, 6, .22, .7, 1.4, 0x8a5750);
-    potPlant(10.5, 5.5); floorLamp(-11.0, 11.5);
+    bed(9.0, 13); wardrobe(-10.3, 6); deskWithPC(-9.8, 14.5); deskChair(-9.8, 13.2, 1);
+    // TV lounge: big screen on a media console (entry wall) with a sofa + coffee table facing it.
+    tvWall(5.5, 2.9, t); sofa(5.5, 8.2); coffeeTable(5.5, 5.6);
+    nightstand(4.9, 13); bookStack(-4.5, 3.0); floorLamp(-11.0, 11.5);
     // Window with warm light on the bedroom right wall.
     box(11.72, 5.0, 9, .12, 3.2, 5.0, 0x9bd8e7); box(11.55, 5.0, 6.4, .2, 3.6, .2, 0xc89c69); box(11.55, 5.0, 11.6, .2, 3.6, .2, 0xc89c69); box(11.55, 6.85, 9, .2, .2, 5.2, 0xc89c69); box(11.55, 3.15, 9, .2, .2, 5.2, 0xc89c69);
     // Pixel self-portrait (ABOUT ME) on the bedroom LEFT wall at z=11.
@@ -299,16 +373,26 @@
         case 'table': readingTable(o.x, o.z, o.hx * 2, o.hz * 2); break;
         case 'chair': chair(o.x, o.z, o.face); break;
         case 'globe': globe(o.x, o.z); break;
+        // tvConsole/sofa/coffee/nightstand/bookStack/pedestal are drawn explicitly below/above.
       }
     });
     // Rolling ladder leaning against the left-wall stacks in the data room (flush to wall).
     box(-11.0, 3, 48.5, .14, 6, .14, 0x5c3f2b); box(-11.35, 3, 48.5, .14, 6, .14, 0x5c3f2b); for (let y = 1; y < 6; y += 1) box(-11.18, y, 48.5, .14, .1, .9, 0x6a4a32);
-    // A few library plants for life (against walls, out of the aisle).
-    potPlant(-10.9, 20.5); potPlant(10.9, 51.5); potPlant(10.9, 33);
+    // Extra interior (no plants): floor lamps + a display pedestal with a small bust.
+    floorLamp(-10.9, 20.5); floorLamp(10.9, 51.5);
+    pedestal(10.9, 49); pedestal(-10.8, 20);
+    // Framed wall sconces glowing along the library side walls.
+    for (const z of [22, 32, 42, 52]) { for (const sx of [-1, 1]) { box(sx * 11.55, 5.6, z, .12, .5, .3, 0x6a4a32); box(sx * 11.5, 5.95, z, .1, .3, .24, 0xffdf9b); } }
 
-    // ---------------- GENRE SIGNS ----------------
-    // A coloured banner hanging over the doorway into each genre room.
-    GENRE_ROOMS.forEach(r => { const dz = r.z0; box(0, 7.0, dz + .2, 4.6, .9, .12, r.accent); box(0, 7.0, dz + .14, 4.9, 1.05, .06, 0x1c1e26); box(0, 7.0, dz + .22, 4.4, .72, .12, r.accent); });
+    // ---------------- GENRE SIGNS (name boards over each doorway) ----------------
+    GENRE_ROOMS.forEach(r => {
+      const dz = r.z0;
+      // backing board + accent frame on the -z (aisle) side of the divider, facing the player
+      box(0, 7.1, dz - .32, 7.3, 1.66, .08, r.accent);
+      box(0, 7.1, dz - .38, 7.0, 1.5, .1, 0x1c1e26);
+      // genre name in pixel letters, sitting in front of the board so it reads clearly
+      pixelTextOnZWall(r.name, 0, 7.55, dz - .46, .15, r.accent === 0xffab52 ? 0xfff0d0 : 0xeef3ff, 6.6);
+    });
 
     // ---------------- PROJECT EXHIBITS ----------------
     projects.forEach((p, i) => {
