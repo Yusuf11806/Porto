@@ -95,13 +95,6 @@
     // library decorative pedestals (collision so the cat can't stand inside them)
     { x: 10.9, z: 49, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
     { x: -10.8, z: 20, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
-    // ---- LIBRARY wall bookcases (in the bays between paintings) ----
-    { x: -11.7, z: 25.5, hx: .55, hz: 1.6, top: 6.1, kind: 'bookcase' },
-    { x: 11.7, z: 19.3, hx: .55, hz: .9, top: 6.1, kind: 'bookcase' },
-    { x: -11.7, z: 35, hx: .55, hz: 1.6, top: 6.1, kind: 'bookcase' }, { x: 11.7, z: 35, hx: .55, hz: 1.6, top: 6.1, kind: 'bookcase' },
-    { x: -11.7, z: 29.3, hx: .55, hz: .7, top: 6.1, kind: 'bookcase' }, { x: 11.7, z: 29.3, hx: .55, hz: .7, top: 6.1, kind: 'bookcase' },
-    { x: 11.7, z: 45, hx: .55, hz: 2.4, top: 6.1, kind: 'bookcase' }, { x: -11.7, z: 45.5, hx: .55, hz: .9, top: 6.1, kind: 'bookcase' },
-    { x: -11.7, z: 55, hx: .55, hz: 3.6, top: 6.1, kind: 'bookcase' }, { x: 11.7, z: 55, hx: .55, hz: 3.6, top: 6.1, kind: 'bookcase' },
     // ---- LIBRARY central furniture (low pieces only; NO free-standing bookcases
     //      in the middle of a room — all books live on the walls). Aisle |x|<2.5 clear. ----
     { x: 0, z: 23, hx: 1.8, hz: 1.0, top: 1.0, kind: 'table' }, { x: -2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 1 }, { x: 2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: -1 },
@@ -195,16 +188,6 @@
   // ---------------------------------------------------------------------------
   // FURNITURE PIECES
   // ---------------------------------------------------------------------------
-  function bookcase(x, z, length, depth, color) {
-    const h = 6.0, trim = 0xb77c4f;
-    box(x, h / 2, z, depth, h, length, color);
-    for (let s = 0; s < 5; s++) {
-      const shelfY = .55 + s * 1.2; box(x, shelfY, z, depth * .9, .14, length * .92, 0xd0a06b);
-      const n = Math.max(1, Math.floor(length / .36));
-      for (let b = 0; b < n; b++) { const bh = .58 + ((b * 7 + s * 3) % 5) * .1, bw = .22 + ((b + s) % 3) * .035, off = -length / 2 + .22 + b * .36; box(x, shelfY + .14 + bh / 2, z + off, depth * .5, bh, bw, [0x52776c, 0x55728b, 0xa14f43, 0xd39a55, 0x63527e, 0x42635c, 0x9a6849][(b + s * 2) % 7]); }
-    }
-    box(x, h - .12, z, depth * 1.08, .28, length * 1.04, trim);
-  }
   function readingTable(x, z, w, d) { box(x, .9, z, w, .16, d, 0x7a5338); box(x, 1.0, z, w * .92, .05, d * .92, 0x4a6a60); for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * (w / 2 - .25), .45, z + sz * (d / 2 - .25), .2, .9, .2, 0x5c3f2b); box(x, 1.2, z, .3, .4, .3, 0x3a3f4a); box(x, 1.55, z, .5, .3, .5, 0xffd58b); }
   // face: 1 => faces +x, -1 => faces -x, 2 => faces +z, -2 => faces -z (default).
   // The backrest sits BEHIND the seat (opposite the facing direction).
@@ -368,20 +351,15 @@
     box(-11.72, CV_POS.y, 15, .16, 2.8, 2.2, 0x45506a); box(-11.6, CV_POS.y + .9, 15, .1, .5, 1.7, 0xdce6f5); box(-11.6, CV_POS.y + .2, 15, .1, .3, 1.5, 0xaebbd2); box(-11.6, CV_POS.y - .35, 15, .1, .3, 1.5, 0xaebbd2); box(-11.6, CV_POS.y - .9, 15, .1, .3, 1.0, 0xaebbd2);
 
     // ---------------- LIBRARY contents (data-driven from collision blocks) ----------------
-    const caseColors = [0x80523a, 0x7a4e37, 0x7d4e36, 0x87583e, 0x82543c];
-    let ci = 0;
     furnitureBlocks.forEach(o => {
       switch (o.kind) {
-        case 'bookcase': bookcase(o.x, o.z, o.hz * 2, o.hx * 2, caseColors[ci++ % caseColors.length]); break;
         case 'table': readingTable(o.x, o.z, o.hx * 2, o.hz * 2); break;
         case 'chair': chair(o.x, o.z, o.face); break;
         case 'globe': globe(o.x, o.z); break;
         // tvConsole/sofa/coffee/nightstand/bookStack/pedestal are drawn explicitly below/above.
       }
     });
-    // Rolling ladder leaning against the left-wall stacks in the data room (flush to wall).
-    box(-11.0, 3, 48.5, .14, 6, .14, 0x5c3f2b); box(-11.35, 3, 48.5, .14, 6, .14, 0x5c3f2b); for (let y = 1; y < 6; y += 1) box(-11.18, y, 48.5, .14, .1, .9, 0x6a4a32);
-    // Extra interior (no plants): floor lamps + a display pedestal with a small bust.
+    // Interior accents (no bookcases, no plants): floor lamps + display pedestals with busts.
     floorLamp(-10.9, 20.5); floorLamp(10.9, 51.5);
     pedestal(10.9, 49); pedestal(-10.8, 20);
     // Framed wall sconces glowing along the library side walls.
