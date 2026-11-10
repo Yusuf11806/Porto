@@ -30,7 +30,7 @@
     { name: 'WeGoGym', tag: 'PROJECT / 001', year: '2024', genre: 'Web & App', description: 'My very first app. Nicho and I designed WeGoGym in Figma for a class brief — a place to log your meals, plan gym routines, and follow workout videos from trainers. The design was rough around the edges, honestly, but it taught us a lot. Shout-out to Bernhard, Geronimo, Oliver, and Nicholas Carlen for building it with us.', tags: ['Figma', 'UI/UX prototype', 'Fitness app', 'Team project'], images: Array.from({ length: 10 }, (_, i) => `../${i + 1}.png`), link: '#', showLink: false },
     { name: 'ShippDecKk', tag: 'PROJECT / 002', year: '2024', genre: 'Web & App', description: 'A little ship-shopping website I built solo, just HTML, CSS and JavaScript. You can browse vessels across a range of prices, from budget-friendly to the fancy ones. It was my playground for getting comfortable building a site from scratch.', tags: ['HTML', 'CSS', 'JavaScript', 'Solo project'], images: ['../shipdeckk.png'], link: 'https://shipdeckk.vercel.app/' },
     { name: 'SmartBaby', tag: 'PROJECT / 003', year: '2024', genre: 'Web & App', description: 'A prototype app for new parents: reach doctors who specialise in baby care, shop for baby products, and get them delivered home. This was where I first bumped into the business side of computer science. Huge thanks to Bryan, Silva, Patrick, and Ayundini — you were amazing.', tags: ['App prototype', 'Baby care', 'E-commerce', 'Team project'], images: Array.from({ length: 5 }, (_, i) => `../${i + 20}.png`), link: '#', showLink: false },
-    { name: 'Face Mask Detector', tag: 'PROJECT / 004', year: '2025', genre: 'AI & Science', description: 'My first real taste of AI. For the course project I trained a model that spots whether someone is wearing a mask — I gathered the dataset myself and trained a YOLOv8 model in PyTorch (the weights live in best.pt). Seeing it actually detect masks in real time was a great feeling.', tags: ['Artificial intelligence', 'Computer vision', 'YOLOv8', 'PyTorch'], images: ['../67.png'], link: 'https://facemask-keav-j342p68sv-yusuf-rayyan-daniel-portofolio.vercel.app/' },
+    { name: 'Face Mask Detector', tag: 'PROJECT / 004', year: '2025', genre: 'AI & Science', description: 'My first real taste of AI. For the course project I trained a model that spots whether someone is wearing a mask. I gathered the dataset myself and trained a YOLOv8 model in PyTorch (the weights live in best.pt). Seeing it actually detect masks in real time was a great feeling.', tags: ['Artificial intelligence', 'Computer vision', 'YOLOv8', 'PyTorch'], images: ['../67.png'], link: 'https://facemask-keav-j342p68sv-yusuf-rayyan-daniel-portofolio.vercel.app/' },
     { name: 'matK Gene Alignment', tag: 'PROJECT / 006', year: '2025', genre: 'AI & Science', description: 'We lined up the matK gene from the Venus flytrap and the sundew to see how similar they really are, using global and local sequence alignment in Biopython (including Needleman-Wunsch for the global pass). A fun crossover of biology and code. Thanks to Filbert, Felix, and Atiqah.', tags: ['Bioinformatics', 'Biopython', 'DNA sequence analysis', 'Needleman-Wunsch'], images: ['../69.png'], link: 'https://github.com/Yusuf11806/Global-Alignment-Study' },
     { name: 'Database HR Analysis', tag: 'PROJECT / 005', year: '2025', genre: 'Data & Database', description: 'We dug into an HR database to figure out why some employees stay and others leave. After cleaning up the data, we explored it with Python (pandas, NumPy, Matplotlib, Seaborn) and leaned on a bit of stats — Pearson correlation and chi-squared tests — to back up what we found. Thanks to Richard, Felix, and Filbert.', tags: ['Python', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy', 'Machine learning'], link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database/blob/main/Code%20-%20Data%20Analytics.ipynb' },
     { name: 'E-Commerce Analytics Pipeline', tag: 'PROJECT / 008', year: '2025', genre: 'Data & Database', description: 'An end-to-end data pipeline for e-commerce sales and profit. We took a Kaggle dataset, cleaned and shaped it in Pentaho, then turned it into dashboards in Power BI. It was my first time wiring a full pipeline together. Thanks to Christian, Filbert, Jovita, Felix, and Richard.', tags: ['Pentaho', 'Power BI', 'Data engineering', 'Data cleaning', 'Team project'], images: ['../pipeline.png'], link: 'https://github.com/Yusuf11806/E-Commerce-Sales-and-Profit-Analytics-Using-Data-Engineering-Pipeline' },
@@ -645,9 +645,15 @@
     if (nearbySpecial === 'cv') {
       document.getElementById('modalEyebrow').textContent = 'ABOUT / CURRICULUM VITAE';
       document.getElementById('modalTitle').textContent = 'My CV';
-      document.getElementById('modalCopy').textContent = 'My curriculum vitae will be available here soon. Check back shortly — the download link is being prepared.';
-      document.getElementById('modalTags').innerHTML = ['<span>COMING SOON</span>'];
-      gallery.hidden = true; markObjective('cv'); openModal(); return;
+      document.getElementById('modalCopy').textContent = 'Here is my CV. Click the button below to download it as a PDF.';
+      document.getElementById('modalTags').innerHTML = ['<span>PDF</span>', '<span>RESUME</span>'];
+      gallery.hidden = true;
+      projectLink.href = '../CV%20Yusuf.pdf';
+      projectLink.setAttribute('download', 'CV Yusuf.pdf');
+      projectLink.setAttribute('target', '_blank');
+      projectLink.innerHTML = 'DOWNLOAD CV <span>↓</span>';
+      projectLink.hidden = false;
+      markObjective('cv'); openModal(); return;
     }
     if (nearby < 0) { showToast('MOVE CLOSER TO AN ARTWORK'); return; }
     const p = projects[nearby];
@@ -657,6 +663,7 @@
     document.getElementById('modalTags').innerHTML = p.tags.map(x => `<span>${x}</span>`).join('');
     gallery.hidden = !p.images?.length;
     if (p.images?.length) { galleryIndex = 0; const single = p.images.length === 1; gallery.classList.toggle('single-image', single); document.getElementById('galleryPrevious').hidden = single; document.getElementById('galleryNext').hidden = single; showGalleryImage(p.images); }
+    projectLink.removeAttribute('download'); projectLink.innerHTML = 'OPEN PROJECT <span>↗</span>'; // reset from any CV state
     projectLink.href = p.link || '#'; projectLink.hidden = p.showLink === false || !p.link || p.link === '#';
     openModal();
     if (!collected.has(nearby)) { collected.add(nearby); showToast(`PROJECT ${collected.size} / ${projects.length} DISCOVERED`); }
