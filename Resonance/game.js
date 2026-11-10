@@ -440,8 +440,8 @@
     if (paused) return;
     recoverPlayer();
 
-    let dx = Number(Boolean(keys.d || keys.D || keys.ArrowRight)) - Number(Boolean(keys.a || keys.A || keys.ArrowLeft));
-    let dz = Number(Boolean(keys.s || keys.S || keys.ArrowDown)) - Number(Boolean(keys.w || keys.W || keys.ArrowUp));
+    let dx = Number(Boolean(keys.right)) - Number(Boolean(keys.left));
+    let dz = Number(Boolean(keys.down)) - Number(Boolean(keys.up));
     if (dx && dz) { dx *= .707; dz *= .707; }
     const hasInput = dx !== 0 || dz !== 0;
     const forward = -dz; // W => +1 (deeper into the world, away from camera)
@@ -449,7 +449,7 @@
     // So D (dx=+1) strafes to the player's screen-right, A (dx=-1) to screen-left.
     const moveX = forward * Math.sin(cameraRig.yaw) - dx * Math.cos(cameraRig.yaw);
     const moveZ = forward * Math.cos(cameraRig.yaw) + dx * Math.sin(cameraRig.yaw);
-    const sprint = keys.Shift ? 1.6 : 1, speed = 7.2 * sprint, blend = 1 - Math.exp(-16 * dt);
+    const sprint = keys.sprint ? 1.6 : 1, speed = 7.2 * sprint, blend = 1 - Math.exp(-16 * dt);
 
     if (hasInput) { player.vx += (moveX * speed - player.vx) * blend; player.vz += (moveZ * speed - player.vz) * blend; }
     else { const sb = 1 - Math.exp(-22 * dt); player.vx -= player.vx * sb; player.vz -= player.vz * sb; if (Math.abs(player.vx) < .05) player.vx = 0; if (Math.abs(player.vz) < .05) player.vz = 0; }
@@ -589,23 +589,52 @@
   canvas.addEventListener('contextmenu', e => e.preventDefault());
   canvas.addEventListener('pointerup', stopOrbit); canvas.addEventListener('pointercancel', stopOrbit);
   canvas.addEventListener('wheel', e => { if (!started) return; e.preventDefault(); cameraRig.distance = clamp(cameraRig.distance + Math.sign(e.deltaY) * .65, 5, 13); }, { passive: false });
-  addEventListener('keydown', e => {
-    if (!started && e.key === 'Enter' && document.getElementById('gameLoader').classList.contains('is-ready')) { startGame(); return; }
-    const k = e.key.length === 1 ? e.key.toLowerCase() : e.key; // normalise so Shift/CapsLock can't desync keys
-    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' '].includes(k) || 'wasd'.includes(k)) e.preventDefault();
-    keys[k] = true;
+  // Map a key event to a canonical action using the PHYSICAL key (e.code) first — this is
+  // layout/IME independent, so WASD works even on non-US keyboards — with an e.key fallback.
+  function actionFor(e) {
+    switch (e.code) {
+      case 'KeyW': case 'ArrowUp': return 'up';
+      case 'KeyS': case 'ArrowDown': return 'down';
+      case 'KeyA': case 'ArrowLeft': return 'left';
+      case 'KeyD': case 'ArrowRight': return 'right';
+      case 'Space': return 'jump';
+      case 'KeyE': return 'use';
+      case 'ShiftLeft': case 'ShiftRight': return 'sprint';
+      case 'Escape': return 'pause';
+      case 'Enter': return 'enter';
+    }
+    const k = (e.key || '').toLowerCase();
+    if (k === 'w' || k === 'arrowup') return 'up';
+    if (k === 's' || k === 'arrowdown') return 'down';
+    if (k === 'a' || k === 'arrowleft') return 'left';
+    if (k === 'd' || k === 'arrowright') return 'right';
+    if (k === ' ' || k === 'spacebar') return 'jump';
+    if (k === 'e') return 'use';
+    if (k === 'shift') return 'sprint';
+    if (k === 'escape') return 'pause';
+    if (k === 'enter') return 'enter';
+    return null;
+  }
+  function onKeyDown(e) {
+    const a = actionFor(e);
+    if (!started && a === 'enter' && document.getElementById('gameLoader').classList.contains('is-ready')) { startGame(); return; }
+    if (!a) return;
+    if (['up', 'down', 'left', 'right', 'jump'].includes(a)) e.preventDefault();
+    keys[a] = true;
     if (e.repeat) return;
-    if (k === ' ') jump();
-    if (k === 'e') modalOpen ? closeModal() : openSignal();
-    if (k === 'Escape') { if (modalOpen) closeModal(); else if (started) setPauseMenu(!paused); }
-  });
-  addEventListener('keyup', e => { const k = e.key.length === 1 ? e.key.toLowerCase() : e.key; keys[k] = false; });
+    if (a === 'jump') jump();
+    if (a === 'use') modalOpen ? closeModal() : openSignal();
+    if (a === 'pause') { if (modalOpen) closeModal(); else if (started) setPauseMenu(!paused); }
+  }
+  function onKeyUp(e) { const a = actionFor(e); if (a) keys[a] = false; }
+  // Attach to both window and the canvas so key events are caught regardless of focus target.
+  for (const tgt of [window, canvas]) { tgt.addEventListener('keydown', onKeyDown); tgt.addEventListener('keyup', onKeyUp); }
   addEventListener('blur', () => Object.keys(keys).forEach(k => keys[k] = false));
   document.getElementById('closeModal').onclick = closeModal;
   document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
   document.querySelectorAll('.touch-controls button').forEach(b => {
-    b.addEventListener('pointerdown', e => { e.preventDefault(); const a = b.dataset.action; if (a === 'left') keys.a = true; if (a === 'right') keys.d = true; if (a === 'forward') keys.w = true; if (a === 'back') keys.s = true; if (a === 'jump') jump(); if (a === 'use') openSignal(); if (a === 'attack') attackSignal(); });
-    ['pointerup', 'pointerleave', 'pointercancel'].forEach(k => b.addEventListener(k, () => { const a = b.dataset.action; if (a === 'left') keys.a = false; if (a === 'right') keys.d = false; if (a === 'forward') keys.w = false; if (a === 'back') keys.s = false; }));
+    b.addEventListener('pointerdown', e => { e.preventDefault(); const a = b.dataset.action; if (a === 'left') keys.left = true; if (a === 'right') keys.right = true; if (a === 'forward') keys.up = true; if (a === 'back') keys.down = true; if (a === 'jump') jump(); if (a === 'use') openSignal(); if (a === 'attack') attackSignal(); });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(k => b.addEventListener(k, () => { const a = b.dataset.action; if (a === 'left') keys.left = false; if (a === 'right') keys.right = false; if (a === 'forward') keys.up = false; if (a === 'back') keys.down = false; }));
   });
 
   // ---------------------------------------------------------------------------
