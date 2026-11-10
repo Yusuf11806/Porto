@@ -727,8 +727,11 @@
     if (a === 'pause') { if (modalOpen) closeModal(); else if (started) setPauseMenu(!paused); }
   }
   function onKeyUp(e) { const a = actionFor(e); if (a) keys[a] = false; }
-  // Attach to both window and the canvas so key events are caught regardless of focus target.
-  for (const tgt of [window, canvas]) { tgt.addEventListener('keydown', onKeyDown); tgt.addEventListener('keyup', onKeyUp); }
+  // Attach to window only. A canvas keydown bubbles up to window too, so adding a second
+  // canvas listener would fire onKeyDown twice per press and (e.g.) toggle the pause menu
+  // open then immediately closed. window alone catches keys whenever the document is focused.
+  window.addEventListener('keydown', onKeyDown);
+  window.addEventListener('keyup', onKeyUp);
   addEventListener('blur', () => Object.keys(keys).forEach(k => keys[k] = false));
   document.getElementById('closeModal').onclick = closeModal;
   document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
