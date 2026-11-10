@@ -27,15 +27,15 @@
   // PORTFOLIO DATA — 9 projects, each grouped into a genre room of the library.
   // ---------------------------------------------------------------------------
   const allProjects = [
-    { name: 'WeGoGym', tag: 'PROJECT / 001', year: '2024', genre: 'Web & App', description: 'In 2024, my colleagues and I were assigned to create a simple app prototype in Figma. Nicho and I designed WeGoGym, an app where users could log meals, plan gym routines, and watch workout videos from instructors. It was our first app, and although the design had plenty of room to improve, it was an important first step for us. A big thank you to Bernhard, Geronimo, Oliver, and Nicholas Carlen for helping bring the project to life.', tags: ['Figma', 'UI/UX prototype', 'Fitness app', 'Team project'], images: Array.from({ length: 10 }, (_, i) => `../${i + 1}.png`), link: '#', showLink: false },
-    { name: 'ShippDecKk', tag: 'PROJECT / 002', year: '2024', genre: 'Web & App', description: 'In 2024, I created ShippDecKk as a solo website project where visitors can browse ships at a range of prices, from affordable options to more premium vessels. I built the site myself using basic HTML, CSS, and JavaScript.', tags: ['HTML', 'CSS', 'JavaScript', 'Solo project'], images: ['../shipdeckk.png'], link: 'https://shipdeckk.vercel.app/' },
-    { name: 'SmartBaby', tag: 'PROJECT / 003', year: '2024', genre: 'Web & App', description: 'In 2024, my colleagues and I created SmartBaby, a prototype app for parents. Families could contact doctors who specialize in baby care, shop for baby products, and have their orders delivered to their homes. This project was my first introduction to business concepts in computer science. Thank you, Bryan, Silva, Patrick, and Ayundini, for helping make it happen. You are amazing.', tags: ['App prototype', 'Baby care', 'E-commerce', 'Team project'], images: Array.from({ length: 5 }, (_, i) => `../${i + 20}.png`), link: '#', showLink: false },
-    { name: 'Face Mask Detector', tag: 'PROJECT / 004', year: '2025', genre: 'AI & Science', description: 'In 2025, I took my first artificial intelligence course, where I learned foundational concepts such as intelligent agents. For the course project, I built a face mask detector that identifies whether a person is wearing a mask. I prepared a dataset and trained a YOLOv8 model with PyTorch; the trained weights are saved as best.pt.', tags: ['Artificial intelligence', 'Computer vision', 'YOLOv8', 'PyTorch'], images: ['../67.png'], link: 'https://facemask-keav-j342p68sv-yusuf-rayyan-daniel-portofolio.vercel.app/' },
-    { name: 'matK Gene Alignment', tag: 'PROJECT / 006', year: '2025', genre: 'AI & Science', description: 'My colleagues and I compared matK gene DNA sequences from the Venus flytrap and sundew using global and local sequence alignment. We implemented the analysis with Biopython, including the Needleman-Wunsch method for global alignment. Thank you to Filbert, Felix, and Atiqah for their collaboration and help with this project.', tags: ['Bioinformatics', 'Biopython', 'DNA sequence analysis', 'Needleman-Wunsch'], images: ['../69.png'], link: 'https://github.com/Yusuf11806/Global-Alignment-Study' },
-    { name: 'Database HR Analysis', tag: 'PROJECT / 005', year: '2025', genre: 'Data & Database', description: 'My colleagues and I analyzed an HR database to understand which employees stayed and which left. We cleaned the original dataset and saved a clean version, then analyzed it with Python, pandas, NumPy, Matplotlib, and Seaborn. We also used statistical and machine-learning methods, including Pearson correlation (pearsonr) and chi-squared contingency analysis. Thank you to Richard, Felix, and Filbert for their teamwork and help completing this project.', tags: ['Python', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy', 'Machine learning'], link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database/blob/main/Code%20-%20Data%20Analytics.ipynb' },
-    { name: 'E-Commerce Analytics Pipeline', tag: 'PROJECT / 008', year: '2025', genre: 'Data & Database', description: 'In 2025, my colleagues and I built a data engineering pipeline for an e-commerce sales and profit analytics project. We used a Kaggle dataset, cleaned and prepared the data with Pentaho, then created visualizations in Power BI. Thank you to Christian, Filbert, Jovita, Felix, and Richard for your teamwork.', tags: ['Pentaho', 'Power BI', 'Data engineering', 'Data cleaning', 'Team project'], images: ['../pipeline.png'], link: 'https://github.com/Yusuf11806/E-Commerce-Sales-and-Profit-Analytics-Using-Data-Engineering-Pipeline' },
-    { name: 'Video Game Sales Analytics', tag: 'PROJECT / 009', year: '2025', genre: 'Data & Database', description: 'I used Power BI to analyze video game sales across genres, release date categories, and regions, as well as global sales. The visualizations make it easier to compare how sales vary across these categories.', tags: ['Power BI', 'Data visualization', 'Video game sales', 'Regional analysis'], images: ['../DataVis.png'], link: 'https://github.com/Yusuf11806/Video-Game-Sales' },
-    { name: 'BINUS Network (Floors 4-6)', tag: 'PROJECT / 007', year: '2025', genre: 'Network & Infra', description: 'My team and I designed a network system for floors 4 through 6 at BINUS. Using Cisco Packet Tracer, we planned the IP addresses, subnet masks, default gateways, Wi-Fi network, and cable types for the floor network.', tags: ['Cisco Packet Tracer', 'Network design', 'IP addressing', 'Team project'], images: ['../11.jpg', '../12.jpg', '../13.jpg'], link: 'https://github.com/Yusuf11806/binus-network-4-6-floor' }
+    { name: 'WeGoGym', tag: 'PROJECT / 001', year: '2024', genre: 'Web & App', description: 'My very first app. Nicho and I designed WeGoGym in Figma for a class brief — a place to log your meals, plan gym routines, and follow workout videos from trainers. The design was rough around the edges, honestly, but it taught us a lot. Shout-out to Bernhard, Geronimo, Oliver, and Nicholas Carlen for building it with us.', tags: ['Figma', 'UI/UX prototype', 'Fitness app', 'Team project'], images: Array.from({ length: 10 }, (_, i) => `../${i + 1}.png`), link: '#', showLink: false },
+    { name: 'ShippDecKk', tag: 'PROJECT / 002', year: '2024', genre: 'Web & App', description: 'A little ship-shopping website I built solo, just HTML, CSS and JavaScript. You can browse vessels across a range of prices, from budget-friendly to the fancy ones. It was my playground for getting comfortable building a site from scratch.', tags: ['HTML', 'CSS', 'JavaScript', 'Solo project'], images: ['../shipdeckk.png'], link: 'https://shipdeckk.vercel.app/' },
+    { name: 'SmartBaby', tag: 'PROJECT / 003', year: '2024', genre: 'Web & App', description: 'A prototype app for new parents: reach doctors who specialise in baby care, shop for baby products, and get them delivered home. This was where I first bumped into the business side of computer science. Huge thanks to Bryan, Silva, Patrick, and Ayundini — you were amazing.', tags: ['App prototype', 'Baby care', 'E-commerce', 'Team project'], images: Array.from({ length: 5 }, (_, i) => `../${i + 20}.png`), link: '#', showLink: false },
+    { name: 'Face Mask Detector', tag: 'PROJECT / 004', year: '2025', genre: 'AI & Science', description: 'My first real taste of AI. For the course project I trained a model that spots whether someone is wearing a mask — I gathered the dataset myself and trained a YOLOv8 model in PyTorch (the weights live in best.pt). Seeing it actually detect masks in real time was a great feeling.', tags: ['Artificial intelligence', 'Computer vision', 'YOLOv8', 'PyTorch'], images: ['../67.png'], link: 'https://facemask-keav-j342p68sv-yusuf-rayyan-daniel-portofolio.vercel.app/' },
+    { name: 'matK Gene Alignment', tag: 'PROJECT / 006', year: '2025', genre: 'AI & Science', description: 'We lined up the matK gene from the Venus flytrap and the sundew to see how similar they really are, using global and local sequence alignment in Biopython (including Needleman-Wunsch for the global pass). A fun crossover of biology and code. Thanks to Filbert, Felix, and Atiqah.', tags: ['Bioinformatics', 'Biopython', 'DNA sequence analysis', 'Needleman-Wunsch'], images: ['../69.png'], link: 'https://github.com/Yusuf11806/Global-Alignment-Study' },
+    { name: 'Database HR Analysis', tag: 'PROJECT / 005', year: '2025', genre: 'Data & Database', description: 'We dug into an HR database to figure out why some employees stay and others leave. After cleaning up the data, we explored it with Python (pandas, NumPy, Matplotlib, Seaborn) and leaned on a bit of stats — Pearson correlation and chi-squared tests — to back up what we found. Thanks to Richard, Felix, and Filbert.', tags: ['Python', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy', 'Machine learning'], link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database/blob/main/Code%20-%20Data%20Analytics.ipynb' },
+    { name: 'E-Commerce Analytics Pipeline', tag: 'PROJECT / 008', year: '2025', genre: 'Data & Database', description: 'An end-to-end data pipeline for e-commerce sales and profit. We took a Kaggle dataset, cleaned and shaped it in Pentaho, then turned it into dashboards in Power BI. It was my first time wiring a full pipeline together. Thanks to Christian, Filbert, Jovita, Felix, and Richard.', tags: ['Pentaho', 'Power BI', 'Data engineering', 'Data cleaning', 'Team project'], images: ['../pipeline.png'], link: 'https://github.com/Yusuf11806/E-Commerce-Sales-and-Profit-Analytics-Using-Data-Engineering-Pipeline' },
+    { name: 'Video Game Sales Analytics', tag: 'PROJECT / 009', year: '2025', genre: 'Data & Database', description: 'A Power BI deep-dive into video game sales — by genre, release period, region, and worldwide. I built the dashboards so you can quickly see which games sold where, and how the trends shift between regions.', tags: ['Power BI', 'Data visualization', 'Video game sales', 'Regional analysis'], images: ['../DataVis.png'], link: 'https://github.com/Yusuf11806/Video-Game-Sales' },
+    { name: 'BINUS Network (Floors 4-6)', tag: 'PROJECT / 007', year: '2025', genre: 'Network & Infra', description: 'We planned the network for floors 4 to 6 at BINUS in Cisco Packet Tracer — mapping out IP addresses, subnet masks, gateways, the Wi-Fi, and which cables go where. Basically designing how a whole building talks to itself.', tags: ['Cisco Packet Tracer', 'Network design', 'IP addressing', 'Team project'], images: ['../11.jpg', '../12.jpg', '../13.jpg'], link: 'https://github.com/Yusuf11806/binus-network-4-6-floor' }
   ];
 
   // World runs along +z: a BEDROOM (z 2..18) then a LIBRARY split into 4 genre rooms.
@@ -67,16 +67,9 @@
   const PROFILE_POS = { x: -11.5, y: 3.5, z: 11 };   // pixel portrait on the bedroom left wall (lowered)
   const CV_POS = { x: -11.5, y: 3.5, z: 15 };        // CV board (coming soon) beside it (lowered)
 
-  function zoneLabel(z) {
-    if (z < 18) return 'BEDROOM / ABOUT ME';
-    for (const r of GENRE_ROOMS) if (z >= r.z0 && z < r.z1) return `LIBRARY / ${r.name}`;
-    return 'LIBRARY';
-  }
-
   const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
   const keys = {}, collected = new Set();
   let nearby = -1, nearbySpecial = '', last = 0, toastTimer, modalOpen = false, started = false, paused = false, galleryIndex = 0;
-  let dbgKeyCount = 0, dbgLastAction = '-'; // DEBUG: counts key events received
 
   // ---------------------------------------------------------------------------
   // COLLISION BLOCKS (bedroom + library). kind drives how each is drawn.
@@ -86,12 +79,12 @@
     { x: 9.0, z: 13, hx: 2.9, hz: 3.4, top: 1.0, kind: 'bed' },
     { x: -10.3, z: 6, hx: 1.6, hz: 1.4, top: 5.0, kind: 'wardrobe' },
     { x: -9.8, z: 14.5, hx: 2.0, hz: .8, top: 1.7, kind: 'deskBed' },
-    { x: -9.8, z: 13.2, hx: .5, hz: .5, top: 1.0, kind: 'deskChairBlock' },
+    { x: -9.8, z: 12.9, hx: .55, hz: .55, top: 1.0, kind: 'deskChairBlock' },
     // TV lounge: media console on the entry wall, sofa facing it, coffee table between.
     { x: 5.5, z: 2.9, hx: 2.6, hz: .7, top: 1.4, kind: 'tvConsole' },
     { x: 5.5, z: 8.2, hx: 2.5, hz: 1.0, top: 1.0, kind: 'sofa' },
     { x: 5.5, z: 5.6, hx: 1.2, hz: .7, top: .7, kind: 'coffee' },
-    { x: 4.9, z: 13, hx: .7, hz: .7, top: 1.1, kind: 'nightstand' },
+    { x: 5.3, z: 10.6, hx: .7, hz: .7, top: 1.1, kind: 'nightstand' },
     { x: -4.5, z: 3.0, hx: .8, hz: .8, top: 1.2, kind: 'bookStack' },
     // library decorative pedestals (collision so the cat can't stand inside them)
     { x: 10.9, z: 49, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
@@ -108,7 +101,7 @@
     { x: 9.3, z: 40.5, hx: 1.3, hz: .5, top: .9, kind: 'console' },
     // NETWORK & INFRA room: study table + globe + a server-rack console against the wall.
     { x: 0, z: 54, hx: 1.8, hz: 1.0, top: 1.05, kind: 'table' }, { x: 0, z: 51.8, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 2 },
-    { x: 6.5, z: 57, hx: .6, hz: .6, top: 1.4, kind: 'globe' }, { x: -9.5, z: 56, hx: 1.4, hz: 1.0, top: 2.0, kind: 'serverRack' }
+    { x: 6.5, z: 57, hx: .6, hz: .6, top: 1.4, kind: 'globe' }, { x: -10.6, z: 56, hx: 1.3, hz: 1.0, top: 2.0, kind: 'serverRack' }
   ];
 
   const PLAYER_R = .42;
@@ -141,6 +134,35 @@
   const profileImage = new Image(); let profilePixels = null, profilePixelUrl = '';
   profileImage.onload = () => { try { const c = document.createElement('canvas'); c.width = 24; c.height = 32; const ctx = c.getContext('2d', { willReadFrequently: true }); ctx.drawImage(profileImage, 0, 0, 24, 32); profilePixels = ctx.getImageData(0, 0, 24, 32).data; profilePixelUrl = c.toDataURL('image/png'); } catch (error) { profilePixels = null; profilePixelUrl = '../image0.jpg'; } };
   profileImage.src = '../image0.jpg';
+
+  // Rasterise a short label to a pixel grid using a real font, cached by text. This gives
+  // proper letterforms (not the blocky 3x5 font) for the genre signs.
+  const labelCache = {};
+  function labelGrid(text) {
+    if (labelCache[text]) return labelCache[text];
+    try {
+      const gw = 160, gh = 28, c = document.createElement('canvas'); c.width = gw; c.height = gh;
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      ctx.clearRect(0, 0, gw, gh);
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      // pick a size that fits the width
+      let size = 22; ctx.font = `700 ${size}px Georgia, "Times New Roman", serif`;
+      while (ctx.measureText(text).width > gw - 8 && size > 8) { size -= 1; ctx.font = `700 ${size}px Georgia, "Times New Roman", serif`; }
+      ctx.fillText(text, gw / 2, gh / 2 + 1);
+      const data = ctx.getImageData(0, 0, gw, gh).data;
+      const grid = { w: gw, h: gh, on: [] };
+      for (let y = 0; y < gh; y++) for (let x = 0; x < gw; x++) { if (data[(y * gw + x) * 4 + 3] > 80) grid.on.push([x, y]); }
+      labelCache[text] = grid; return grid;
+    } catch (e) { labelCache[text] = null; return null; }
+  }
+  // Draw a rasterised label centred at (cx, topY..) on a wall facing -z (read from the aisle).
+  function labelOnZWall(text, cx, cy, zFace, worldW, color) {
+    const g = labelGrid(text);
+    if (!g) { pixelTextOnZWall(text, cx, cy + .4, zFace, .15, color, worldW); return; }
+    const cell = worldW / g.w, originX = cx + worldW / 2, originY = cy + (g.h * cell) / 2; // +x flipped for -z view
+    for (const [gx, gy] of g.on) { const px = originX - gx * cell, py = originY - gy * cell; box(px, py, zFace, cell * 1.05, cell * 1.05, .06, color); }
+  }
 
   function rgb(hex, shade = 1) { return [((hex >> 16) & 255) / 255 * shade, ((hex >> 8) & 255) / 255 * shade, (hex & 255) / 255 * shade]; }
   function tri(a, b, c, color, shade = 1) { const k = rgb(color, shade); for (const raw of [a, b, c]) { let p = raw; if (activeFrame) { const dx = raw[0] - activeFrame.ox, dy = raw[1] - activeFrame.oy, dz = raw[2] - activeFrame.oz; const m = activeFrame.matrix; p = [activeFrame.x + m[0] * dx + m[1] * dy + m[2] * dz, activeFrame.y + m[3] * dx + m[4] * dy + m[5] * dz, activeFrame.z + m[6] * dx + m[7] * dy + m[8] * dz]; } add(p[0], p[1], p[2], ...k); } }
@@ -195,21 +217,40 @@
   // ---------------------------------------------------------------------------
   // FURNITURE PIECES
   // ---------------------------------------------------------------------------
-  function readingTable(x, z, w, d) { box(x, .9, z, w, .16, d, 0x7a5338); box(x, 1.0, z, w * .92, .05, d * .92, 0x4a6a60); for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(x + sx * (w / 2 - .25), .45, z + sz * (d / 2 - .25), .2, .9, .2, 0x5c3f2b); box(x, 1.2, z, .3, .4, .3, 0x3a3f4a); box(x, 1.55, z, .5, .3, .5, 0xffd58b); }
-  // face: 1 => faces +x, -1 => faces -x, 2 => faces +z, -2 => faces -z (default).
-  // The backrest sits BEHIND the seat (opposite the facing direction).
-  function chair(x, z, face = -2) {
-    box(x, .32, z, .78, .12, .78, 0x7a5338); // seat
-    let bx = x, bz = z, sx = .78, sz = .14;
-    if (face === 1) { bx = x - .33; sx = .14; sz = .78; }        // faces +x => back on -x
-    else if (face === -1) { bx = x + .33; sx = .14; sz = .78; }   // faces -x => back on +x
-    else if (face === 2) { bz = z - .33; }                        // faces +z => back on -z
-    else { bz = z + .33; }                                        // faces -z => back on +z
-    box(bx, .74, bz, sx, .74, sz, 0x6a4a32); // backrest
-    for (const ox of [-1, 1]) for (const oz of [-1, 1]) box(x + ox * .3, .16, z + oz * .3, .1, .34, .1, 0x5c3f2b);
+  // Clean modern table: pale oak top on two trestle legs, with a couple of books/mug on top.
+  function readingTable(x, z, w, d) {
+    box(x, .86, z, w, .12, d, 0xcaa877);                               // top
+    box(x, .84, z, w - .12, .04, d - .12, 0xb8955f);                   // top edge
+    for (const sx of [-1, 1]) { box(x + sx * (w / 2 - .35), .42, z, .18, .84, d - .5, 0x6f4e36); } // trestle legs
+    box(x, .2, z, w - .9, .1, .25, 0x6f4e36);                          // stretcher bar
+    box(x - w * .22, .98, z, .55, .1, .7, 0x8a5a4a);                   // a couple of books
+    box(x - w * .22, 1.06, z + .05, .5, .06, .62, 0x5a7a8a);
+    box(x + w * .24, 1.0, z, .2, .22, .2, 0xe8e2d4);                   // mug
   }
-  // A swivel desk chair. faceZ=+1 => seat faces +z (backrest on the -z side).
-  function deskChair(x, z, faceZ = 1) { box(x, .5, z, .9, .14, .9, 0x2f3340); box(x, .95, z - faceZ * .4, .86, .9, .14, 0x363b49); box(x, .22, z, .12, .5, .12, 0x1f232c); box(x, .08, z, 1.0, .1, 1.0, 0x1f232c); box(x, 1.15, z - faceZ * .38, .5, .22, .1, 0x363b49); }
+  // A slim upholstered chair. face: 1=>+x, -1=>-x, 2=>+z, -2=>-z (default). Back sits behind the seat.
+  function chair(x, z, face = -2) {
+    box(x, .48, z, .66, .1, .66, 0xc4b79a);   // seat pad
+    box(x, .43, z, .6, .08, .6, 0x8a7a5e);    // seat frame
+    let bx = x, bz = z, sx = .66, sz = .1;
+    if (face === 1) { bx = x - .28; sx = .1; sz = .66; }
+    else if (face === -1) { bx = x + .28; sx = .1; sz = .66; }
+    else if (face === 2) { bz = z - .28; }
+    else { bz = z + .28; }
+    box(bx, .88, bz, sx, .78, sz, 0x6f5a46);  // tall slim backrest
+    box(bx, 1.22, bz, sx * .96, .12, sz, 0x8a7156); // back top rail
+    for (const ox of [-1, 1]) for (const oz of [-1, 1]) box(x + ox * .26, .22, z + oz * .26, .08, .44, .08, 0x4c3b2c); // legs
+  }
+  // A proper office swivel chair. faceZ=+1 => seat faces +z (backrest on the -z side).
+  function deskChair(x, z, faceZ = 1) {
+    box(x, .08, z, 1.0, .1, 1.0, 0x23262e);           // 5-star base
+    for (const a of [0, 1, 2, 3, 4]) { const ang = a / 5 * Math.PI * 2; box(x + Math.cos(ang) * .42, .06, z + Math.sin(ang) * .42, .22, .08, .22, 0x15171c); } // castors
+    box(x, .3, z, .14, .5, .14, 0x1f232c);            // gas lift
+    box(x, .55, z, .92, .16, .86, 0x3a414e);          // seat
+    box(x, .62, z, .82, .1, .78, 0x4a525f);           // seat cushion
+    box(x, 1.1, z - faceZ * .42, .86, 1.0, .16, 0x3a414e);   // backrest
+    box(x, 1.12, z - faceZ * .36, .74, .86, .08, 0x4a525f);  // back cushion
+    for (const sx of [-1, 1]) box(x + sx * .52, .72, z, .1, .4, .5, 0x23262e); // armrests
+  }
   function globe(x, z) { box(x, .7, z, .18, 1.4, .18, 0x6a4a32); box(x, 1.5, z, .7, .7, .7, 0x4e7fa6); box(x, 1.5, z, .74, .12, .74, 0xd7b06a); }
   // A small display pedestal topped with a stylised bust (decor, no plants).
   function pedestal(x, z) { box(x, .7, z, .7, 1.4, .7, 0xd8cdb6); box(x, 1.45, z, .9, .18, .9, 0xe8dfca); box(x, 1.85, z, .5, .6, .4, 0xb9c2cc); box(x, 2.25, z, .38, .38, .34, 0xc9d0d8); }
@@ -353,10 +394,10 @@
     for (let z = 6; z <= 58; z += 8) { box(0, W.ceilY - .3, z, .25, .5, .25, 0x8a7a63); box(0, W.ceilY - .7, z, .7, .18, .7, 0xffe3a8); box(0, W.ceilY - .82, z, .42, .1, .42, 0xfff3cf); }
 
     // ---------------- BEDROOM contents ----------------
-    bed(9.0, 13); wardrobe(-10.3, 6); deskWithPC(-9.8, 14.5); deskChair(-9.8, 13.2, 1);
+    bed(9.0, 13); wardrobe(-10.3, 6); deskWithPC(-9.8, 14.5); deskChair(-9.8, 12.9, 1);
     // TV lounge: big screen on a media console (entry wall) with a sofa + coffee table facing it.
     tvWall(5.5, 2.9, t); sofa(5.5, 8.2); coffeeTable(5.5, 5.6);
-    nightstand(4.9, 13); bookStack(-4.5, 3.0); floorLamp(-11.0, 11.5);
+    nightstand(5.3, 10.6); bookStack(-4.5, 3.0); floorLamp(-11.0, 11.5);
     // Window with warm light on the bedroom right wall.
     box(11.72, 5.0, 9, .12, 3.2, 5.0, 0x9bd8e7); box(11.55, 5.0, 6.4, .2, 3.6, .2, 0xc89c69); box(11.55, 5.0, 11.6, .2, 3.6, .2, 0xc89c69); box(11.55, 6.85, 9, .2, .2, 5.2, 0xc89c69); box(11.55, 3.15, 9, .2, .2, 5.2, 0xc89c69);
     // Pixel self-portrait (ABOUT ME) on the bedroom LEFT wall at z=11.
@@ -391,8 +432,8 @@
       // backing board + accent frame on the -z (aisle) side of the divider, facing the player
       box(0, 7.1, dz - .32, 7.3, 1.66, .08, r.accent);
       box(0, 7.1, dz - .38, 7.0, 1.5, .1, 0x1c1e26);
-      // genre name in pixel letters, sitting in front of the board so it reads clearly
-      pixelTextOnZWall(r.name, 0, 7.55, dz - .46, .15, r.accent === 0xffab52 ? 0xfff0d0 : 0xeef3ff, 6.6);
+      // genre name rendered from a real serif font, sitting in front of the board
+      labelOnZWall(r.name, 0, 7.1, dz - .46, 6.4, r.accent === 0xffab52 ? 0xfff0d0 : 0xeef3ff);
     });
 
     // ---------------- PROJECT EXHIBITS ----------------
@@ -415,6 +456,64 @@
     // ...and over the ABOUT ME portrait + CV board.
     plumbob(PROFILE_POS.x + 1.0, PROFILE_POS.y + 2.0, PROFILE_POS.z, t, started && nearbySpecial === 'profile');
     plumbob(CV_POS.x + 1.0, CV_POS.y + 1.9, CV_POS.z, t, started && nearbySpecial === 'cv');
+  }
+
+  // ---------------------------------------------------------------------------
+  // MINIMAP (top-left): top-down plan of the world with the cat + project dots.
+  // ---------------------------------------------------------------------------
+  const miniCanvas = document.getElementById('minimapCanvas');
+  const miniCtx = miniCanvas ? miniCanvas.getContext('2d') : null;
+  function drawMinimap() {
+    if (!miniCtx) return;
+    const CW = miniCanvas.width, CH = miniCanvas.height, pad = 8;
+    // world x in [-12,12], z in [2,60] -> map into the canvas (x across, z down).
+    const wx0 = W.minX, wx1 = W.maxX, wz0 = W.minZ, wz1 = W.maxZ;
+    const sx = (CW - pad * 2) / (wx1 - wx0), sz = (CH - pad * 2) / (wz1 - wz0);
+    const MX = x => pad + (x - wx0) * sx, MZ = z => pad + (z - wz0) * sz;
+    miniCtx.clearRect(0, 0, CW, CH);
+    // room fills: bedroom + 4 genre rooms, tinted per zone
+    const zones = [[W.minZ, 18, '#6b5a44'], ...GENRE_ROOMS.map(r => [r.z0, r.z1, '#4a4a5e'])];
+    const zoneAccent = ['#caa877', '#4b9cff', '#8f6bff', '#36c98d', '#ffab52'];
+    zones.forEach(([z0, z1], i) => { miniCtx.fillStyle = i === 0 ? '#5a4c3a' : '#3a3f4e'; miniCtx.fillRect(MX(wx0), MZ(z0), (wx1 - wx0) * sx, (z1 - z0) * sz); });
+    // divider lines with doorway gaps
+    miniCtx.strokeStyle = '#1b1d26'; miniCtx.lineWidth = 2;
+    for (const dz of INTERNAL_WALLS) { miniCtx.beginPath(); miniCtx.moveTo(MX(wx0), MZ(dz)); miniCtx.lineTo(MX(-DOOR_HALF), MZ(dz)); miniCtx.moveTo(MX(DOOR_HALF), MZ(dz)); miniCtx.lineTo(MX(wx1), MZ(dz)); miniCtx.stroke(); }
+    miniCtx.strokeStyle = '#20242e'; miniCtx.strokeRect(MX(wx0), MZ(wz0), (wx1 - wx0) * sx, (wz1 - wz0) * sz);
+    // project dots (coloured by genre)
+    projects.forEach((p, i) => { const acc = (GENRE_ROOMS.find(r => r.name === p.genre.toUpperCase()) || {}).accent || 0xffffff; miniCtx.fillStyle = (i === nearby) ? '#fff' : '#' + acc.toString(16).padStart(6, '0'); miniCtx.beginPath(); miniCtx.arc(MX(p.x), MZ(p.z), i === nearby ? 4 : 2.5, 0, 7); miniCtx.fill(); });
+    // about-me + CV markers
+    miniCtx.fillStyle = '#ffd27d'; for (const m of [PROFILE_POS, CV_POS]) { miniCtx.fillRect(MX(m.x) - 2, MZ(m.z) - 2, 4, 4); }
+    // the cat (you), with a facing wedge
+    const px = MX(player.x), pz = MZ(player.z);
+    miniCtx.fillStyle = '#ff5d5d'; miniCtx.beginPath(); miniCtx.arc(px, pz, 4, 0, 7); miniCtx.fill();
+    miniCtx.strokeStyle = '#ff5d5d'; miniCtx.lineWidth = 2; miniCtx.beginPath(); miniCtx.moveTo(px, pz);
+    miniCtx.lineTo(px - Math.sin(player.face) * 9, pz + Math.cos(player.face) * 9); miniCtx.stroke();
+  }
+
+  // ---------------------------------------------------------------------------
+  // OBJECTIVES (top-right): simple to-do list that ticks off as you interact.
+  // ---------------------------------------------------------------------------
+  const OBJECTIVES = [
+    { id: 'profile', label: 'Check my About Me' },
+    { id: 'cv', label: 'Find my CV' },
+    { id: 'web', label: 'Visit the Web & App room' },
+    { id: 'ai', label: 'Visit the AI & Science room' },
+    { id: 'data', label: 'Visit the Data & Database room' },
+    { id: 'net', label: 'Visit the Network & Infra room' },
+    { id: 'all', label: 'Open all 9 projects' }
+  ];
+  const doneObjectives = new Set();
+  const objListEl = document.getElementById('objectiveList');
+  let objectivesDirty = true;
+  function markObjective(id) { if (!doneObjectives.has(id)) { doneObjectives.add(id); objectivesDirty = true; } }
+  function updateObjectives() {
+    // auto-complete "visit room" when the player is inside each genre room
+    const zoneIdx = player.z < 18 ? -1 : GENRE_ROOMS.findIndex(r => player.z >= r.z0 && player.z < r.z1);
+    if (zoneIdx >= 0) markObjective(['web', 'ai', 'data', 'net'][zoneIdx]);
+    if (collected.size >= projects.length) markObjective('all');
+    if (!objListEl || !objectivesDirty) return;
+    objectivesDirty = false;
+    objListEl.innerHTML = OBJECTIVES.map(o => `<li class="${doneObjectives.has(o.id) ? 'done' : ''}"><i></i>${o.label}</li>`).join('');
   }
 
   // ---------------------------------------------------------------------------
@@ -496,19 +595,8 @@
     if (hint) { const prompt = nearbySpecial === 'profile' ? 'CLICK OR PRESS E  /  ABOUT ME' : nearbySpecial === 'cv' ? 'CLICK OR PRESS E  /  CV' : nearby >= 0 ? 'CLICK OR PRESS E  /  VIEW PROJECT' : ''; hint.textContent = prompt; hint.classList.toggle('visible', Boolean(prompt)); }
     if (player.attackPending && t >= player.attackHitAt) { player.attackPending = false; if (nearby >= 0 || nearbySpecial) openSignal(); }
 
-    document.getElementById('zoneLabel').textContent = nearby >= 0 ? `${projects[nearby].genre.toUpperCase()} / ${projects[nearby].tag}` : nearbySpecial === 'profile' ? 'ABOUT / YUSUF RAYYAN DANIEL' : nearbySpecial === 'cv' ? 'ABOUT / CURRICULUM VITAE' : zoneLabel(player.z);
-    document.getElementById('coord').textContent = `${String(Math.round(player.x + 12)).padStart(2, '0')} : ${String(Math.round(player.z)).padStart(2, '0')}`;
-
-    // DEBUG HUD — shows live input + player state so we can diagnose movement.
-    const hud = document.getElementById('debugHud');
-    if (hud) {
-      hud.textContent =
-        `started=${started} paused=${paused} modal=${modalOpen}\n` +
-        `keyEvents=${dbgKeyCount} lastAction=${dbgLastAction}\n` +
-        `flags U:${keys.up ? 1 : 0} D:${keys.down ? 1 : 0} L:${keys.left ? 1 : 0} R:${keys.right ? 1 : 0}\n` +
-        `vel  x=${player.vx.toFixed(2)} z=${player.vz.toFixed(2)}\n` +
-        `pos  x=${player.x.toFixed(2)} z=${player.z.toFixed(2)} y=${player.y.toFixed(2)}`;
-    }
+    drawMinimap();
+    updateObjectives();
   }
 
   // ---------------------------------------------------------------------------
@@ -536,14 +624,14 @@
       extra.hidden = false;
       document.getElementById('modalLinkedIn').href = 'https://www.linkedin.com/in/yusuf-rayyan-daniel-936a35318';
       document.getElementById('modalGithub').href = 'https://github.com/Yusuf11806';
-      openModal(); return;
+      markObjective('profile'); openModal(); return;
     }
     if (nearbySpecial === 'cv') {
       document.getElementById('modalEyebrow').textContent = 'ABOUT / CURRICULUM VITAE';
       document.getElementById('modalTitle').textContent = 'My CV';
       document.getElementById('modalCopy').textContent = 'My curriculum vitae will be available here soon. Check back shortly — the download link is being prepared.';
       document.getElementById('modalTags').innerHTML = ['<span>COMING SOON</span>'];
-      gallery.hidden = true; openModal(); return;
+      gallery.hidden = true; markObjective('cv'); openModal(); return;
     }
     if (nearby < 0) { showToast('MOVE CLOSER TO AN ARTWORK'); return; }
     const p = projects[nearby];
@@ -629,7 +717,6 @@
   }
   function onKeyDown(e) {
     const a = actionFor(e);
-    dbgKeyCount++; dbgLastAction = (a || e.key || e.code || '?'); // DEBUG: prove key events arrive
     if (!started && a === 'enter' && document.getElementById('gameLoader').classList.contains('is-ready')) { startGame(); return; }
     if (!a) return;
     if (['up', 'down', 'left', 'right', 'jump'].includes(a)) e.preventDefault();

@@ -10,17 +10,24 @@
 <meta property="og:description" content="Play as a cat and explore a pixel-art bedroom and genre library where every framed artwork is one of my projects.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23090b12'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23ffb86b'%3E%F0%9F%90%88%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=world-29-debug">
-<link rel="stylesheet" href="loading.css?v=world-29-debug">
+<link rel="stylesheet" href="style.css?v=world-30">
+<link rel="stylesheet" href="loading.css?v=world-30">
 </head>
 <body>
 <main class="experience" id="experience">
   <div class="scene" id="scene" aria-label="Third-person 3D pixel-art portfolio library"><canvas id="world" tabindex="0" aria-label="3D game view. Use WASD to move, drag to look, and E to open projects."></canvas></div>
   <div class="grain"></div><div class="shade"></div>
-  <div class="scene-status"><span><i class="status-square"></i><b id="zoneLabel">BEDROOM / ABOUT ME</b></span><span>COORD <b id="coord">00 : 00</b></span></div>
-  <div id="debugHud" style="position:absolute;z-index:9;left:10px;bottom:70px;padding:8px 10px;background:#000a;border:1px solid #2d8cff88;color:#9fe;font:10px/1.5 monospace;white-space:pre;pointer-events:none;border-radius:6px;"></div>
+  <!-- Minimap (top-left): room plan + cat position + project dots -->
+  <div class="minimap" id="minimap" aria-label="Minimap">
+    <span class="minimap-title">MAP</span>
+    <canvas id="minimapCanvas" width="150" height="150"></canvas>
+  </div>
+  <!-- Objectives (top-right): things to go and do -->
+  <div class="objectives" id="objectives" aria-label="Objectives">
+    <span class="obj-title">TO DO</span>
+    <ul id="objectiveList"></ul>
+  </div>
   <div class="toast" id="toast"></div><div class="center-prompt" id="interactHint" aria-live="polite"></div>
-  <footer class="controls"><span><kbd>WASD</kbd> MOVE</span><span><kbd>SPACE</kbd> JUMP</span><span><kbd>E</kbd> VIEW ART</span><span><kbd>CLICK</kbd> INTERACT</span><small>DRAG TO LOOK · SCROLL TO ZOOM · ESC TO PAUSE</small></footer>
   <div class="fatal" id="fatal" hidden>The 3D scene could not start in this browser.</div>
   <div class="modal" id="modal" aria-hidden="true"><article class="modal-card"><button class="close" id="closeModal" aria-label="Close">×</button><p class="eyebrow" id="modalEyebrow">ARTWORK / 01</p><h2 id="modalTitle">Project title</h2><section class="project-gallery" id="projectGallery" aria-label="Project screenshots" hidden><button class="gallery-arrow" id="galleryPrevious" type="button" aria-label="Previous image">‹</button><img id="galleryImage" src="" alt=""><div class="photo-empty" id="friendPhotoEmpty" hidden>PHOTO ARCHIVE<br><small>Add your photos to this folder to display them here.</small></div><button class="gallery-arrow" id="galleryNext" type="button" aria-label="Next image">›</button><span class="gallery-count" id="galleryCount"></span></section><p class="modal-copy" id="modalCopy"></p><div class="modal-tags" id="modalTags"></div><a class="modal-link" id="modalLink" href="#" target="_blank" rel="noreferrer">OPEN PROJECT <span>↗</span></a><div class="profile-links" id="modalExtraLinks" hidden><a id="modalLinkedIn" href="#" target="_blank" rel="noreferrer">LINKEDIN ↗</a><a id="modalGithub" href="#" target="_blank" rel="noreferrer">GITHUB ↗</a></div><p class="modal-foot">PRESS ESC TO RETURN TO THE GALLERY</p></article></div>
   <section class="escape-menu" id="escapeMenu" aria-hidden="true" aria-labelledby="escapeTitle">
@@ -64,5 +71,5 @@
     </div>
   </section>
 </main>
-<script src="game.js?v=world-29-debug"></script>
+<script src="game.js?v=world-30"></script>
 </body></html>
