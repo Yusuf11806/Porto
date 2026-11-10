@@ -34,7 +34,7 @@ window.tailwind.config = {
             }
         ];
 
-        // Media tab — personal photos with a title each (no other info).
+        // Volunteering tab - personal photos with a title each (no other info).
         const MEDIA_PHOTOS = [
             { src: 'Bersama1.jpg', title: 'Biosphere in Bandung' },
             { src: 'Bersama2.jpg', title: 'Tree Planting in Bandung' },
