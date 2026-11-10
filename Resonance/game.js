@@ -24,18 +24,18 @@
   gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL); gl.disable(gl.CULL_FACE);
 
   // ---------------------------------------------------------------------------
-  // PORTFOLIO DATA — 9 projects, each grouped into a genre room of the library.
+  // PORTFOLIO DATA - 9 projects, each grouped into a genre room of the library.
   // ---------------------------------------------------------------------------
   const allProjects = [
-    { name: 'WeGoGym', tag: 'PROJECT / 001', year: '2024', genre: 'Web & App', description: 'My very first app. Nicho and I designed WeGoGym in Figma for a class brief — a place to log your meals, plan gym routines, and follow workout videos from trainers. The design was rough around the edges, honestly, but it taught us a lot. Shout-out to Bernhard, Geronimo, Oliver, and Nicholas Carlen for building it with us.', tags: ['Figma', 'UI/UX prototype', 'Fitness app', 'Team project'], images: Array.from({ length: 10 }, (_, i) => `../${i + 1}.png`), link: '#', showLink: false },
+    { name: 'WeGoGym', tag: 'PROJECT / 001', year: '2024', genre: 'Web & App', description: 'My very first app. Nicho and I designed WeGoGym in Figma for a class brief, a place to log your meals, plan gym routines, and follow workout videos from trainers. The design was rough around the edges, honestly, but it taught us a lot. Shout-out to Bernhard, Geronimo, Oliver, and Nicholas Carlen for building it with us.', tags: ['Figma', 'UI/UX prototype', 'Fitness app', 'Team project'], images: Array.from({ length: 10 }, (_, i) => `../${i + 1}.png`), link: '#', showLink: false },
     { name: 'ShippDecKk', tag: 'PROJECT / 002', year: '2024', genre: 'Web & App', description: 'A little ship-shopping website I built solo, just HTML, CSS and JavaScript. You can browse vessels across a range of prices, from budget-friendly to the fancy ones. It was my playground for getting comfortable building a site from scratch.', tags: ['HTML', 'CSS', 'JavaScript', 'Solo project'], images: ['../shipdeckk.png'], link: 'https://shipdeckk.vercel.app/' },
-    { name: 'SmartBaby', tag: 'PROJECT / 003', year: '2024', genre: 'Web & App', description: 'A prototype app for new parents: reach doctors who specialise in baby care, shop for baby products, and get them delivered home. This was where I first bumped into the business side of computer science. Huge thanks to Bryan, Silva, Patrick, and Ayundini — you were amazing.', tags: ['App prototype', 'Baby care', 'E-commerce', 'Team project'], images: Array.from({ length: 5 }, (_, i) => `../${i + 20}.png`), link: '#', showLink: false },
+    { name: 'SmartBaby', tag: 'PROJECT / 003', year: '2024', genre: 'Web & App', description: 'A prototype app for new parents: reach doctors who specialise in baby care, shop for baby products, and get them delivered home. This was where I first bumped into the business side of computer science. Huge thanks to Bryan, Silva, Patrick, and Ayundini. You were amazing.', tags: ['App prototype', 'Baby care', 'E-commerce', 'Team project'], images: Array.from({ length: 5 }, (_, i) => `../${i + 20}.png`), link: '#', showLink: false },
     { name: 'Face Mask Detector', tag: 'PROJECT / 004', year: '2025', genre: 'AI & Science', description: 'My first real taste of AI. For the course project I trained a model that spots whether someone is wearing a mask. I gathered the dataset myself and trained a YOLOv8 model in PyTorch (the weights live in best.pt). Seeing it actually detect masks in real time was a great feeling.', tags: ['Artificial intelligence', 'Computer vision', 'YOLOv8', 'PyTorch'], images: ['../67.png'], link: 'https://facemask-keav-j342p68sv-yusuf-rayyan-daniel-portofolio.vercel.app/' },
     { name: 'matK Gene Alignment', tag: 'PROJECT / 006', year: '2025', genre: 'AI & Science', description: 'We lined up the matK gene from the Venus flytrap and the sundew to see how similar they really are, using global and local sequence alignment in Biopython (including Needleman-Wunsch for the global pass). A fun crossover of biology and code. Thanks to Filbert, Felix, and Atiqah.', tags: ['Bioinformatics', 'Biopython', 'DNA sequence analysis', 'Needleman-Wunsch'], images: ['../69.png'], link: 'https://github.com/Yusuf11806/Global-Alignment-Study' },
-    { name: 'Database HR Analysis', tag: 'PROJECT / 005', year: '2025', genre: 'Data & Database', description: 'We dug into an HR database to figure out why some employees stay and others leave. After cleaning up the data, we explored it with Python (pandas, NumPy, Matplotlib, Seaborn) and leaned on a bit of stats — Pearson correlation and chi-squared tests — to back up what we found. Thanks to Richard, Felix, and Filbert.', tags: ['Python', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy', 'Machine learning'], link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database/blob/main/Code%20-%20Data%20Analytics.ipynb' },
+    { name: 'Database HR Analysis', tag: 'PROJECT / 005', year: '2025', genre: 'Data & Database', description: 'We dug into an HR database to figure out why some employees stay and others leave. After cleaning up the data, we explored it with Python (pandas, NumPy, Matplotlib, Seaborn) and leaned on a bit of stats, like Pearson correlation and chi-squared tests, to back up what we found. Thanks to Richard, Felix, and Filbert.', tags: ['Python', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy', 'Machine learning'], link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database/blob/main/Code%20-%20Data%20Analytics.ipynb' },
     { name: 'E-Commerce Analytics Pipeline', tag: 'PROJECT / 008', year: '2025', genre: 'Data & Database', description: 'An end-to-end data pipeline for e-commerce sales and profit. We took a Kaggle dataset, cleaned and shaped it in Pentaho, then turned it into dashboards in Power BI. It was my first time wiring a full pipeline together. Thanks to Christian, Filbert, Jovita, Felix, and Richard.', tags: ['Pentaho', 'Power BI', 'Data engineering', 'Data cleaning', 'Team project'], images: ['../pipeline.png'], link: 'https://github.com/Yusuf11806/E-Commerce-Sales-and-Profit-Analytics-Using-Data-Engineering-Pipeline' },
-    { name: 'Video Game Sales Analytics', tag: 'PROJECT / 009', year: '2025', genre: 'Data & Database', description: 'A Power BI deep-dive into video game sales — by genre, release period, region, and worldwide. I built the dashboards so you can quickly see which games sold where, and how the trends shift between regions.', tags: ['Power BI', 'Data visualization', 'Video game sales', 'Regional analysis'], images: ['../DataVis.png'], link: 'https://github.com/Yusuf11806/Video-Game-Sales' },
-    { name: 'BINUS Network (Floors 4-6)', tag: 'PROJECT / 007', year: '2025', genre: 'Network & Infra', description: 'We planned the network for floors 4 to 6 at BINUS in Cisco Packet Tracer — mapping out IP addresses, subnet masks, gateways, the Wi-Fi, and which cables go where. Basically designing how a whole building talks to itself.', tags: ['Cisco Packet Tracer', 'Network design', 'IP addressing', 'Team project'], images: ['../11.jpg', '../12.jpg', '../13.jpg'], link: 'https://github.com/Yusuf11806/binus-network-4-6-floor' }
+    { name: 'Video Game Sales Analytics', tag: 'PROJECT / 009', year: '2025', genre: 'Data & Database', description: 'A Power BI deep-dive into video game sales, by genre, release period, region, and worldwide. I built the dashboards so you can quickly see which games sold where, and how the trends shift between regions.', tags: ['Power BI', 'Data visualization', 'Video game sales', 'Regional analysis'], images: ['../DataVis.png'], link: 'https://github.com/Yusuf11806/Video-Game-Sales' },
+    { name: 'BINUS Network (Floors 4-6)', tag: 'PROJECT / 007', year: '2025', genre: 'Network & Infra', description: 'We planned the network for floors 4 to 6 at BINUS in Cisco Packet Tracer, mapping out IP addresses, subnet masks, gateways, the Wi-Fi, and which cables go where. Basically designing how a whole building talks to itself.', tags: ['Cisco Packet Tracer', 'Network design', 'IP addressing', 'Team project'], images: ['../11.jpg', '../12.jpg', '../13.jpg'], link: 'https://github.com/Yusuf11806/binus-network-4-6-floor' }
   ];
 
   // World runs along +z: a BEDROOM (z 2..18) then a LIBRARY split into 4 genre rooms.
@@ -90,7 +90,7 @@
     { x: 10.9, z: 49, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
     { x: -10.8, z: 20, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
     // ---- LIBRARY central furniture (low pieces only; NO free-standing bookcases
-    //      in the middle of a room — all books live on the walls). Aisle |x|<2.5 clear. ----
+    //      in the middle of a room - all books live on the walls). Aisle |x|<2.5 clear. ----
     // NOTE: tables & chairs removed from the project rooms (kept only in the bedroom).
     // WEB & APP room: two symmetric wall benches as low seating accents.
     { x: -9.3, z: 24.5, hx: 1.2, hz: .5, top: .8, kind: 'bench' }, { x: 9.3, z: 24.5, hx: 1.2, hz: .5, top: .8, kind: 'bench' },
@@ -306,7 +306,7 @@
   function bookStack(x, z) { const cols = [0x9a6849, 0x55728b, 0xa14f43, 0x63527e]; for (let i = 0; i < 4; i++) box(x, .25 + i * .22, z, 1.1 - i * .08, .2, .8, cols[i]); box(x + .2, 1.2, z, .7, .08, .7, 0xd0a06b); }
 
   // ---------------------------------------------------------------------------
-  // PIXEL TEXT (tiny 3x5 block font) — used for genre room name signs.
+  // PIXEL TEXT (tiny 3x5 block font) - used for genre room name signs.
   // Each glyph is 5 rows x 3 cols, top row first. '1' = filled cell.
   // ---------------------------------------------------------------------------
   const FONT = {
@@ -333,7 +333,7 @@
     const totalW = text.length * stride - gap * cell;
     // The sign is read from the -z side (player walks toward +z). Looking down +z, the
     // world +x axis runs to the viewer's LEFT, so lay characters out along -x and flip
-    // each glyph's columns — otherwise the text reads mirrored.
+    // each glyph's columns - otherwise the text reads mirrored.
     let x0 = cx + totalW / 2;
     for (let i = 0; i < text.length; i++) {
       const g = FONT[text[i]] || FONT[' '];
@@ -376,7 +376,7 @@
     box(0, -.3, 10, lenX + 1, .6, 17, bedroomFloor);
     box(0, -.3, 39.5, lenX + 1, .6, 43.5, libraryFloor);
     box(0, W.ceilY, midZ, lenX + 1, .5, lenZ + 1, ceil);
-    // Outer walls — bedroom portion a touch warmer than the library portion.
+    // Outer walls - bedroom portion a touch warmer than the library portion.
     for (const x of [W.minX, W.maxX]) { box(x, W.ceilY / 2, 10, WALL_T, W.ceilY, 17, wallBedroom); box(x, W.ceilY / 2, 39.5, WALL_T, W.ceilY, 43.5, wallLibrary); }
     box(0, W.ceilY / 2, W.minZ, lenX + 1, W.ceilY, WALL_T, wallBedroom);
     box(0, W.ceilY / 2, W.maxZ, lenX + 1, W.ceilY, WALL_T, wallLibrary);
@@ -400,7 +400,7 @@
       box(0, 5.9, dz, DOOR_HALF * 2 + .4, .3, WALL_T + .1, trim);
     }
 
-    // Ceiling lamps — hanging pendant fixtures in a grid so every room is lit.
+    // Ceiling lamps - hanging pendant fixtures in a grid so every room is lit.
     const ceilingLamp = (lx, lz) => {
       box(lx, W.ceilY - .15, lz, .1, .3, .1, 0x3a352e);      // cord
       box(lx, W.ceilY - .5, lz, .95, .22, .95, 0x2a2822);    // shade (dark rim)
@@ -632,7 +632,7 @@
     if (nearbySpecial === 'profile') {
       document.getElementById('modalEyebrow').textContent = 'ABOUT / YUSUF RAYYAN DANIEL';
       document.getElementById('modalTitle').textContent = 'Yusuf Rayyan Daniel';
-      document.getElementById('modalCopy').textContent = 'Computer Science student at BINUS University @ Alam Sutera (born 11 August 2006). This is my bedroom — my personal space. Head through the doorway into the library to explore my projects, grouped by genre.';
+      document.getElementById('modalCopy').textContent = 'Computer Science student at BINUS University @ Alam Sutera (born 11 August 2006). This is my bedroom, my personal space. Head through the doorway into the library to explore my projects, grouped by genre.';
       document.getElementById('modalTags').innerHTML = ['BINUS UNIVERSITY', 'COMPUTER SCIENCE', 'BORN 11 AUGUST 2006'].map(x => `<span>${x}</span>`).join('');
       gallery.hidden = !profilePixelUrl; gallery.classList.add('pixel-profile', 'single-image');
       document.getElementById('galleryPrevious').hidden = true; document.getElementById('galleryNext').hidden = true;
@@ -696,7 +696,7 @@
     loader.classList.add('is-ready');
     document.getElementById('menuKicker').textContent = 'YUSUF RAYYAN DANIEL / PORTFOLIO';
     document.getElementById('menuTitle').innerHTML = 'My room,<br><em>my library.</em>';
-    document.getElementById('menuCopy').textContent = 'Spawn in my bedroom for the about-me and CV, then walk the cat into the library — four genre rooms of projects. Follow the glowing gems and press E.';
+    document.getElementById('menuCopy').textContent = 'Spawn in my bedroom for the about-me and CV, then walk the cat into the library: four genre rooms of projects. Follow the glowing gems and press E.';
     document.getElementById('loaderProgress').hidden = true;
     document.getElementById('gameMenuActions').hidden = false;
   }, 1850);
@@ -712,8 +712,8 @@
   canvas.addEventListener('contextmenu', e => e.preventDefault());
   canvas.addEventListener('pointerup', stopOrbit); canvas.addEventListener('pointercancel', stopOrbit);
   canvas.addEventListener('wheel', e => { if (!started) return; e.preventDefault(); cameraRig.distance = clamp(cameraRig.distance + Math.sign(e.deltaY) * .65, 5, 13); }, { passive: false });
-  // Map a key event to a canonical action using the PHYSICAL key (e.code) first — this is
-  // layout/IME independent, so WASD works even on non-US keyboards — with an e.key fallback.
+  // Map a key event to a canonical action using the PHYSICAL key (e.code) first - this is
+  // layout/IME independent, so WASD works even on non-US keyboards - with an e.key fallback.
   function actionFor(e) {
     switch (e.code) {
       case 'KeyW': case 'ArrowUp': return 'up';
