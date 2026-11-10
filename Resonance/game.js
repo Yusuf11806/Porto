@@ -91,17 +91,15 @@
     { x: -10.8, z: 20, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
     // ---- LIBRARY central furniture (low pieces only; NO free-standing bookcases
     //      in the middle of a room — all books live on the walls). Aisle |x|<2.5 clear. ----
-    // WEB & APP room: central reading table + chairs, plus two symmetric wall benches.
-    { x: 0, z: 23, hx: 1.8, hz: 1.0, top: 1.0, kind: 'table' }, { x: -2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 1 }, { x: 2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: -1 },
+    // NOTE: tables & chairs removed from the project rooms (kept only in the bedroom).
+    // WEB & APP room: two symmetric wall benches as low seating accents.
     { x: -9.3, z: 24.5, hx: 1.2, hz: .5, top: .8, kind: 'bench' }, { x: 9.3, z: 24.5, hx: 1.2, hz: .5, top: .8, kind: 'bench' },
-    // AI & SCIENCE room: a round display plinth (model under glass) + a low exhibit table.
-    { x: 0, z: 33, hx: 1.1, hz: 1.1, top: 1.3, kind: 'plinth' }, { x: 0, z: 35.6, hx: 1.6, hz: .7, top: .9, kind: 'exhibitTable' },
-    // DATA & DATABASE room: central study table + two facing chairs + a side console.
-    { x: 0, z: 44, hx: 1.9, hz: 1.1, top: 1.0, kind: 'table' }, { x: -3.0, z: 44, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 1 }, { x: 3.0, z: 44, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: -1 },
+    // AI & SCIENCE room: a round display plinth (model under glass).
+    { x: 0, z: 33, hx: 1.1, hz: 1.1, top: 1.3, kind: 'plinth' },
+    // DATA & DATABASE room: a side console against the wall.
     { x: 9.3, z: 40.5, hx: 1.3, hz: .5, top: .9, kind: 'console' },
-    // NETWORK & INFRA room: study table + globe + a server-rack console against the wall.
-    { x: 0, z: 54, hx: 1.8, hz: 1.0, top: 1.05, kind: 'table' }, { x: 0, z: 51.8, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 2 },
-    { x: 6.5, z: 57, hx: .6, hz: .6, top: 1.4, kind: 'globe' }, { x: -10.6, z: 56, hx: 1.3, hz: 1.0, top: 2.0, kind: 'serverRack' }
+    // NETWORK & INFRA room: globe + a server rack pushed further back against the far wall.
+    { x: 6.5, z: 57, hx: .6, hz: .6, top: 1.4, kind: 'globe' }, { x: -10.6, z: 58.4, hx: 1.3, hz: .9, top: 2.0, kind: 'serverRack' }
   ];
 
   const PLAYER_R = .42;
@@ -204,12 +202,24 @@
     const anchor = player.y + .5 + bob, cf = Math.cos(player.face), sf = Math.sin(player.face);
     activeFrame = { ox: 0, oy: anchor, oz: 0, x: player.x, y: anchor, z: player.z, matrix: [cf, 0, sf, 0, 1, 0, -sf, 0, cf] };
     const part = (x, y, z, sx, sy, sz, c) => box(x, anchor + y, z, sx, sy, sz, c);
+    // Attack animation: a quick raise-and-swipe of the right front paw (0..1..0 over the window).
+    const now = performance.now();
+    const atkT = player.attackUntil > now ? 1 - (player.attackUntil - now) / 560 : -1; // 0->1 during the swing
+    const swing = atkT >= 0 ? Math.sin(Math.min(atkT, 1) * Math.PI) : 0; // smooth up then down
     part(0, 0, 0, .72, .5, .92, 0xc77b3d);
     part(0, -.11, -.03, .5, .28, .66, 0xf4d2a0);
-    part(0, .32, -.4, .6, .55, .58, 0xd18a46);
+    // head dips slightly into the swipe
+    part(0, .32 - swing * .08, -.4 - swing * .05, .6, .55, .58, 0xd18a46);
     for (const side of [-1, 1]) { part(side * .21, .62, -.45, .17, .27, .19, 0xd18a46); part(side * .21, .63, -.55, .07, .13, .025, 0xf0a5a0); part(side * .14, .36, -.68, .06, .09, .025, 0x27332b); }
     part(0, .3, -.7, .09, .06, .03, 0xf0a5a0);
-    for (const [x, z, phase] of [[-.23, -.3, 1], [.23, -.3, -1], [-.23, .3, -1], [.23, .3, 1]]) { part(x, -.31, z + step * phase, .17, .33, .2, 0xc77b3d); part(x, -.49, z + step * phase, .19, .11, .22, 0xf4d2a0); }
+    // Front-right paw (first entry) lifts up & forward during an attack swipe.
+    const paws = [[-.23, -.3, 1], [.23, -.3, -1], [-.23, .3, -1], [.23, .3, 1]];
+    paws.forEach(([x, z, phase], i) => {
+      const atk = i === 0 ? swing : 0;
+      const py = -.31 + atk * .55, pz = z + step * phase - atk * .35;
+      part(x, py, pz, .17, .33 - atk * .08, .2, 0xc77b3d);
+      part(x, py - .18, pz, .19, .11, .22, 0xf4d2a0);
+    });
     part(tail, .12, .52, .19, .24, .21, 0xc77b3d); part(tail * 1.7, .33, .68, .19, .24, .19, 0xc77b3d); part(tail * 2, .52, .68, .17, .19, .17, 0xf4d2a0);
     activeFrame = null;
   }
@@ -390,8 +400,14 @@
       box(0, 5.9, dz, DOOR_HALF * 2 + .4, .3, WALL_T + .1, trim);
     }
 
-    // Ceiling lamps down the aisle.
-    for (let z = 6; z <= 58; z += 8) { box(0, W.ceilY - .3, z, .25, .5, .25, 0x8a7a63); box(0, W.ceilY - .7, z, .7, .18, .7, 0xffe3a8); box(0, W.ceilY - .82, z, .42, .1, .42, 0xfff3cf); }
+    // Ceiling lamps — hanging pendant fixtures in a grid so every room is lit.
+    const ceilingLamp = (lx, lz) => {
+      box(lx, W.ceilY - .15, lz, .1, .3, .1, 0x3a352e);      // cord
+      box(lx, W.ceilY - .5, lz, .95, .22, .95, 0x2a2822);    // shade (dark rim)
+      box(lx, W.ceilY - .58, lz, .78, .12, .78, 0xffe7a6);   // warm bulb glow
+      box(lx, W.ceilY - .66, lz, .5, .08, .5, 0xfff4d2);     // bright core
+    };
+    for (let z = 6; z <= 58; z += 6.5) { for (const lx of [-7, 0, 7]) ceilingLamp(lx, z); }
 
     // ---------------- BEDROOM contents ----------------
     bed(9.0, 13); wardrobe(-10.3, 6); deskWithPC(-9.8, 14.5); deskChair(-9.8, 12.9, 1);
@@ -723,7 +739,7 @@
     keys[a] = true;
     if (e.repeat) return;
     if (a === 'jump') jump();
-    if (a === 'use') modalOpen ? closeModal() : openSignal();
+    if (a === 'use') { if (modalOpen) { closeModal(); } else if (started) { attackSignal(); } }
     if (a === 'pause') { if (modalOpen) closeModal(); else if (started) setPauseMenu(!paused); }
   }
   function onKeyUp(e) { const a = actionFor(e); if (a) keys[a] = false; }
