@@ -108,7 +108,7 @@
 .pshome-button:hover { color: white; border-color: #2d8cff; background: #2d8cff1c; transform: translateY(-2px); }
 .escape-card { transform: translateY(16px) scale(.985); opacity: 0; transition: transform .28s cubic-bezier(.2,.75,.2,1), opacity .24s ease; }
 .escape-menu.open .escape-card { transform: translateY(0) scale(1); opacity: 1; }
-.escape-actions button:last-child { border-color: #2d8cff55; }
+.escape-actions button:last-child { border-color: #c6701f66; }
 @media(max-width:760px) { .game-menu-actions { justify-content: center; } .pshome-button { min-height: 38px; } }
 
 .game-loader { grid-template-rows: 1fr; }
