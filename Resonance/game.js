@@ -97,11 +97,17 @@
     { x: -10.8, z: 20, hx: .45, hz: .45, top: 2.3, kind: 'pedestalBlock' },
     // ---- LIBRARY central furniture (low pieces only; NO free-standing bookcases
     //      in the middle of a room — all books live on the walls). Aisle |x|<2.5 clear. ----
+    // WEB & APP room: central reading table + chairs, plus two symmetric wall benches.
     { x: 0, z: 23, hx: 1.8, hz: 1.0, top: 1.0, kind: 'table' }, { x: -2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 1 }, { x: 2.9, z: 23, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: -1 },
-    // Data room: a central study table with two facing chairs (no mid-room shelves).
+    { x: -9.3, z: 24.5, hx: 1.2, hz: .5, top: .8, kind: 'bench' }, { x: 9.3, z: 24.5, hx: 1.2, hz: .5, top: .8, kind: 'bench' },
+    // AI & SCIENCE room: a round display plinth (model under glass) + a low exhibit table.
+    { x: 0, z: 33, hx: 1.1, hz: 1.1, top: 1.3, kind: 'plinth' }, { x: 0, z: 35.6, hx: 1.6, hz: .7, top: .9, kind: 'exhibitTable' },
+    // DATA & DATABASE room: central study table + two facing chairs + a side console.
     { x: 0, z: 44, hx: 1.9, hz: 1.1, top: 1.0, kind: 'table' }, { x: -3.0, z: 44, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 1 }, { x: 3.0, z: 44, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: -1 },
+    { x: 9.3, z: 40.5, hx: 1.3, hz: .5, top: .9, kind: 'console' },
+    // NETWORK & INFRA room: study table + globe + a server-rack console against the wall.
     { x: 0, z: 54, hx: 1.8, hz: 1.0, top: 1.05, kind: 'table' }, { x: 0, z: 51.8, hx: .45, hz: .45, top: 1.1, kind: 'chair', face: 2 },
-    { x: 6.5, z: 57, hx: .6, hz: .6, top: 1.4, kind: 'globe' }
+    { x: 6.5, z: 57, hx: .6, hz: .6, top: 1.4, kind: 'globe' }, { x: -9.5, z: 56, hx: 1.4, hz: 1.0, top: 2.0, kind: 'serverRack' }
   ];
 
   const PLAYER_R = .42;
@@ -206,6 +212,14 @@
   function globe(x, z) { box(x, .7, z, .18, 1.4, .18, 0x6a4a32); box(x, 1.5, z, .7, .7, .7, 0x4e7fa6); box(x, 1.5, z, .74, .12, .74, 0xd7b06a); }
   // A small display pedestal topped with a stylised bust (decor, no plants).
   function pedestal(x, z) { box(x, .7, z, .7, 1.4, .7, 0xd8cdb6); box(x, 1.45, z, .9, .18, .9, 0xe8dfca); box(x, 1.85, z, .5, .6, .4, 0xb9c2cc); box(x, 2.25, z, .38, .38, .34, 0xc9d0d8); }
+  // A cushioned wall bench (seat + low back).
+  function bench(x, z, color = 0x8a5750) { box(x, .3, z, 2.4, .4, 1.0, 0x6b4a34); box(x, .6, z, 2.3, .22, .9, color); box(x, 1.0, z + .4, 2.4, .8, .2, 0x6b4a34); }
+  // A round display plinth with a glowing "model" under a glass dome (AI room centrepiece).
+  function plinth(x, z, t) { box(x, .4, z, 2.0, .8, 2.0, 0x3b4150); box(x, .82, z, 1.7, .08, 1.7, 0x4a5262); const s = .9 + .2 * Math.sin(t * .003); box(x, 1.2, z, .7, .7, .7, 0x6b9bff, s); box(x, 1.55, z, .35, .35, .35, 0xbfe0ff, s + .2); box(x, 1.35, z, 1.4, 1.1, 1.4, 0x2b3340, .4); }
+  function exhibitTable(x, z) { box(x, .7, z, 3.2, .18, 1.4, 0x6b4a34); for (const sx of [-1, 1]) box(x + sx * 1.3, .35, z, .2, .7, 1.2, 0x5c3f2b); box(x, .85, z, 2.2, .1, .8, 0x2b3550); }
+  function console3(x, z) { box(x, .45, z, 2.6, .9, 1.0, 0x4a4036); box(x, .95, z, 2.7, .12, 1.1, 0x6b5a48); for (const dx of [-.8, .8]) box(x + dx, .45, z + .4, .9, .6, .06, 0x2f281f); }
+  // A tall server rack with blinking status lights (Network room).
+  function serverRack(x, z, t) { box(x, 1.0, z, 2.8, 4.0, 2.0, 0x23262e); box(x, 1.0, z - 1.02, 2.6, 3.7, .06, 0x15171c); for (let r = 0; r < 8; r++) { box(x, .4 + r * .45, z - 1.05, 2.2, .3, .04, 0x2d323c); for (let c = 0; c < 6; c++) { const on = (Math.sin(t * .006 + r * 1.7 + c) > .2); box(x - .9 + c * .36, .4 + r * .45, z - 1.08, .08, .08, .03, on ? (c % 2 ? 0x57e08a : 0x6bb6ff) : 0x20242c); } } }
   function floorLamp(x, z) { box(x, .1, z, .5, .2, .5, 0x3a3f4a); box(x, 1.4, z, .1, 2.6, .1, 0x5c5248); box(x, 2.75, z, .7, .5, .7, 0xffe0a0); }
 
   // Big flat-screen TV on a low media console (mounted + standing). Screen faces +z.
@@ -356,7 +370,12 @@
         case 'table': readingTable(o.x, o.z, o.hx * 2, o.hz * 2); break;
         case 'chair': chair(o.x, o.z, o.face); break;
         case 'globe': globe(o.x, o.z); break;
-        // tvConsole/sofa/coffee/nightstand/bookStack/pedestal are drawn explicitly below/above.
+        case 'bench': bench(o.x, o.z); break;
+        case 'plinth': plinth(o.x, o.z, t); break;
+        case 'exhibitTable': exhibitTable(o.x, o.z); break;
+        case 'console': console3(o.x, o.z); break;
+        case 'serverRack': serverRack(o.x, o.z, t); break;
+        // tvConsole/sofa/coffee/nightstand/bookStack/pedestal are drawn explicitly elsewhere.
       }
     });
     // Interior accents (no bookcases, no plants): floor lamps + display pedestals with busts.
@@ -546,7 +565,7 @@
   // ---------------------------------------------------------------------------
   // LOADER / MENU
   // ---------------------------------------------------------------------------
-  function startGame() { if (started) return; started = true; document.getElementById('experience').classList.add('is-playing'); }
+  function startGame() { if (started) return; started = true; document.getElementById('experience').classList.add('is-playing'); if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); try { canvas.focus({ preventScroll: true }); } catch (e) { try { canvas.focus(); } catch (e2) {} } }
   setTimeout(() => { const status = document.getElementById('loaderStatus'); if (status) status.textContent = 'ARRANGING THE ROOMS'; }, 650);
   setTimeout(() => {
     const loader = document.getElementById('gameLoader'), status = document.getElementById('loaderStatus');
@@ -564,7 +583,7 @@
   // ---------------------------------------------------------------------------
   // INPUT
   // ---------------------------------------------------------------------------
-  canvas.addEventListener('pointerdown', e => { if (!started || e.pointerType !== 'mouse' || e.button !== 0) return; cameraRig.dragging = true; cameraRig.lastX = e.clientX; cameraRig.lastY = e.clientY; cameraRig.downX = e.clientX; cameraRig.downY = e.clientY; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener('pointerdown', e => { try { canvas.focus({ preventScroll: true }); } catch (err) {} if (!started || e.pointerType !== 'mouse' || e.button !== 0) return; cameraRig.dragging = true; cameraRig.lastX = e.clientX; cameraRig.lastY = e.clientY; cameraRig.downX = e.clientX; cameraRig.downY = e.clientY; canvas.setPointerCapture(e.pointerId); });
   canvas.addEventListener('pointermove', e => { if (!cameraRig.dragging) return; const dx = e.clientX - cameraRig.lastX, dy = e.clientY - cameraRig.lastY; cameraRig.lastX = e.clientX; cameraRig.lastY = e.clientY; cameraRig.yaw -= dx * .007 * cameraRig.sensitivity; cameraRig.pitch = clamp(cameraRig.pitch + dy * .03 * cameraRig.sensitivity, 1.0, 9.0); });
   const stopOrbit = e => { if (!cameraRig.dragging) return; const click = Math.hypot(e.clientX - cameraRig.downX, e.clientY - cameraRig.downY) < 5; cameraRig.dragging = false; if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId); if (e.type === 'pointerup' && click) attackSignal(); };
   canvas.addEventListener('contextmenu', e => e.preventDefault());
@@ -572,14 +591,15 @@
   canvas.addEventListener('wheel', e => { if (!started) return; e.preventDefault(); cameraRig.distance = clamp(cameraRig.distance + Math.sign(e.deltaY) * .65, 5, 13); }, { passive: false });
   addEventListener('keydown', e => {
     if (!started && e.key === 'Enter' && document.getElementById('gameLoader').classList.contains('is-ready')) { startGame(); return; }
-    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' '].includes(e.key)) e.preventDefault();
-    keys[e.key] = true;
+    const k = e.key.length === 1 ? e.key.toLowerCase() : e.key; // normalise so Shift/CapsLock can't desync keys
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' '].includes(k) || 'wasd'.includes(k)) e.preventDefault();
+    keys[k] = true;
     if (e.repeat) return;
-    if (e.key === ' ') jump();
-    if (e.key.toLowerCase() === 'e') modalOpen ? closeModal() : openSignal();
-    if (e.key === 'Escape') { if (modalOpen) closeModal(); else if (started) setPauseMenu(!paused); }
+    if (k === ' ') jump();
+    if (k === 'e') modalOpen ? closeModal() : openSignal();
+    if (k === 'Escape') { if (modalOpen) closeModal(); else if (started) setPauseMenu(!paused); }
   });
-  addEventListener('keyup', e => keys[e.key] = false);
+  addEventListener('keyup', e => { const k = e.key.length === 1 ? e.key.toLowerCase() : e.key; keys[k] = false; });
   addEventListener('blur', () => Object.keys(keys).forEach(k => keys[k] = false));
   document.getElementById('closeModal').onclick = closeModal;
   document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
