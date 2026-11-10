@@ -34,15 +34,21 @@ window.tailwind.config = {
             }
         ];
 
-        // Media tab — personal photos only, no captions/info.
-        const MEDIA_PHOTOS = ['bersama1.jpg', 'bersama2.jpg', 'bersama3.jpg', 'bersama4.jpg', 'bersama5.jpg'];
-        const ACTIVITY_APPS = MEDIA_PHOTOS.map((src, i) => ({
+        // Media tab — personal photos with a title each (no other info).
+        const MEDIA_PHOTOS = [
+            { src: 'Bersama1.jpg', title: 'Biosphere in Bandung' },
+            { src: 'Bersama2.jpg', title: 'Tree Planting in Bandung' },
+            { src: 'Bersama3.jpg', title: 'Beverage Bottle Recycling & Waste Management' },
+            { src: 'Bersama4.png', title: 'The Ethics of Communication' },
+            { src: 'Bersama5.jpg', title: 'Educational Workshop on Youth Ambition & National Prosperity' }
+        ];
+        const ACTIVITY_APPS = MEDIA_PHOTOS.map((p, i) => ({
             id: 'photo_' + (i + 1),
-            name: '',
-            iconImg: src,
-            title: '',
+            name: p.title,
+            iconImg: p.src,
+            title: p.title,
             desc: '',
-            art: src,
+            art: p.src,
             isPhoto: true,
             link: '#'
         }));
@@ -195,9 +201,11 @@ window.tailwind.config = {
             renderProjectTechCards(app);
             document.getElementById('projectTechSection').classList.toggle('hidden', !(app.techCards && app.techCards.length));
 
-            // Media photos: just show the photo as the backdrop, no title/description/buttons.
+            // Media photos: show the photo as the backdrop with only its title (no description/buttons).
             if (app.isPhoto) {
-                heroContainer.classList.add('hidden');
+                heroContainer.classList.remove('hidden');
+                heroTitle.innerText = app.title;
+                heroDesc.innerText = '';
                 heroActionContainer.innerHTML = '';
                 const bgArtPhoto = document.getElementById('psBgArt');
                 bgArtPhoto.classList.add('changing');
