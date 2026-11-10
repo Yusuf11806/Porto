@@ -265,6 +265,15 @@ body {
         .console-tabs button:first-child { font-weight: 700; }
         .console-tools { gap: clamp(1rem, 2.3vw, 2.2rem); }
         .page-art-background { height: 100svh; background: #080a0f; }
+        /* Volunteering photos: show them bright and clear, filling the frame. */
+        #psBgArt.photo-mode {
+            width: 100% !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            opacity: 1 !important;
+            filter: saturate(1.05) brightness(1.08) !important;
+        }
+        .page-art-background.photo-dim .absolute { opacity: .25 !important; }
         #psBgArt {
             position: absolute;
             inset: 0 0 0 auto;
