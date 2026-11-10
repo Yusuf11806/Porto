@@ -89,9 +89,10 @@ main { position: relative; min-height: 100vh; }
     cursor: pointer;
     animation: pulse 2.2s ease-in-out infinite;
 }
+.ps-button { width: 5rem; height: 5rem; aspect-ratio: 1; }
 .ps-button:hover { transform: scale(1.08); }
-.ps-mark { font-weight: 900; font-size: 1.35rem; letter-spacing: -.12em; font-style: italic; }
-.screen-hint { align-self: start; margin-top: 1.35rem; color: rgba(255,255,255,.45); font-size: .75rem; }
+.ps-mark { font-weight: 800; font-size: 1.25rem; letter-spacing: .04em; font-style: normal; }
+.screen-hint { display: none; }
 @keyframes pulse {
     50% { box-shadow: 0 0 0 13px rgba(255,255,255,0), 0 0 40px rgba(255,255,255,.24); }
 }

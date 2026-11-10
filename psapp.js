@@ -22,16 +22,10 @@ window.tailwind.config = {
         const PROJECTS_APPS = [
             {
                 id: 'about',
-                name: 'About Me',
+                name: 'Yusuf Rayyan Daniel',
                 iconImg: 'image0.jpg',
                 title: 'Yusuf Rayyan Daniel',
-                desc: 'Spawn in my bedroom for the about-me and CV, then explore a 3D library of projects grouped by genre — all as a cat.',
-                projectInfo: 'Play as a cat. Start in my bedroom (about-me + CV), then head into the library: four genre rooms — Web & App, AI & Science, Data & Database, and Network & Infra. Follow the glowing green gems and press E under any framed artwork.',
-                techCards: [
-                    { name: 'JavaScript', use: 'Movement, camera, interactions, and animation.' },
-                    { name: 'WebGL', use: 'Renders the real-time 3D library in the browser.' },
-                    { name: 'HTML & CSS', use: 'Builds the interface and responsive presentation.' }
-                ],
+                desc: 'Explore the house of projects and information',
                 art: 'image0.jpg',
                 link: 'Resonance/index.html',
                 sameTab: true,
@@ -40,51 +34,18 @@ window.tailwind.config = {
             }
         ];
 
-        // Media / highlights dataset — real projects, shown on the "Media" tab.
-        const ACTIVITY_APPS = [
-            {
-                id: 'ecommerce',
-                name: 'E-Commerce Analytics Pipeline',
-                iconImg: 'pipeline.png',
-                title: 'E-Commerce Sales & Profit Analytics',
-                desc: 'A data engineering pipeline built with Pentaho for cleaning and Power BI for visualization, on a Kaggle e-commerce dataset.',
-                techCards: [
-                    { name: 'Pentaho', use: 'Cleaned and transformed the raw sales data.' },
-                    { name: 'Power BI', use: 'Built the sales and profit dashboards.' },
-                    { name: 'Data engineering', use: 'Designed the end-to-end pipeline.' }
-                ],
-                art: 'pipeline.png',
-                link: 'https://github.com/Yusuf11806/E-Commerce-Sales-and-Profit-Analytics-Using-Data-Engineering-Pipeline'
-            },
-            {
-                id: 'hr_analytics',
-                name: 'HR Database Analysis',
-                iconImg: 'image0.jpg',
-                title: 'Data Analytics on an HR Database',
-                desc: 'Analyzing employee retention with Python, pandas, Matplotlib, Seaborn, and statistical tests like Pearson correlation and chi-squared.',
-                techCards: [
-                    { name: 'Python & pandas', use: 'Cleaned and analyzed the HR dataset.' },
-                    { name: 'Matplotlib / Seaborn', use: 'Visualized retention patterns.' },
-                    { name: 'SciPy', use: 'Correlation and chi-squared testing.' }
-                ],
-                art: 'image0.jpg',
-                link: 'https://github.com/Yusuf11806/Analytics-for-HR-Database'
-            },
-            {
-                id: 'videogame',
-                name: 'Video Game Sales Analytics',
-                iconImg: 'DataVis.png',
-                title: 'Video Game Sales Analytics',
-                desc: 'A Power BI analysis of video game sales across genres, release periods, and regions, with comparisons of global performance.',
-                techCards: [
-                    { name: 'Power BI', use: 'Built the interactive sales dashboard.' },
-                    { name: 'Data visualization', use: 'Compared sales by genre and region.' },
-                    { name: 'Analysis', use: 'Surfaced regional and global trends.' }
-                ],
-                art: 'DataVis.png',
-                link: 'https://github.com/Yusuf11806/Video-Game-Sales'
-            }
-        ];
+        // Media tab — personal photos only, no captions/info.
+        const MEDIA_PHOTOS = ['bersama1.jpg', 'bersama2.jpg', 'bersama3.jpg', 'bersama4.jpg', 'bersama5.jpg'];
+        const ACTIVITY_APPS = MEDIA_PHOTOS.map((src, i) => ({
+            id: 'photo_' + (i + 1),
+            name: '',
+            iconImg: src,
+            title: '',
+            desc: '',
+            art: src,
+            isPhoto: true,
+            link: '#'
+        }));
 
         let currentCategory = 'projects';
         let activeIndex = 0;
@@ -200,7 +161,7 @@ window.tailwind.config = {
                 <div onclick="selectApp(${idx})" class="game-tile shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-psCard border-2 border-white/10 flex items-center justify-center cursor-pointer overflow-hidden ${idx === activeIndex ? 'active-tile' : 'hover:border-white/40'}" id="tile-${idx}">
                     ${app.isStore 
                         ? `<div class="w-full h-full bg-gradient-to-tr from-psBlue to-cyan-400 flex items-center justify-center">${app.icon}</div>` 
-                        : `<img src="${app.iconImg}" class="w-full h-full object-cover">`
+                        : `<img src="${app.iconImg}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='image0.jpg';this.style.opacity=.4">`
                     }
                 </div>
             `).join('');
@@ -233,6 +194,17 @@ window.tailwind.config = {
             heroDesc.innerText = app.desc;
             renderProjectTechCards(app);
             document.getElementById('projectTechSection').classList.toggle('hidden', !(app.techCards && app.techCards.length));
+
+            // Media photos: just show the photo as the backdrop, no title/description/buttons.
+            if (app.isPhoto) {
+                heroContainer.classList.add('hidden');
+                heroActionContainer.innerHTML = '';
+                const bgArtPhoto = document.getElementById('psBgArt');
+                bgArtPhoto.classList.add('changing');
+                setTimeout(() => { bgArtPhoto.src = app.art; bgArtPhoto.classList.remove('changing'); }, 300);
+                return;
+            }
+            heroContainer.classList.remove('hidden');
 
             // Render Hero Play Button if link exists
             if (app.link && app.link !== '#') {
@@ -345,10 +317,12 @@ window.tailwind.config = {
                 <div class="text-center space-y-3">
                     <img src="image0.jpg" alt="Yusuf Rayyan Daniel" class="w-20 h-20 rounded-full mx-auto border-2 border-psBlue object-cover">
                     <h3 class="text-base font-bold text-white">Yusuf Rayyan Daniel</h3>
-                    <p class="text-xs text-gray-400">Binus University @AlamSutera Computer Science</p>
-                    <p class="text-xs text-gray-300 font-medium">
-                        <i class="fa-solid fa-cake-candles text-psBlue mr-1"></i> 11 August 2006
-                    </p>
+                    <p class="text-xs text-gray-400">Binus University @AlamSutera · Computer Science</p>
+                    <div class="flex flex-wrap justify-center gap-2 pt-1">
+                        <span class="text-[11px] text-gray-200 bg-white/10 rounded-full px-3 py-1"><i class="fa-solid fa-cake-candles text-psBlue mr-1"></i> 11 August 2006</span>
+                        <span class="text-[11px] text-gray-200 bg-white/10 rounded-full px-3 py-1"><i class="fa-solid fa-graduation-cap text-psBlue mr-1"></i> GPA 3.41</span>
+                        <span class="text-[11px] text-gray-200 bg-white/10 rounded-full px-3 py-1"><i class="fa-solid fa-calendar text-psBlue mr-1"></i> Term 5 (up to now)</span>
+                    </div>
                     <div class="flex justify-center items-center gap-4 pt-2">
                         <a href="https://www.linkedin.com/in/yusuf-rayyan-daniel-936a35318" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-psBlue flex items-center justify-center text-white text-base transition-colors" title="LinkedIn Profile">
                             <i class="fa-brands fa-linkedin-in"></i>
@@ -360,8 +334,19 @@ window.tailwind.config = {
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     </div>
+                    <button onclick="backToUserSelect()" class="mt-4 w-full inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-psBlue text-white text-xs font-semibold rounded-xl px-4 py-3 transition-colors">
+                        <i class="fa-solid fa-right-from-bracket"></i> Switch user
+                    </button>
                 </div>
             `);
+        }
+
+        // Go back to the home user-select screen.
+        function backToUserSelect() {
+            closeModal();
+            const overlay = document.getElementById('launchOverlay');
+            if (overlay) overlay.classList.add('is-active');
+            setTimeout(() => { window.location.href = 'index.html'; }, 500);
         }
 
         // Live Clock
