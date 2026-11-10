@@ -76,6 +76,7 @@
   const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
   const keys = {}, collected = new Set();
   let nearby = -1, nearbySpecial = '', last = 0, toastTimer, modalOpen = false, started = false, paused = false, galleryIndex = 0;
+  let dbgKeyCount = 0, dbgLastAction = '-'; // DEBUG: counts key events received
 
   // ---------------------------------------------------------------------------
   // COLLISION BLOCKS (bedroom + library). kind drives how each is drawn.
@@ -497,6 +498,17 @@
 
     document.getElementById('zoneLabel').textContent = nearby >= 0 ? `${projects[nearby].genre.toUpperCase()} / ${projects[nearby].tag}` : nearbySpecial === 'profile' ? 'ABOUT / YUSUF RAYYAN DANIEL' : nearbySpecial === 'cv' ? 'ABOUT / CURRICULUM VITAE' : zoneLabel(player.z);
     document.getElementById('coord').textContent = `${String(Math.round(player.x + 12)).padStart(2, '0')} : ${String(Math.round(player.z)).padStart(2, '0')}`;
+
+    // DEBUG HUD — shows live input + player state so we can diagnose movement.
+    const hud = document.getElementById('debugHud');
+    if (hud) {
+      hud.textContent =
+        `started=${started} paused=${paused} modal=${modalOpen}\n` +
+        `keyEvents=${dbgKeyCount} lastAction=${dbgLastAction}\n` +
+        `flags U:${keys.up ? 1 : 0} D:${keys.down ? 1 : 0} L:${keys.left ? 1 : 0} R:${keys.right ? 1 : 0}\n` +
+        `vel  x=${player.vx.toFixed(2)} z=${player.vz.toFixed(2)}\n` +
+        `pos  x=${player.x.toFixed(2)} z=${player.z.toFixed(2)} y=${player.y.toFixed(2)}`;
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -617,6 +629,7 @@
   }
   function onKeyDown(e) {
     const a = actionFor(e);
+    dbgKeyCount++; dbgLastAction = (a || e.key || e.code || '?'); // DEBUG: prove key events arrive
     if (!started && a === 'enter' && document.getElementById('gameLoader').classList.contains('is-ready')) { startGame(); return; }
     if (!a) return;
     if (['up', 'down', 'left', 'right', 'jump'].includes(a)) e.preventDefault();
