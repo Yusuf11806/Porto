@@ -201,18 +201,26 @@ window.tailwind.config = {
             renderProjectTechCards(app);
             document.getElementById('projectTechSection').classList.toggle('hidden', !(app.techCards && app.techCards.length));
 
-            // Media photos: show the photo as the backdrop with only its title (no description/buttons).
+            // Volunteering photos: show the photo bright + clear with only its title.
             if (app.isPhoto) {
                 heroContainer.classList.remove('hidden');
                 heroTitle.innerText = app.title;
                 heroDesc.innerText = '';
                 heroActionContainer.innerHTML = '';
                 const bgArtPhoto = document.getElementById('psBgArt');
+                bgArtPhoto.classList.add('photo-mode');
+                bgArtPhoto.parentElement.classList.add('photo-dim');
                 bgArtPhoto.classList.add('changing');
                 setTimeout(() => { bgArtPhoto.src = app.art; bgArtPhoto.classList.remove('changing'); }, 300);
                 return;
             }
             heroContainer.classList.remove('hidden');
+            // Not a photo: restore the normal dimmed background styling.
+            {
+                const bgArtNorm = document.getElementById('psBgArt');
+                bgArtNorm.classList.remove('photo-mode');
+                bgArtNorm.parentElement.classList.remove('photo-dim');
+            }
 
             // Render Hero Play Button if link exists
             if (app.link && app.link !== '#') {

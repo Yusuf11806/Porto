@@ -146,38 +146,41 @@
 }
 
 
-/* ===== Brighter, warmer menu to match the cosy library theme ===== */
+/* ===== Dark PS-style menu + loading screen, matched to the home/dashboard ===== */
+/* Same ambient gradient as the home screen (pshome.css), with warm amber accents. */
 .game-loader {
   background:
-    radial-gradient(ellipse at 50% 30%, #fff3df 0%, #f2d9b0 34%, #e2bd8c 70%, #c99f6e 100%) !important;
+    radial-gradient(ellipse at 23% 5%, rgba(193,158,145,.30), transparent 36%),
+    radial-gradient(ellipse at 82% 42%, rgba(29,30,56,.55), transparent 48%),
+    linear-gradient(112deg, #28252d 0%, #11121f 46%, #070812 100%) !important;
 }
 .game-loader:before {
-  opacity: .5 !important;
+  opacity: .35 !important;
   background:
-    linear-gradient(115deg, transparent 10%, #ffffff55 42%, transparent 72%),
-    radial-gradient(ellipse at 80% 88%, #ffcf8f55, transparent 46%) !important;
+    linear-gradient(115deg, transparent 15%, #ffffff0d 45%, transparent 70%),
+    radial-gradient(ellipse at 78% 88%, #ffbd7322, transparent 44%) !important;
 }
-/* Readable dark text on the light menu */
-.loader-kicker { color: #9a5b2a !important; }
-.loader-center h1 { color: #2a1d12 !important; text-shadow: 0 2px 10px #ffffff66 !important; }
-.loader-center h1 em { color: #c6701f !important; }
-.loader-copy { color: #5a4634 !important; }
-.loader-foot { color: #8a6a45 !important; }
-.loader-foot i { color: #c6701f !important; }
-.loader-status, #loaderStatus { color: #7a5330 !important; }
-.loader-progress { background: #00000018 !important; }
-.loader-progress span { background: #c6701f !important; box-shadow: 0 0 14px #e0902f !important; }
-/* Buttons: warm solid primary, soft secondary */
-.enter-house-button { background: #c6701f !important; border-color: #c6701f !important; color: #fff6ea !important; }
-.enter-house-button:hover { background: #e0902f !important; }
-.controls-button { color: #7a5330 !important; }
-.controls-button b { color: #c6701f !important; }
-.controls-button:hover { color: #a85a16 !important; }
-.pshome-button { color: #7a5330 !important; border-color: #00000022 !important; }
-.pshome-button span { color: #c6701f !important; }
-.pshome-button:hover { color: #3a2817 !important; border-color: #c6701f !important; background: #c6701f1c !important; }
-.game-controls-card { border-top-color: #00000018 !important; }
-.game-controls-card span { color: #7a5330 !important; }
-.game-controls-card kbd { background: #ffffffcc !important; color: #5a4634 !important; border-color: #00000022 !important; }
-.preview-caption { color: #3a2817 !important; }
-.preview-caption i { background: #c6701f !important; box-shadow: 0 0 12px #e0902f !important; }
+/* Light text on the dark menu (PS5 look) */
+.loader-kicker { color: #ffbd73 !important; }
+.loader-center h1 { color: #f2eef7 !important; text-shadow: 0 6px 30px #0009 !important; }
+.loader-center h1 em { color: #ffbd73 !important; }
+.loader-copy { color: #c3c0cf !important; }
+.loader-foot { color: #8f91a3 !important; }
+.loader-foot i { color: #ffbd73 !important; }
+.loader-status, #loaderStatus { color: #aeb1c1 !important; }
+.loader-progress { background: #ffffff1c !important; }
+.loader-progress span { background: #ffbd73 !important; box-shadow: 0 0 14px #ffbd73 !important; }
+/* Buttons: warm amber primary, subtle secondary (same accent as home) */
+.enter-house-button { background: #ffbd73 !important; border-color: #ffbd73 !important; color: #15151b !important; }
+.enter-house-button:hover { background: #ffd49e !important; }
+.controls-button { color: #c3c0cf !important; }
+.controls-button b { color: #ffbd73 !important; }
+.controls-button:hover { color: #ffd49e !important; }
+.pshome-button { color: #b8c9df !important; border-color: #ffffff24 !important; }
+.pshome-button span { color: #ffbd73 !important; }
+.pshome-button:hover { color: #fff !important; border-color: #ffbd73 !important; background: #ffbd731c !important; }
+.game-controls-card { border-top-color: #ffffff14 !important; }
+.game-controls-card span { color: #a7aab8 !important; }
+.game-controls-card kbd { background: #11141f !important; color: #e5e6eb !important; border-color: #494d5d !important; }
+.preview-caption { color: #d2c3b0 !important; }
+.preview-caption i { background: #ffbd73 !important; box-shadow: 0 0 12px #ffbd73 !important; }
